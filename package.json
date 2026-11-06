@@ -1,0 +1,24 @@
+{
+  "name": "marketing-video-studio",
+  "version": "1.0.0",
+  "description": "AI-assisted marketing video studio on HyperFrames",
+  "scripts": {
+    "hf": "node scripts/hf.mjs",
+    "doctor": "node scripts/hf.mjs doctor",
+    "test": "node -e \"require('fs').rmSync('tests/.tmp/_hf-history',{recursive:true,force:true})\" && node --test --test-concurrency=1 tests/*.test.mjs",
+    "prepare": "git config core.hooksPath .githooks || true"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "esbuild": "^0.28.2",
+    "ffmpeg-static": "^5.3.0",
+    "gsap": "^3.15.0",
+    "hyperframes": "^0.8.223",
+    "playwright-core": "^1.64.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "private": true
+}

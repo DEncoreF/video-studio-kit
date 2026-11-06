@@ -1,0 +1,15 @@
+#root { background: #cdb48c; color: var(--brand); font-family: 'Noto Sans TC', sans-serif; }
+#kraft { position: absolute; inset: 0; background-image: var(--kraft); mix-blend-mode: multiply; }
+.piece { position: absolute; filter: drop-shadow(0 3px 2px #0000002e) drop-shadow(0 18px 22px #0000003a); }
+.paper { position: absolute; inset: 0; }
+.fringe { position: absolute; inset: -10px; background: #fbf8f1; }
+.newsprint { background: #f1ece0 repeating-linear-gradient(0deg, transparent 0 21px, color-mix(in srgb, var(--brand) 7%, transparent) 21px 23px); }
+.newsprint::after { content: ""; position: absolute; inset: 0; background-image: var(--fiber); mix-blend-mode: multiply; }
+.navy { background: var(--brand); color: #f4efe4; }
+.violet { background: var(--accent); color: #fff; }
+.tape { position: absolute; width: 170px; height: 46px; background: #ecdcae; opacity: 0.88; mix-blend-mode: multiply; }
+.serif { font-family: 'Noto Serif TC', serif; font-weight: 900; }
+.halftone { filter: grayscale(1) contrast(1.45) brightness(1.08); mix-blend-mode: multiply; }
+.dots { position: absolute; inset: 0; background: radial-gradient(var(--brand) 1.3px, transparent 1.7px) 0 0 / 7px 7px; mix-blend-mode: screen; opacity: 0.35; }
+.digit { position: absolute; display: grid; place-items: center; font-family: 'Noto Serif TC', serif; font-weight: 900; }
+.stamp { position: absolute; border: 6px solid #b2342a; color: #b2342a; font-weight: 900; padding: 6px 22px; opacity: 0.85; -webkit-mask-image: var(--grit); mask-image: var(--grit); }

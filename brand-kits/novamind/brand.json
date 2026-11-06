@@ -1,0 +1,31 @@
+{
+  "id": "novamind",
+  "name": "NovaMind",
+  "description": "NovaMind：虛構的示範品牌（企業 AI 軟體），給測試與範例使用",
+  "colors": {
+    "ink": { "hex": "#141414", "role": "Logo 字標、文字" },
+    "accent": { "hex": "#12A39A", "role": "品牌青綠，Logo 圓點與強調" },
+    "canvas": { "hex": "#FFFFFF", "role": "預設底色" }
+  },
+  "fonts": {
+    "display": { "family": "Noto Serif TC", "file": "NotoSerifTC-VF.ttf", "weights": [700, 900] },
+    "body": { "family": "Noto Sans TC", "file": "NotoSansTC-VF.ttf", "weights": [400, 500, 700, 900] },
+    "latin": { "family": "Instrument Serif", "file": "InstrumentSerif-Regular.ttf", "weights": [400] }
+  },
+  "logos": {
+    "primary": { "file": "logos/novamind.svg", "use": "淺色底（#141414 字標＋青綠圓點）" },
+    "reversed": { "file": "logos/novamind-white.svg", "use": "深色底（白字標＋青綠圓點）" }
+  },
+  "pronunciation": [
+    { "text": "NovaMind", "say": "Nova Mind", "note": "Nova ＋ Mind 兩個字" },
+    { "text": "AI", "say": "A I", "note": "字母分開念" }
+  ],
+  "rules": {
+    "do": ["深色底用反白版 Logo", "Logo 不加抖動、不變形、不換色"],
+    "dont": ["改動 Logo 青綠色", "宣稱沒有出處的數據"]
+  },
+  "products": ["NovaMind", "NovaMind Enterprise", "NovaMind Meter"],
+  "forbidden": [],
+  "allowed_brands": [],
+  "logo": { "motion": "static", "note": "位置、大小可隨版面；進場可淡入或位移，進場後不抖動、不變形、不換色" }
+}

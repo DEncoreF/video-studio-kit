@@ -1,0 +1,3 @@
+#!/bin/sh
+# Run the tests that touch the staged files (scripts/test-related.mjs). Skip once with git commit --no-verify; run everything with npm test.
+exec node "$(git rev-parse --show-toplevel)/scripts/test-related.mjs" --staged

@@ -1,0 +1,1426 @@
+{
+  "source": "使用者提供的「20 種 AI 影片視覺風格」清單（2026-10-19）；2026-10-20 依「呈現效果」收斂成 13 類（families），groups 保留為原清單分組",
+  "families": {
+    "grid-editorial": {
+      "zh": "網格編排",
+      "en": "Grid & Editorial",
+      "define": {
+        "構圖": "元素對齊欄位網格，大量留白，資訊有清楚的主次層級",
+        "動態": "沿網格方向滑入、遮罩展開，動作短而精準",
+        "轉場": "欄位推移或遮罩擦過整個版面",
+        "文字": "標題與內文分級，逐行出現或逐欄排入",
+        "質感": "平面、無陰影，偶有紙張或照片",
+        "節奏": "俐落、一拍一個資訊"
+      },
+      "textEffects": [
+        "stagger-fade-up",
+        "clip-wipe",
+        "mask-reveal",
+        "editorial-emphasis",
+        "tracking-in"
+      ],
+      "fits": "產品介紹、知識解說、B2B 簡報",
+      "sources": [
+        "Prompt Motion：Kinetic type",
+        "HyperFrames registry：typography、reveal",
+        "Behance：Styleframes"
+      ],
+      "motif": "grid"
+    },
+    "geometric": {
+      "zh": "幾何構成",
+      "en": "Geometric Construction",
+      "define": {
+        "構圖": "以圓、方、三角與色塊組成畫面，形狀本身就是插圖",
+        "動態": "形狀滑動、旋轉、堆疊、互相推擠或組合成物件",
+        "轉場": "形狀放大蓋滿畫面、色條劃過切場",
+        "文字": "字配合形狀排列，常被色塊遮住再露出",
+        "質感": "平塗色塊，無漸層或只有顆粒",
+        "節奏": "有彈性的節拍，進場略為超出再回來"
+      },
+      "textEffects": [
+        "headline-slam",
+        "mask-reveal",
+        "word-swap"
+      ],
+      "fits": "品牌形象、知識解說、社群短片",
+      "sources": [
+        "Raivcoo：Shapes、Flat Design",
+        "Prompt Motion：Shapes",
+        "illo（扁平幾何）"
+      ],
+      "motif": "shapes"
+    },
+    "kinetic-type": {
+      "zh": "動態字體",
+      "en": "Kinetic Typography",
+      "define": {
+        "構圖": "字是主角，字級極大、可以出血被裁切，畫面幾乎只有字",
+        "動態": "字依拍點縮放、拆字、推擠、換詞",
+        "轉場": "字放大衝進畫面或字本身當轉場",
+        "文字": "整片的核心：逐字、逐詞、對拍",
+        "質感": "平面為主，可加粗框、色差或印章",
+        "節奏": "對拍，一拍一個詞，速度快"
+      },
+      "textEffects": [
+        "headline-slam",
+        "char-explode",
+        "word-swap",
+        "text-match-cut",
+        "backdrop-word",
+        "rgb-offset"
+      ],
+      "fits": "活動開場、社群短片、品牌主張",
+      "sources": [
+        "Raivcoo：Text",
+        "Prompt Motion：Kinetic type、Music",
+        "Ordinary Folk《Google: Gemini》"
+      ],
+      "motif": "bigtype"
+    },
+    "pattern-optical": {
+      "zh": "圖樣與視錯",
+      "en": "Pattern & Optical",
+      "define": {
+        "構圖": "重複圖樣鋪滿畫面：網點、條紋、放射、對稱裝飾",
+        "動態": "圖樣連續變化：波紋擴散、旋轉、無限循環",
+        "轉場": "圖樣本身擴散或捲動成下一個畫面",
+        "文字": "字嵌在圖樣裡，或被圖樣遮罩",
+        "質感": "高對比、網點、條紋、金屬線",
+        "節奏": "規律循環，適合做無縫 loop"
+      },
+      "textEffects": [
+        "texture-mask",
+        "shimmer",
+        "neon"
+      ],
+      "fits": "社群短片、活動宣傳、背景",
+      "sources": [
+        "Raivcoo：Loop、Colorful、Aesthetic",
+        "HyperFrames registry：background、shader"
+      ],
+      "motif": "rings"
+    },
+    "print-collage": {
+      "zh": "印刷拼貼",
+      "en": "Print & Collage",
+      "define": {
+        "構圖": "多層紙片、照片剪貼、印刷版面疊在一起",
+        "動態": "紙片滑入、翻頁、套色錯位後對準",
+        "轉場": "撕紙、整張換頁、膠帶貼上",
+        "文字": "字像剪下來貼上、蓋章或印出來",
+        "質感": "紙紋、油墨不均、網點、套色偏移",
+        "節奏": "手作感的頓挫（12fps）"
+      },
+      "textEffects": [
+        "torn-label",
+        "misregistration",
+        "marker-annotate",
+        "texture-mask"
+      ],
+      "fits": "品牌故事、社群短片、活動宣傳",
+      "sources": [
+        "Raivcoo：Dust & Scratches、2D Animation",
+        "Stash：品牌影片"
+      ],
+      "motif": "paper"
+    },
+    "hand-drawn": {
+      "zh": "手繪線條",
+      "en": "Hand-drawn Line",
+      "define": {
+        "構圖": "線條插畫為主，大量留白",
+        "動態": "線一筆一筆畫出、延伸、抖動、生長",
+        "轉場": "線條延伸成下一個畫面，或墨暈開",
+        "文字": "手寫字、圈選、劃線強調",
+        "質感": "鉛筆、墨水、筆觸、紙張",
+        "節奏": "隨筆畫節奏，有呼吸感"
+      },
+      "textEffects": [
+        "handwrite",
+        "marker-annotate",
+        "highlighter",
+        "stitched"
+      ],
+      "fits": "知識解說、品牌故事、文化主題",
+      "sources": [
+        "Raivcoo：Wiggly、2D Animation",
+        "illo"
+      ],
+      "motif": "vines"
+    },
+    "objects-3d": {
+      "zh": "立體物件",
+      "en": "3D Objects",
+      "define": {
+        "構圖": "立體物件在場景中，有光影與景深",
+        "動態": "物件擠壓彈跳、旋轉、組裝或拆解",
+        "轉場": "鏡頭繞過物件或推進穿越",
+        "文字": "立體字或字貼在物件表面",
+        "質感": "黏土、充氣、低多邊形、鍍鉻、紙雕",
+        "節奏": "物理感，有重量與回彈"
+      },
+      "textEffects": [
+        "extruded-3d"
+      ],
+      "fits": "產品介紹、品牌形象、社群短片",
+      "sources": [
+        "Raivcoo：3D",
+        "Prompt Motion：Shapes",
+        "HyperFrames registry：3d"
+      ],
+      "motif": "clay"
+    },
+    "ui-demo": {
+      "zh": "介面示範",
+      "en": "UI & Product Demo",
+      "define": {
+        "構圖": "產品介面拆成卡片或元件，漂浮或連續變形",
+        "動態": "游標點擊、打字、結果彈出、元件變形成下一個",
+        "轉場": "推鏡進一張卡片，或元件連續變形",
+        "文字": "介面字＋壓在上面的一句粗字",
+        "質感": "乾淨平面、柔和陰影或漸層",
+        "節奏": "跟操作走，一個功能一段"
+      },
+      "textEffects": [
+        "typed-prompt",
+        "streaming",
+        "typewriter",
+        "count-up"
+      ],
+      "fits": "產品發表、功能展示、SaaS 行銷",
+      "sources": [
+        "Raivcoo：SaaS、UI/UX、Launch video",
+        "Prompt Motion：Product UI、Phone、Code",
+        "Ordinary Folk《Google: Gemini》"
+      ],
+      "motif": "ui"
+    },
+    "tech-systems": {
+      "zh": "科技系統",
+      "en": "Tech Systems & HUD",
+      "define": {
+        "構圖": "程序化圖形（點陣、粒子、環、網格）加 HUD 外框",
+        "動態": "依規則展開：波紋、擴散、聚合、掃描",
+        "轉場": "系統變成下一個系統（點 → 點陣 → 球）",
+        "文字": "等寬小字、巨型字加色差、亂碼解碼",
+        "質感": "霓虹、像素、掃描線、光暈",
+        "節奏": "一小節一個概念，切點落在重拍"
+      },
+      "textEffects": [
+        "scramble-decode",
+        "rgb-offset",
+        "scan-band",
+        "neon",
+        "particle-assemble"
+      ],
+      "fits": "品牌形象、科技產品、活動開場",
+      "sources": [
+        "Prompt Motion：Particles",
+        "Raivcoo：Motion Graphics、Showreel",
+        "Fliki／Revid：Claude 動態影片"
+      ],
+      "motif": "hud"
+    },
+    "data-diagram": {
+      "zh": "資料圖解",
+      "en": "Data & Diagram",
+      "define": {
+        "構圖": "圖表、流程圖、節點連線、工程圖",
+        "動態": "長條生長、數字跳動、線條畫出、訊號沿線流動",
+        "轉場": "圖解拉遠成總覽，或拆解後重組",
+        "文字": "數字與標註，簡短的說明",
+        "質感": "平面、細線、網格",
+        "節奏": "一個數字或步驟一段"
+      },
+      "textEffects": [
+        "count-up",
+        "slot-roll",
+        "highlighter",
+        "marker-annotate"
+      ],
+      "fits": "數據呈現、高階主管、知識解說",
+      "sources": [
+        "Prompt Motion：Charts、Diagrams",
+        "HyperFrames registry：data",
+        "illo《Tech Motion System》"
+      ],
+      "motif": "bars"
+    },
+    "morph-fluid": {
+      "zh": "變形流體",
+      "en": "Morph & Fluid",
+      "define": {
+        "構圖": "物件融化、液態、不合理的比例與組合",
+        "動態": "一個形狀連續變形成另一個，流體滴落、膨脹",
+        "轉場": "變形本身就是轉場：A 融成 B",
+        "文字": "字也會變形、融化或液態填色",
+        "質感": "光滑、液態、漸層、夢境感",
+        "節奏": "緩慢流動與突然的變形交錯"
+      },
+      "textEffects": [
+        "gooey-morph",
+        "blur-focus"
+      ],
+      "fits": "品牌形象、創意概念、社群短片",
+      "sources": [
+        "Raivcoo：Smooth、Transition",
+        "HyperFrames registry：transition、shader"
+      ],
+      "motif": "melt"
+    },
+    "character": {
+      "zh": "角色動畫",
+      "en": "Character Animation",
+      "define": {
+        "構圖": "角色是主角：人物、吉祥物或擬人化物件",
+        "動態": "走、跑、表情、手勢，有預備動作與跟隨",
+        "轉場": "角色走出畫面或動作接動作",
+        "文字": "對白字卡或字幕，配合角色",
+        "質感": "依角色畫風：扁平、線條或立體",
+        "節奏": "依表演與台詞"
+      },
+      "textEffects": [
+        "karaoke",
+        "word-swap"
+      ],
+      "fits": "品牌故事、知識解說、社群短片",
+      "sources": [
+        "Raivcoo：Character",
+        "Prompt Motion：Characters",
+        "Ordinary Folk（角色與美術指導）"
+      ],
+      "motif": "walker"
+    },
+    "cinematic": {
+      "zh": "影像電影感",
+      "en": "Cinematic & Footage",
+      "define": {
+        "構圖": "以照片或影片為主，大字、雙色調或質感疊在上面",
+        "動態": "緩推鏡頭、視差、光影移動、景深變化",
+        "轉場": "溶接、光掃過、膠片燒掉、色塊切換",
+        "文字": "電影片頭式的字卡，克制、停留久",
+        "質感": "顆粒、刮痕、暗角、雙色調、自然光",
+        "節奏": "慢，有停頓與呼吸"
+      },
+      "textEffects": [
+        "blur-focus",
+        "tracking-in",
+        "mask-reveal"
+      ],
+      "fits": "品牌形象、紀錄片風、企業形象",
+      "sources": [
+        "Raivcoo：Cinematic、Documentary、Dust & Scratches",
+        "Prompt Motion：Photos",
+        "Art of the Title"
+      ],
+      "motif": "letterbox"
+    },
+    "captions-led": {
+      "zh": "口播字幕",
+      "en": "Talking-head Captions",
+      "define": {
+        "構圖": "真人口播畫面為主，字幕是第二主角：關鍵字放大、上色、加圖示",
+        "動態": "字幕逐字跳出、關鍵詞彈大、畫面跟著重點推近",
+        "轉場": "跳剪、推鏡、B-roll 插入",
+        "文字": "逐字字幕（卡拉 OK）、重點字換色、表情符號",
+        "質感": "真實影像＋乾淨的字幕底",
+        "節奏": "跟著說話的節奏，一句一個重點"
+      },
+      "textEffects": [
+        "karaoke",
+        "highlighter",
+        "word-swap",
+        "headline-slam"
+      ],
+      "fits": "社群短片、知識分享、主管談話",
+      "sources": [
+        "Prompt Motion：Talking-head clip edit",
+        "HyperFrames registry：captions、caption-style、lower-third"
+      ],
+      "motif": "captions"
+    },
+    "media-wall": {
+      "zh": "圖片牆輪播",
+      "en": "Media Wall & Carousel",
+      "define": {
+        "構圖": "大量照片或截圖排成牆、環、輪播帶",
+        "動態": "整面牆捲動、照片一張張翻出、鏡頭推進其中一張",
+        "轉場": "鏡頭穿進一張圖變成下一個畫面",
+        "文字": "大字壓在圖片牆上，或每張圖一個短標",
+        "質感": "照片、截圖、卡片陰影",
+        "節奏": "快速堆疊後停在主角"
+      },
+      "textEffects": [
+        "mask-reveal",
+        "stagger-fade-up",
+        "backdrop-word"
+      ],
+      "fits": "產品發表、客戶案例、活動回顧",
+      "sources": [
+        "HyperFrames registry：carousel、gallery、images",
+        "Prompt Motion：Photos",
+        "Raivcoo：Commercial"
+      ],
+      "motif": "wall"
+    },
+    "generative-shader": {
+      "zh": "生成式材質",
+      "en": "Generative Shader",
+      "define": {
+        "構圖": "整個畫面是程式生成的流動材質：噪聲、漸層場、光斑",
+        "動態": "材質持續流動、扭曲、隨拍點脈動",
+        "轉場": "材質本身溶解成下一個畫面",
+        "文字": "字少，放在材質上或用材質填字",
+        "質感": "WebGL／WebGPU 噪聲、顆粒、玻璃、液態光",
+        "節奏": "慢而連續，偶爾隨拍點爆開"
+      },
+      "textEffects": [
+        "texture-mask",
+        "blend-invert",
+        "shimmer"
+      ],
+      "fits": "品牌形象、背景、活動開場",
+      "sources": [
+        "HyperFrames registry：webgpu-shader、shader、background",
+        "Raivcoo：Aesthetic、Smooth",
+        "Prompt Motion：Psychedelic hypnotic eye showreel"
+      ],
+      "motif": "shader"
+    },
+    "physics-sim": {
+      "zh": "物理模擬",
+      "en": "Physics Simulation",
+      "define": {
+        "構圖": "球、方塊、粒子在有邊界的場景裡碰撞",
+        "動態": "重力、反彈、碰撞、堆疊，結果可預期又有驚喜",
+        "轉場": "碰撞引發下一個事件（連鎖反應）",
+        "文字": "字是被撞出來的物件，或撞擊時跳出",
+        "質感": "平面或簡單 3D，重點在運動",
+        "節奏": "碰撞點就是節拍，可對音樂"
+      },
+      "textEffects": [
+        "slot-roll",
+        "char-explode"
+      ],
+      "fits": "社群短片、品牌趣味片、音樂對拍",
+      "sources": [
+        "Prompt Motion：Ball escaping twelve rings、Collision-driven music machine、Beat-synced bouncing 3D ball"
+      ],
+      "motif": "bounce"
+    },
+    "timeline-story": {
+      "zh": "時間軸敘事",
+      "en": "Timeline Story",
+      "define": {
+        "構圖": "一條時間軸貫穿全片，年份與事件沿線排開",
+        "動態": "鏡頭沿時間軸平移或推進，事件依序長出",
+        "轉場": "沿軸往前走就是轉場",
+        "文字": "年份大字、事件短句、引言",
+        "質感": "依主題：編輯排版、插畫或照片",
+        "節奏": "一個年份一拍，重要節點停留"
+      },
+      "textEffects": [
+        "count-up",
+        "stagger-fade-up",
+        "editorial-emphasis"
+      ],
+      "fits": "品牌歷程、產業回顧、知識解說",
+      "sources": [
+        "Prompt Motion：History of AI timeline、Moroccan political history timeline、Indian civilisation history film"
+      ],
+      "motif": "timeline"
+    },
+    "music-reactive": {
+      "zh": "音樂視覺化",
+      "en": "Music Reactive",
+      "define": {
+        "構圖": "圖形直接由音樂驅動：波形、頻譜、示波器、ASCII",
+        "動態": "形狀隨音量與頻率伸縮、跳動、變色",
+        "轉場": "段落隨歌曲結構切換（主歌、副歌）",
+        "文字": "歌詞逐字對拍出現",
+        "質感": "示波器線條、像素、霓虹或極簡黑白",
+        "節奏": "完全跟著音樂"
+      },
+      "textEffects": [
+        "karaoke",
+        "scan-band",
+        "neon"
+      ],
+      "fits": "音樂相關、活動開場、社群短片",
+      "sources": [
+        "Prompt Motion：Music（51 支）、Synced lyrics motion video、Oscilloscope-style studio motion graphic、UK dubstep track with ASCII visuals"
+      ],
+      "motif": "eq"
+    },
+    "silhouette-theatre": {
+      "zh": "剪影劇場",
+      "en": "Silhouette Theatre",
+      "define": {
+        "構圖": "黑色剪影在光源前演出，像皮影戲或舞台",
+        "動態": "剪影角色與物件平移、升降、光源移動",
+        "轉場": "布幕拉開、燈光暗下、剪影換場",
+        "文字": "字少，像默片字卡",
+        "質感": "高對比剪影、暖色光、紙質",
+        "節奏": "慢，像說故事"
+      },
+      "textEffects": [
+        "tracking-in",
+        "blur-focus"
+      ],
+      "fits": "品牌故事、溫馨敘事、文化主題",
+      "sources": [
+        "Prompt Motion：Shadow theatre home story、Lighthouse keeper silent short"
+      ],
+      "motif": "silhouette"
+    },
+    "logo-reveal": {
+      "zh": "Logo 演繹",
+      "en": "Logo Reveal",
+      "define": {
+        "構圖": "幾秒內只做一件事：Logo 從元素組合、繪出或揭開",
+        "動態": "線條畫出、形狀聚合、遮罩揭開後定格",
+        "轉場": "通常是片頭或片尾，不需要轉場",
+        "文字": "品牌名與一句標語",
+        "質感": "依品牌：平面、立體或材質",
+        "節奏": "2–5 秒，最後定格要穩"
+      },
+      "textEffects": [
+        "tracking-in",
+        "mask-reveal",
+        "clip-wipe"
+      ],
+      "fits": "片頭、片尾、社群頭像動畫",
+      "sources": [
+        "Raivcoo：Logo",
+        "Prompt Motion：TypingMind logo reveal",
+        "HyperFrames registry：logo-brand-close、wordmark-tiles"
+      ],
+      "motif": "logo"
+    }
+  },
+  "groups": {
+    "A": "幾何與現代設計",
+    "B": "藝術與實驗設計",
+    "C": "科技與未來主義",
+    "D": "材質與特殊動畫",
+    "E": "編輯與字體",
+    "F": "手繪與插畫",
+    "G": "文化與年代",
+    "H": "數位與資訊"
+  },
+  "styles": [
+    {
+      "group": "A",
+      "id": "bauhaus",
+      "zh": "包浩斯",
+      "en": "Bauhaus",
+      "visual": "紅黃藍三原色、幾何圖形、功能性設計、簡潔構圖",
+      "motion": "圓形、方形與三角形依節奏移動、旋轉、組合",
+      "fits": "科技品牌、AI 產品介紹、知識型影片、企業形象",
+      "status": "trial",
+      "preview": {
+        "bg": "#f2ece0",
+        "fg": "#141414",
+        "accents": [
+          "#d83a2b",
+          "#2a4fa3",
+          "#f2c230"
+        ],
+        "font": "sans",
+        "motif": "shapes",
+        "ease": "mech"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "A",
+      "id": "de-stijl",
+      "zh": "風格派",
+      "en": "De Stijl",
+      "visual": "黑色直線、矩形色塊、非對稱平衡、蒙德里安式構圖",
+      "motion": "色塊沿水平與垂直方向滑動、重組",
+      "fits": "科技品牌、企業形象",
+      "status": "radar",
+      "preview": {
+        "bg": "#f4f1ea",
+        "fg": "#111111",
+        "accents": [
+          "#d4271b",
+          "#1f4fa0",
+          "#f1c40f"
+        ],
+        "font": "sans",
+        "motif": "mondrian",
+        "ease": "snap"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "A",
+      "id": "swiss",
+      "zh": "瑞士國際主義",
+      "en": "Swiss Style",
+      "visual": "網格系統、無襯線字體、大量留白、精準排版",
+      "motion": "文字、圖片按照網格精準切換，節奏俐落",
+      "fits": "產品介紹、知識型影片、B2B",
+      "status": "trial",
+      "preview": {
+        "bg": "#f4f3ef",
+        "fg": "#111936",
+        "accents": [
+          "#e3221b"
+        ],
+        "font": "sans",
+        "motif": "grid",
+        "ease": "expo"
+      },
+      "family": "grid-editorial"
+    },
+    {
+      "group": "A",
+      "id": "constructivism",
+      "zh": "俄國構成主義",
+      "en": "Constructivism",
+      "visual": "強烈對角線、紅黑配色、幾何拼貼、工業感",
+      "motion": "圖形快速切入、縮放、旋轉，形成強烈視覺衝擊",
+      "fits": "宣言式品牌片、活動宣傳",
+      "status": "radar",
+      "preview": {
+        "bg": "#efe6d2",
+        "fg": "#141414",
+        "accents": [
+          "#c8231b"
+        ],
+        "font": "sans",
+        "motif": "diagonal",
+        "ease": "snap"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "A",
+      "id": "minimalism",
+      "zh": "極簡主義",
+      "en": "Minimalism",
+      "visual": "少量色彩、極簡幾何、大面積留白",
+      "motion": "緩慢位移、流暢轉場、微小但精準的動態",
+      "fits": "高階主管、品牌形象",
+      "status": "radar",
+      "preview": {
+        "bg": "#f6f5f1",
+        "fg": "#1a1a1a",
+        "accents": [
+          "#9a9a94"
+        ],
+        "font": "sans-light",
+        "motif": "minimal",
+        "ease": "slow"
+      },
+      "family": "grid-editorial"
+    },
+    {
+      "group": "B",
+      "id": "art-deco",
+      "zh": "裝飾藝術",
+      "en": "Art Deco",
+      "visual": "金色線條、對稱構圖、幾何裝飾、1920 年代奢華感",
+      "motion": "金屬光影流動、幾何圖案向外展開",
+      "fits": "高端品牌、典禮活動",
+      "status": "radar",
+      "preview": {
+        "bg": "#101820",
+        "fg": "#e8d9a8",
+        "accents": [
+          "#c9a24a",
+          "#f1e3b4"
+        ],
+        "font": "serif",
+        "motif": "deco",
+        "ease": "slow"
+      },
+      "family": "pattern-optical"
+    },
+    {
+      "group": "B",
+      "id": "art-nouveau",
+      "zh": "新藝術",
+      "en": "Art Nouveau",
+      "visual": "植物曲線、花卉、自然形態、優雅裝飾",
+      "motion": "藤蔓生長、曲線延伸、物件柔和變形",
+      "fits": "人文、教育、永續主題",
+      "status": "radar",
+      "preview": {
+        "bg": "#efe7d4",
+        "fg": "#2f3b2a",
+        "accents": [
+          "#7a8f5a",
+          "#c58b5b"
+        ],
+        "font": "serif",
+        "motif": "vines",
+        "ease": "slow"
+      },
+      "family": "hand-drawn"
+    },
+    {
+      "group": "B",
+      "id": "memphis",
+      "zh": "孟菲斯",
+      "en": "Memphis Design",
+      "visual": "高彩度撞色、不規則幾何、波浪線、1980 年代設計感",
+      "motion": "幾何物件彈跳、旋轉、快速變形",
+      "fits": "社群、年輕受眾、活動",
+      "status": "radar",
+      "preview": {
+        "bg": "#fff6e9",
+        "fg": "#111111",
+        "accents": [
+          "#ff5aa5",
+          "#2ec4b6",
+          "#ffd23f",
+          "#6c63ff"
+        ],
+        "font": "sans",
+        "motif": "memphis",
+        "ease": "bounce"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "B",
+      "id": "neo-brutalism",
+      "zh": "新粗獷主義",
+      "en": "Neo-Brutalism",
+      "visual": "粗黑邊框、大膽配色、強烈對比、刻意直接的版面",
+      "motion": "強烈跳切、硬切轉場、文字快速放大",
+      "fits": "產品發表、社群、開發者",
+      "status": "trial",
+      "preview": {
+        "bg": "#fff4e0",
+        "fg": "#111111",
+        "accents": [
+          "#ffe14d",
+          "#7be0ad",
+          "#c4b5fd",
+          "#ff8a5c"
+        ],
+        "font": "sans",
+        "motif": "cards",
+        "ease": "slam"
+      },
+      "family": "kinetic-type"
+    },
+    {
+      "group": "B",
+      "id": "pop-art",
+      "zh": "普普藝術",
+      "en": "Pop Art",
+      "visual": "漫畫網點、鮮豔色塊、重複圖像、流行文化元素",
+      "motion": "漫畫格切換、圖像連續複製、節奏性縮放",
+      "fits": "社群行銷、活動宣傳",
+      "status": "radar",
+      "preview": {
+        "bg": "#ffe600",
+        "fg": "#111111",
+        "accents": [
+          "#ff2d55",
+          "#00a8e8"
+        ],
+        "font": "sans",
+        "motif": "halftone",
+        "ease": "pop"
+      },
+      "family": "pattern-optical"
+    },
+    {
+      "group": "B",
+      "id": "op-art",
+      "zh": "歐普藝術",
+      "en": "Op Art",
+      "visual": "高對比線條、視覺錯覺、重複圖案、光學變形",
+      "motion": "波紋擴散、視覺扭曲、幾何圖形連續變化",
+      "fits": "開場、品牌片、音樂視覺",
+      "status": "trial",
+      "preview": {
+        "bg": "#f4f4f0",
+        "fg": "#0b0b0b",
+        "accents": [],
+        "font": "sans",
+        "motif": "rings",
+        "ease": "linear"
+      },
+      "family": "pattern-optical"
+    },
+    {
+      "group": "B",
+      "id": "surrealism",
+      "zh": "超現實主義",
+      "en": "Surrealism",
+      "visual": "夢境、不合理比例、物體融合、現實與幻想交錯",
+      "motion": "物體融化、空間轉換、不可能的形態變化",
+      "fits": "創意廣告、品牌短片",
+      "status": "radar",
+      "preview": {
+        "bg": "#d7dfe8",
+        "fg": "#2b2a3a",
+        "accents": [
+          "#e9b38a",
+          "#7f9cc4"
+        ],
+        "font": "serif",
+        "motif": "melt",
+        "ease": "slow"
+      },
+      "family": "morph-fluid"
+    },
+    {
+      "group": "C",
+      "id": "retro-futurism",
+      "zh": "復古未來主義",
+      "en": "Retro-Futurism",
+      "visual": "復古科技、太空時代、流線型機械、未來想像",
+      "motion": "復古機械運轉、鏡頭穿越幻想中的未來城市",
+      "fits": "AI、創新概念、數位轉型",
+      "status": "radar",
+      "preview": {
+        "bg": "#132a3e",
+        "fg": "#f6e7c8",
+        "accents": [
+          "#ff7a3d",
+          "#ffc857",
+          "#46b3a6"
+        ],
+        "font": "display",
+        "motif": "orbit",
+        "ease": "smooth"
+      },
+      "family": "tech-systems"
+    },
+    {
+      "group": "C",
+      "id": "vaporwave",
+      "zh": "蒸氣波",
+      "en": "Vaporwave",
+      "visual": "粉紫色、霓虹漸層、古典雕像、復古電腦圖像",
+      "motion": "緩慢漂浮、無限網格移動、夢幻空間轉換",
+      "fits": "社群、音樂、年輕受眾",
+      "status": "radar",
+      "preview": {
+        "bg": "#1d0f3b",
+        "fg": "#ffffff",
+        "accents": [
+          "#ff71ce",
+          "#01cdfe",
+          "#b967ff"
+        ],
+        "font": "serif",
+        "motif": "vapor",
+        "ease": "slow"
+      },
+      "family": "tech-systems"
+    },
+    {
+      "group": "C",
+      "id": "cyberpunk",
+      "zh": "賽博龐克",
+      "en": "Cyberpunk",
+      "visual": "霓虹燈、科技都市、雨夜、機械義體、高密度資訊",
+      "motion": "都市穿梭、全息投影浮現、強烈光影變化",
+      "fits": "資安、科技產品",
+      "status": "radar",
+      "preview": {
+        "bg": "#07080f",
+        "fg": "#e8f7ff",
+        "accents": [
+          "#00f0ff",
+          "#ff2a6d",
+          "#f9f871"
+        ],
+        "font": "mono",
+        "motif": "neon",
+        "ease": "glitch"
+      },
+      "family": "tech-systems"
+    },
+    {
+      "group": "C",
+      "id": "y2k",
+      "zh": "Y2K 數位美學",
+      "en": "Y2K Aesthetic",
+      "visual": "鍍鉻金屬、透明塑膠、液態漸層、千禧年科技感",
+      "motion": "金屬液體流動、介面展開、3D 物件彈性變形",
+      "fits": "AI 產品、社群、新品發表",
+      "status": "trial",
+      "preview": {
+        "bg": "#eef0ff",
+        "fg": "#1b1d3a",
+        "accents": [
+          "#b8e6ff",
+          "#ffc6e8",
+          "#c9b8ff"
+        ],
+        "font": "sans",
+        "motif": "chrome",
+        "ease": "elastic"
+      },
+      "family": "objects-3d"
+    },
+    {
+      "group": "D",
+      "id": "wabi-sabi",
+      "zh": "侘寂",
+      "en": "Wabi-Sabi",
+      "visual": "自然材質、樸素色彩、不完美紋理、安靜氛圍",
+      "motion": "光影緩慢移動、自然元素微幅變化",
+      "fits": "品牌形象、人文、永續",
+      "status": "radar",
+      "preview": {
+        "bg": "#e9e3d8",
+        "fg": "#3b342c",
+        "accents": [
+          "#a39882",
+          "#6f6656"
+        ],
+        "font": "serif",
+        "motif": "wabi",
+        "ease": "slow"
+      },
+      "family": "cinematic"
+    },
+    {
+      "group": "D",
+      "id": "collage",
+      "zh": "剪紙拼貼",
+      "en": "Collage / Cut-out",
+      "visual": "紙張紋理、照片剪貼、多層次構圖、混合媒材",
+      "motion": "紙片滑動、翻頁、圖層堆疊",
+      "fits": "故事型影片、品牌形象、部門情境",
+      "status": "trial",
+      "preview": {
+        "bg": "#cdb48c",
+        "fg": "#111936",
+        "accents": [
+          "#f1ece0",
+          "#725ff7",
+          "#111936"
+        ],
+        "font": "serif",
+        "motif": "paper",
+        "ease": "steps"
+      },
+      "family": "print-collage"
+    },
+    {
+      "group": "D",
+      "id": "claymation",
+      "zh": "黏土定格",
+      "en": "Claymation",
+      "visual": "手工黏土質感、柔軟物件、可見的手作紋理",
+      "motion": "逐格跳動、黏土擠壓、角色形變",
+      "fits": "教育、親切品牌、角色故事",
+      "status": "radar",
+      "preview": {
+        "bg": "#f3d9c4",
+        "fg": "#3a2a22",
+        "accents": [
+          "#ff8c69",
+          "#7fc8a9",
+          "#ffd166"
+        ],
+        "font": "sans",
+        "motif": "clay",
+        "ease": "squash"
+      },
+      "family": "objects-3d"
+    },
+    {
+      "group": "D",
+      "id": "low-poly",
+      "zh": "低多邊形",
+      "en": "Low-poly 3D",
+      "visual": "多邊形模型、簡化的 3D 場景、低細節幾何表面",
+      "motion": "物件組裝、3D 場景旋轉、多邊形逐步生成",
+      "fits": "產品動畫、科技概念",
+      "status": "radar",
+      "preview": {
+        "bg": "#1f2a44",
+        "fg": "#f2f4f8",
+        "accents": [
+          "#5b8def",
+          "#7fd1b9",
+          "#f2c14e"
+        ],
+        "font": "sans",
+        "motif": "lowpoly",
+        "ease": "smooth"
+      },
+      "family": "objects-3d"
+    },
+    {
+      "group": "D",
+      "id": "risograph",
+      "zh": "Risograph 印刷",
+      "en": "Risograph Print",
+      "visual": "兩三色油墨疊印、網點、紙張顆粒、套色錯位",
+      "motion": "錯位後對準、12fps 頓挫、整張換頁",
+      "fits": "產品介紹、品牌形象、社群",
+      "status": "radar",
+      "preview": {
+        "bg": "#f3efe6",
+        "fg": "#111936",
+        "accents": [
+          "#725ff7",
+          "#ff5b8a"
+        ],
+        "font": "sans",
+        "motif": "halftone",
+        "ease": "steps"
+      },
+      "family": "print-collage"
+    },
+    {
+      "group": "E",
+      "id": "editorial-magazine",
+      "zh": "編輯雜誌排版",
+      "en": "Editorial Magazine",
+      "visual": "雜誌跨頁、襯線大標、引言與圖說",
+      "motion": "翻頁、欄位滑動、照片遮罩展開",
+      "fits": "品牌故事、產品介紹、高階主管",
+      "status": "radar",
+      "preview": {
+        "bg": "#f5f1e8",
+        "fg": "#1b1b1b",
+        "accents": [
+          "#c2410c",
+          "#1e3a8a"
+        ],
+        "font": "serif",
+        "motif": "grid",
+        "ease": "expo"
+      },
+      "family": "grid-editorial"
+    },
+    {
+      "group": "E",
+      "id": "kinetic-typography",
+      "zh": "動態字體",
+      "en": "Kinetic Typography",
+      "visual": "只有字：極大字級、對拍拆字堆疊",
+      "motion": "對拍縮放、拆字、推擠",
+      "fits": "社群短片、活動宣傳、品牌口號",
+      "status": "radar",
+      "preview": {
+        "bg": "#111111",
+        "fg": "#f5f5f5",
+        "accents": [
+          "#ffd23f",
+          "#725ff7"
+        ],
+        "font": "sans",
+        "motif": "cards",
+        "ease": "snap"
+      },
+      "family": "kinetic-type"
+    },
+    {
+      "group": "E",
+      "id": "newsprint",
+      "zh": "報紙頭版",
+      "en": "Newsprint Front Page",
+      "visual": "報頭、大標、欄位內文、網點照片",
+      "motion": "標題逐行印出、版面切換",
+      "fits": "發表會、產品新聞、品牌公告",
+      "status": "radar",
+      "preview": {
+        "bg": "#ecebe4",
+        "fg": "#141414",
+        "accents": [
+          "#c8231b"
+        ],
+        "font": "serif",
+        "motif": "halftone",
+        "ease": "expo"
+      },
+      "family": "grid-editorial"
+    },
+    {
+      "group": "E",
+      "id": "big-type-poster",
+      "zh": "超大字海報",
+      "en": "Big Type Poster",
+      "visual": "超大裁切字、海報式構圖",
+      "motion": "沿字移動、縮放露出全字",
+      "fits": "品牌口號、活動主視覺",
+      "status": "radar",
+      "preview": {
+        "bg": "#f2f2ee",
+        "fg": "#0f0f0f",
+        "accents": [
+          "#ff4d2e"
+        ],
+        "font": "sans",
+        "motif": "diagonal",
+        "ease": "expo"
+      },
+      "family": "kinetic-type"
+    },
+    {
+      "group": "E",
+      "id": "duotone-photo",
+      "zh": "雙色調攝影",
+      "en": "Duotone Photography",
+      "visual": "影像轉品牌雙色調＋大字",
+      "motion": "緩推鏡頭、色塊切換",
+      "fits": "品牌形象、活動宣傳",
+      "status": "radar",
+      "preview": {
+        "bg": "#1d1b4f",
+        "fg": "#ffffff",
+        "accents": [
+          "#725ff7",
+          "#ffb3c7"
+        ],
+        "font": "sans",
+        "motif": "melt",
+        "ease": "slow"
+      },
+      "family": "cinematic"
+    },
+    {
+      "group": "F",
+      "id": "sketchbook",
+      "zh": "手繪筆記",
+      "en": "Sketchbook",
+      "visual": "筆記紙、鉛筆線、螢光筆、便利貼",
+      "motion": "逐筆畫出、圈選、劃線",
+      "fits": "功能解說、流程說明",
+      "status": "radar",
+      "preview": {
+        "bg": "#fbf8f1",
+        "fg": "#2b2b2b",
+        "accents": [
+          "#ffe066",
+          "#725ff7"
+        ],
+        "font": "serif",
+        "motif": "vines",
+        "ease": "slow"
+      },
+      "family": "hand-drawn"
+    },
+    {
+      "group": "F",
+      "id": "engraving-collage",
+      "zh": "雕版插畫拼貼",
+      "en": "Engraving Collage",
+      "visual": "古典線刻插畫剪貼＋品牌色塊",
+      "motion": "剪紙式位移、關節擺動",
+      "fits": "品牌形象、有趣的知識解說",
+      "status": "radar",
+      "preview": {
+        "bg": "#efe8da",
+        "fg": "#161616",
+        "accents": [
+          "#725ff7",
+          "#e0533d"
+        ],
+        "font": "serif",
+        "motif": "paper",
+        "ease": "steps"
+      },
+      "family": "print-collage"
+    },
+    {
+      "group": "F",
+      "id": "linocut",
+      "zh": "木刻／麻膠版畫",
+      "en": "Linocut Print",
+      "visual": "刻線、墨塊、油墨不均",
+      "motion": "逐格印出、刻刀劃開",
+      "fits": "品牌形象、文化調性",
+      "status": "radar",
+      "preview": {
+        "bg": "#f1ebe0",
+        "fg": "#1a1a1a",
+        "accents": [
+          "#d94b2b"
+        ],
+        "font": "sans",
+        "motif": "diagonal",
+        "ease": "steps"
+      },
+      "family": "print-collage"
+    },
+    {
+      "group": "F",
+      "id": "line-art",
+      "zh": "單線條插畫",
+      "en": "Continuous Line Art",
+      "visual": "一筆畫的線條插畫、大量留白",
+      "motion": "畫線、變形延伸",
+      "fits": "知識解說、品牌形象",
+      "status": "radar",
+      "preview": {
+        "bg": "#faf8f3",
+        "fg": "#1f1f1f",
+        "accents": [
+          "#725ff7"
+        ],
+        "font": "sans-light",
+        "motif": "vines",
+        "ease": "smooth"
+      },
+      "family": "hand-drawn"
+    },
+    {
+      "group": "F",
+      "id": "paper-diorama",
+      "zh": "立體紙雕",
+      "en": "Paper Diorama",
+      "visual": "多層剪紙、真實陰影、景深",
+      "motion": "視差推鏡、立體書彈起",
+      "fits": "產品介紹、品牌故事",
+      "status": "radar",
+      "preview": {
+        "bg": "#f6e9d7",
+        "fg": "#2d2a26",
+        "accents": [
+          "#725ff7",
+          "#7fc8a9",
+          "#f4a259"
+        ],
+        "font": "sans",
+        "motif": "paper",
+        "ease": "smooth"
+      },
+      "family": "objects-3d"
+    },
+    {
+      "group": "G",
+      "id": "saul-bass",
+      "zh": "Saul Bass 片頭",
+      "en": "Saul Bass Titles",
+      "visual": "剪紙色條、剪影、平塗色",
+      "motion": "色條劃過切場、硬切",
+      "fits": "品牌形象、活動開場",
+      "status": "radar",
+      "preview": {
+        "bg": "#f1e6cf",
+        "fg": "#141414",
+        "accents": [
+          "#e04e2a",
+          "#725ff7"
+        ],
+        "font": "sans",
+        "motif": "diagonal",
+        "ease": "snap"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "G",
+      "id": "mid-century-modern",
+      "zh": "中世紀現代插畫",
+      "en": "Mid-century Modern",
+      "visual": "幾何人物、迴力鏢、星芒、暖色",
+      "motion": "彈性擺動、旋轉",
+      "fits": "品牌形象、知識解說",
+      "status": "radar",
+      "preview": {
+        "bg": "#f3e7cf",
+        "fg": "#2f2a24",
+        "accents": [
+          "#e0a526",
+          "#6b7f3a",
+          "#e2683c"
+        ],
+        "font": "serif",
+        "motif": "shapes",
+        "ease": "bounce"
+      },
+      "family": "geometric"
+    },
+    {
+      "group": "G",
+      "id": "retro-70s",
+      "zh": "70 年代復古",
+      "en": "Retro 70s",
+      "visual": "暖色彩虹條紋、圓胖字、顆粒",
+      "motion": "波浪彎曲、彈跳",
+      "fits": "社群、活動",
+      "status": "radar",
+      "preview": {
+        "bg": "#f6e3c3",
+        "fg": "#4a2c1d",
+        "accents": [
+          "#e2711d",
+          "#f4b33d",
+          "#8c4a2f"
+        ],
+        "font": "sans",
+        "motif": "orbit",
+        "ease": "bounce"
+      },
+      "family": "pattern-optical"
+    },
+    {
+      "group": "G",
+      "id": "ukiyo-e",
+      "zh": "浮世繪",
+      "en": "Ukiyo-e Woodblock",
+      "visual": "平塗色、輪廓線、海浪雲紋",
+      "motion": "海浪捲動、印章",
+      "fits": "文化題材、節慶活動",
+      "status": "radar",
+      "preview": {
+        "bg": "#efe4cc",
+        "fg": "#1b2a41",
+        "accents": [
+          "#2e5c8a",
+          "#c0563b",
+          "#d9b26f"
+        ],
+        "font": "serif",
+        "motif": "vines",
+        "ease": "slow"
+      },
+      "family": "hand-drawn"
+    },
+    {
+      "group": "G",
+      "id": "ink-wash",
+      "zh": "東方水墨",
+      "en": "Ink Wash",
+      "visual": "墨暈、飛白、留白、印章",
+      "motion": "暈開、筆觸劃過",
+      "fits": "品牌形象、高階主管",
+      "status": "radar",
+      "preview": {
+        "bg": "#f5f2ea",
+        "fg": "#1c1c1c",
+        "accents": [
+          "#b23a2b"
+        ],
+        "font": "serif",
+        "motif": "wabi",
+        "ease": "slow"
+      },
+      "family": "hand-drawn"
+    },
+    {
+      "group": "H",
+      "id": "infographic",
+      "zh": "資訊圖表動態",
+      "en": "Infographic Motion",
+      "visual": "長條、圓環、節點連線、圖示",
+      "motion": "數字跳動、長條生長、線條流動",
+      "fits": "數據呈現、知識解說",
+      "status": "radar",
+      "preview": {
+        "bg": "#f7f8fb",
+        "fg": "#14213d",
+        "accents": [
+          "#725ff7",
+          "#2ec4b6",
+          "#ff9f1c"
+        ],
+        "font": "sans",
+        "motif": "grid",
+        "ease": "expo"
+      },
+      "family": "data-diagram"
+    },
+    {
+      "group": "H",
+      "id": "blueprint",
+      "zh": "藍圖工程圖",
+      "en": "Blueprint",
+      "visual": "深藍白線、尺寸標註、爆炸圖",
+      "motion": "逐線畫出、拆解組合",
+      "fits": "產品架構、功能說明",
+      "status": "radar",
+      "preview": {
+        "bg": "#0f2a4a",
+        "fg": "#e8f1ff",
+        "accents": [
+          "#7fdbff",
+          "#725ff7"
+        ],
+        "font": "mono",
+        "motif": "grid",
+        "ease": "smooth"
+      },
+      "family": "data-diagram"
+    },
+    {
+      "group": "H",
+      "id": "isometric",
+      "zh": "等角插畫",
+      "en": "Isometric Illustration",
+      "visual": "等角小世界、積木、流動光點",
+      "motion": "升起、沿路徑流動",
+      "fits": "產品架構、流程解說",
+      "status": "radar",
+      "preview": {
+        "bg": "#eef1f7",
+        "fg": "#1f2a44",
+        "accents": [
+          "#725ff7",
+          "#7fd1b9",
+          "#f2c14e"
+        ],
+        "font": "sans",
+        "motif": "lowpoly",
+        "ease": "smooth"
+      },
+      "family": "objects-3d"
+    },
+    {
+      "group": "H",
+      "id": "pixel-art",
+      "zh": "像素藝術",
+      "en": "Pixel Art",
+      "visual": "8-bit 像素、遊戲 UI、有限色盤",
+      "motion": "逐格、閃爍、分數跳動",
+      "fits": "社群、活動、年輕受眾",
+      "status": "radar",
+      "preview": {
+        "bg": "#1b1b2f",
+        "fg": "#f5f5f5",
+        "accents": [
+          "#ff5d8f",
+          "#3ddc97",
+          "#ffd166"
+        ],
+        "font": "mono",
+        "motif": "neon",
+        "ease": "glitch"
+      },
+      "family": "tech-systems"
+    },
+    {
+      "group": "H",
+      "id": "soft-3d",
+      "zh": "軟質 3D",
+      "en": "Soft 3D",
+      "visual": "圓潤充氣 3D、柔和光影",
+      "motion": "擠壓彈跳、慢轉",
+      "fits": "產品介紹、社群",
+      "status": "radar",
+      "preview": {
+        "bg": "#f4eefc",
+        "fg": "#2b2440",
+        "accents": [
+          "#725ff7",
+          "#ff9ecf",
+          "#8ee3c8"
+        ],
+        "font": "sans",
+        "motif": "clay",
+        "ease": "squash"
+      },
+      "family": "objects-3d"
+    }
+  ]
+}

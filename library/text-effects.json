@@ -1,0 +1,365 @@
+{
+ "source": "依 Threads @ai_tjb「40 種文字動態效果」的命名概念整理（原清單為圖片，名稱為本專案自行對照），實作對應 HyperFrames registry（v0.8.174）元件或 GSAP 作法。cjk：ok＝中文可用；partial＝需測試；latin-only＝原元件只支援拉丁字母。",
+ "effects": [
+  {
+   "id": "split-flap",
+   "zh": "翻牌",
+   "en": "Split Flap",
+   "look": "每格像車站時刻表一格格翻動",
+   "hyperframes": "split-flap-board",
+   "gsap": "drum 格子逐格翻轉",
+   "cjk": "ok"
+  },
+  {
+   "id": "marquee",
+   "zh": "跑馬燈",
+   "en": "Marquee",
+   "look": "文字橫向連續捲動，像新聞跑馬",
+   "hyperframes": "perspective-marquee",
+   "gsap": "x 位移 loop",
+   "cjk": "ok"
+  },
+  {
+   "id": "glitch-slice",
+   "zh": "故障切片",
+   "en": "Glitch Slice",
+   "look": "大字切成橫條左右錯位閃一下",
+   "hyperframes": "rgb-glitch-text",
+   "gsap": "clip-path 切條＋x 抖動",
+   "cjk": "ok"
+  },
+  {
+   "id": "typewriter",
+   "zh": "打字機",
+   "en": "Typewriter",
+   "look": "逐字打出、游標閃爍",
+   "hyperframes": "typewriter",
+   "gsap": "clip 或逐字顯示＋游標",
+   "cjk": "ok"
+  },
+  {
+   "id": "scramble-decode",
+   "zh": "亂碼解碼",
+   "en": "Scramble Decode",
+   "look": "亂碼由左到右解成正確文字",
+   "hyperframes": "matrix-decode",
+   "gsap": "ScrambleText 外掛",
+   "cjk": "partial"
+  },
+  {
+   "id": "per-char-rise",
+   "zh": "逐字升起",
+   "en": "Per-char Rise",
+   "look": "每個字從遮罩下方升起",
+   "hyperframes": "bottom-up-letters",
+   "gsap": "SplitText chars + yPercent",
+   "cjk": "ok"
+  },
+  {
+   "id": "letter-drop",
+   "zh": "逐字落下",
+   "en": "Letter Drop",
+   "look": "字母由上往下階梯落下",
+   "hyperframes": "top-down-letters",
+   "gsap": "SplitText chars + y",
+   "cjk": "ok"
+  },
+  {
+   "id": "stagger-fade-up",
+   "zh": "逐詞淡入上滑",
+   "en": "Staggered Fade Up",
+   "look": "一個詞一個詞淡入並上移",
+   "hyperframes": "staggered-fade-up",
+   "gsap": "stagger opacity + y",
+   "cjk": "ok"
+  },
+  {
+   "id": "tracking-in",
+   "zh": "字距收合",
+   "en": "Tracking In",
+   "look": "字距由寬收緊到定位",
+   "hyperframes": "tracking-in",
+   "gsap": "letterSpacing 補間",
+   "cjk": "ok"
+  },
+  {
+   "id": "blur-focus",
+   "zh": "模糊對焦",
+   "en": "Blur Focus",
+   "look": "由重模糊拉到清晰",
+   "hyperframes": "focus-blur-resolve",
+   "gsap": "filter blur 補間",
+   "cjk": "ok"
+  },
+  {
+   "id": "mask-reveal",
+   "zh": "遮罩揭示",
+   "en": "Mask Reveal",
+   "look": "整行從遮罩中滑出",
+   "hyperframes": "shared-axis-y",
+   "gsap": "clip-path inset 補間",
+   "cjk": "ok"
+  },
+  {
+   "id": "clip-wipe",
+   "zh": "左到右擦出",
+   "en": "Clip Wipe",
+   "look": "文字由左到右被擦出來",
+   "hyperframes": "caption-clip-wipe",
+   "gsap": "clip-path inset 右側",
+   "cjk": "ok"
+  },
+  {
+   "id": "highlighter",
+   "zh": "螢光筆劃過",
+   "en": "Highlighter Sweep",
+   "look": "螢光色塊從左掃過關鍵字",
+   "hyperframes": "inline-highlight",
+   "gsap": "背景塊 scaleX",
+   "cjk": "ok"
+  },
+  {
+   "id": "marker-annotate",
+   "zh": "手繪圈選",
+   "en": "Marker Annotate",
+   "look": "手繪圈或底線逐筆畫出",
+   "hyperframes": "vox-annotate",
+   "gsap": "SVG stroke-dashoffset",
+   "cjk": "ok"
+  },
+  {
+   "id": "strike-replace",
+   "zh": "刪除線替換",
+   "en": "Strike & Replace",
+   "look": "劃掉舊字再換上新字",
+   "hyperframes": "strikethrough-replace",
+   "gsap": "線條 scaleX＋文字交換",
+   "cjk": "ok"
+  },
+  {
+   "id": "headline-slam",
+   "zh": "重擊標題",
+   "en": "Headline Slam",
+   "look": "大標由大縮到位重重落下",
+   "hyperframes": "headline-slam",
+   "gsap": "scale 1.3→1 + 微震",
+   "cjk": "ok"
+  },
+  {
+   "id": "char-explode",
+   "zh": "爆散重組",
+   "en": "Char Explode",
+   "look": "字先四散再重組",
+   "hyperframes": "char-slam-explode",
+   "gsap": "SplitText chars 隨機位移回位",
+   "cjk": "ok"
+  },
+  {
+   "id": "particle-assemble",
+   "zh": "粒子聚合",
+   "en": "Particle Assemble",
+   "look": "文字由粒子雲聚合或消散",
+   "hyperframes": "particle-text-dissolve",
+   "gsap": "canvas 粒子取樣字形",
+   "cjk": "partial"
+  },
+  {
+   "id": "gooey-morph",
+   "zh": "液態變形",
+   "en": "Gooey Morph",
+   "look": "詞與詞之間像液體融合轉換",
+   "hyperframes": "morph-text",
+   "gsap": "SVG 閾值濾鏡",
+   "cjk": "partial"
+  },
+  {
+   "id": "weight-wave",
+   "zh": "字重波浪",
+   "en": "Weight Wave",
+   "look": "粗細像波浪沿字串傳遞",
+   "hyperframes": "weight-wave",
+   "gsap": "可變字重 font-variation-settings",
+   "cjk": "partial"
+  },
+  {
+   "id": "shimmer",
+   "zh": "光澤掃過",
+   "en": "Shimmer Sweep",
+   "look": "一道光從字上掃過",
+   "hyperframes": "text-shimmer",
+   "gsap": "漸層遮罩位移",
+   "cjk": "ok"
+  },
+  {
+   "id": "slot-roll",
+   "zh": "拉霸滾動",
+   "en": "Slot Roll",
+   "look": "數字或字像拉霸機滾到定位",
+   "hyperframes": "slot-machine-roll",
+   "gsap": "縱向捲軸 y",
+   "cjk": "ok"
+  },
+  {
+   "id": "count-up",
+   "zh": "數字計數",
+   "en": "Count Up",
+   "look": "數字從 0 跳到目標值",
+   "hyperframes": "(blueprint dataviz-countup)",
+   "gsap": "onUpdate 改 textContent",
+   "cjk": "ok"
+  },
+  {
+   "id": "word-swap",
+   "zh": "關鍵字替換",
+   "en": "Word Swap",
+   "look": "句子不動，只換掉一個詞",
+   "hyperframes": "kinetic-type-swap",
+   "gsap": "單詞進出場",
+   "cjk": "ok"
+  },
+  {
+   "id": "text-match-cut",
+   "zh": "文字配對剪接",
+   "en": "Text Match Cut",
+   "look": "一行字在移動中變成另一行",
+   "hyperframes": "text-match-cut",
+   "gsap": "兩行同一緩動交叉",
+   "cjk": "ok"
+  },
+  {
+   "id": "streaming",
+   "zh": "串流文字",
+   "en": "Streaming Text",
+   "look": "像 AI 回答一樣一段段湧出",
+   "hyperframes": "streaming-text",
+   "gsap": "分塊顯示",
+   "cjk": "ok"
+  },
+  {
+   "id": "typed-prompt",
+   "zh": "打字提示詞",
+   "en": "Typed Prompt",
+   "look": "提示詞以人類節奏打出",
+   "hyperframes": "typed-prompt",
+   "gsap": "分段 typewriter",
+   "cjk": "ok"
+  },
+  {
+   "id": "stitched",
+   "zh": "縫線字",
+   "en": "Stitched Text",
+   "look": "文字像縫線一樣一針針畫出",
+   "hyperframes": "stitched-text-draw",
+   "gsap": "SVG 虛線描邊",
+   "cjk": "latin-only"
+  },
+  {
+   "id": "handwrite",
+   "zh": "手寫書寫",
+   "en": "Handwriting Write-on",
+   "look": "手寫字一筆筆寫出",
+   "hyperframes": "hw-write-title",
+   "gsap": "中文用霞鶩文楷＋左到右 clip（sketchbook 風格）",
+   "cjk": "latin-only"
+  },
+  {
+   "id": "texture-mask",
+   "zh": "紋理鏤空字",
+   "en": "Texture Mask",
+   "look": "字形鏤空露出紋理或影片",
+   "hyperframes": "texture-mask-text",
+   "gsap": "CSS mask / background-clip",
+   "cjk": "ok"
+  },
+  {
+   "id": "blend-invert",
+   "zh": "混合反相",
+   "en": "Blend Invert",
+   "look": "字隨背景自動黑白反相",
+   "hyperframes": "caption-blend-difference",
+   "gsap": "mix-blend-mode: difference",
+   "cjk": "ok"
+  },
+  {
+   "id": "rgb-offset",
+   "zh": "RGB 色偏",
+   "en": "Chromatic Offset",
+   "look": "紅藍綠三色錯開",
+   "hyperframes": "caption-glitch-rgb",
+   "gsap": "三層 text-shadow 錯位",
+   "cjk": "ok"
+  },
+  {
+   "id": "scan-band",
+   "zh": "掃描帶",
+   "en": "Scan Band",
+   "look": "一道斜向扭曲帶掃過字標",
+   "hyperframes": "scan-band",
+   "gsap": "遮罩帶位移",
+   "cjk": "ok"
+  },
+  {
+   "id": "neon",
+   "zh": "霓虹光",
+   "en": "Neon Glow",
+   "look": "霓虹發光字（多數品味方向禁用）",
+   "hyperframes": "caption-neon-glow",
+   "gsap": "text-shadow 發光",
+   "cjk": "ok"
+  },
+  {
+   "id": "karaoke",
+   "zh": "卡拉 OK 變色",
+   "en": "Karaoke",
+   "look": "逐字依旁白變色",
+   "hyperframes": "caption-pill-karaoke",
+   "gsap": "依字幕時間改色",
+   "cjk": "ok"
+  },
+  {
+   "id": "backdrop-word",
+   "zh": "背景巨字",
+   "en": "Oversized Backdrop Word",
+   "look": "低對比巨字在主體後慢慢漂移",
+   "hyperframes": "mk-emphasis-type",
+   "gsap": "大字 x 慢速位移",
+   "cjk": "ok"
+  },
+  {
+   "id": "extruded-3d",
+   "zh": "3D 擠出字",
+   "en": "Extruded 3D",
+   "look": "斜角立體字一個個翻起",
+   "hyperframes": "extruded-logo",
+   "gsap": "Three.js",
+   "cjk": "latin-only"
+  },
+  {
+   "id": "editorial-emphasis",
+   "zh": "雙字體強調",
+   "en": "Editorial Emphasis",
+   "look": "關鍵詞換另一種字體並放大",
+   "hyperframes": "caption-editorial-emphasis",
+   "gsap": "兩種字體＋字級對比",
+   "cjk": "ok"
+  },
+  {
+   "id": "misregistration",
+   "zh": "套色偏移",
+   "en": "Misregistration",
+   "look": "雙色印刷的套色錯位微晃",
+   "hyperframes": "(style riso)",
+   "gsap": "text-shadow 偏移逐格變動",
+   "cjk": "ok"
+  },
+  {
+   "id": "torn-label",
+   "zh": "撕紙字條",
+   "en": "Torn-paper Label",
+   "look": "字印在撕下的紙條上啪地貼上",
+   "hyperframes": "(style paper-collage)",
+   "gsap": "clip-path 撕邊＋steps 緩動",
+   "cjk": "ok"
+  }
+ ]
+}

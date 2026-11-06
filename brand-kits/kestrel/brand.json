@@ -1,0 +1,31 @@
+{
+  "id": "kestrel",
+  "name": "Kestrel",
+  "description": "Kestrel 聯盟：虛構的示範品牌（硬體通路），給測試與範例使用；示範禁用詞與禁止價格",
+  "colors": {
+    "ink": { "hex": "#1B2547", "role": "主色、文字、Logo" },
+    "accent": { "hex": "#12A39A", "role": "強調（取自 NovaMind 青綠）" },
+    "canvas": { "hex": "#FFFFFF", "role": "預設底色；風格可改成紙色等" }
+  },
+  "fonts": {
+    "display": { "family": "Noto Serif TC", "file": "NotoSerifTC-VF.ttf", "weights": [700, 900] },
+    "body": { "family": "Noto Sans TC", "file": "NotoSansTC-VF.ttf", "weights": [400, 500, 700, 900] },
+    "latin": { "family": "Instrument Serif", "file": "InstrumentSerif-Regular.ttf", "weights": [400] }
+  },
+  "logos": {
+    "primary": { "file": "logos/kestrel-navy.svg", "use": "淺色底" },
+    "reversed": { "file": "logos/kestrel-white.svg", "use": "深色底" }
+  },
+  "pronunciation": [
+    { "text": "NovaMind", "say": "Nova Mind", "note": "Nova ＋ Mind 兩個字" },
+    { "text": "AI", "say": "A I", "note": "字母分開念" }
+  ],
+  "rules": {
+    "do": ["Logo 周圍至少保留 Logo 高度一半的留白", "深色底用反白版 Logo", "Logo 不加抖動、不變形、不換色"],
+    "dont": ["畫面上出現價格或「限時優惠」", "出現醫療、OCR 方案（除非該片主題就是它們）", "宣稱沒有出處的數據"]
+  },
+  "forbidden": ["醫療", "OCR"],
+  "forbid_prices": true,
+  "allowed_brands": ["NovaMind"],
+  "logo": { "motion": "static", "clear_space": 0.5, "note": "位置、大小可隨版面；進場可淡入或位移，進場後不抖動、不變形、不換色" }
+}

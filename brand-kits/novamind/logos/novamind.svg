@@ -1,0 +1,5 @@
+<svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" aria-label="NovaMind">
+  <circle cx="40" cy="40" r="28" fill="none" stroke="#141414" stroke-width="10"/>
+  <circle cx="40" cy="40" r="9" fill="#12A39A"/>
+  <text x="84" y="54" font-family="Noto Sans TC, sans-serif" font-size="40" font-weight="700" fill="#141414">NovaMind</text>
+</svg>

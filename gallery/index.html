@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>風格與參考庫</title>
+<style>
+  @font-face { font-family: 'Noto Sans TC'; src: url('/fonts/NotoSansTC-VF.ttf'); font-weight: 100 900; }
+  @font-face { font-family: 'Noto Serif TC'; src: url('/fonts/NotoSerifTC-VF.ttf'); font-weight: 200 900; }
+  @font-face { font-family: 'Instrument Serif'; src: url('/fonts/InstrumentSerif-Regular.ttf'); }
+  @font-face { font-family: 'Instrument Serif'; font-style: italic; src: url('/fonts/InstrumentSerif-Italic.ttf'); }
+  :root { --ink: #16171d; --muted: #6b6b73; --line: #e4e1da; --bg: #f6f4ef; --card: #ffffff; --accent: #725ff7; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Noto Sans TC', system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+  .top { display: flex; align-items: baseline; gap: 24px; padding: 22px 0 12px; }
+  h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 40px; margin: 0; letter-spacing: -0.5px; }
+  h1 em { color: var(--accent); }
+  .ctx { color: var(--muted); font-size: 14px; }
+  .tabs { display: flex; gap: 4px; margin-left: auto; }
+  .tab { border: 0; background: none; font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 999px; cursor: pointer; color: var(--muted); }
+  .tab[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 0 16px; }
+  .chip { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+  .chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+  input[type=search] { margin-left: auto; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 8px 16px; font: inherit; font-size: 14px; width: 260px; }
+  main { padding: 28px 0 140px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .card { background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); transition: box-shadow .2s, border-color .2s; display: flex; flex-direction: column; }
+  .card:hover { box-shadow: 0 18px 40px -20px #0004; }
+  .card.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .tile { position: relative; aspect-ratio: 16 / 9; overflow: hidden; container-type: inline-size; }
+  .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .name { display: flex; align-items: baseline; gap: 8px; }
+  .name b { font-size: 19px; }
+  .name i { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--muted); }
+  .meta { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-size: 12px; padding: 2px 8px; border-radius: 6px; background: #f0eee8; color: #4a4a52; }
+  .badge.trial { background: #ece9ff; color: #4b3cc4; }
+  .badge.adopted { background: #e3f5ea; color: #1d7a45; }
+  .desc { font-size: 14px; line-height: 1.55; color: #3c3c44; margin: 0; }
+  .desc span { color: var(--muted); }
+  .actions { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
+  .btn { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+  .btn.pick[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+  .ref { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .ref a { color: var(--ink); font-weight: 700; text-decoration: none; }
+  .ref a:hover { text-decoration: underline; }
+  .ref.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .empty { color: var(--muted); padding: 40px 0; }
+  footer { position: fixed; left: 0; right: 0; bottom: 0; background: var(--ink); color: #fff; transform: translateY(100%); transition: transform .25s; z-index: 20; }
+  footer.show { transform: none; }
+  footer .wrap { display: flex; gap: 8px; padding-top: 12px; padding-bottom: 14px; }
+  footer .picked { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+  footer .picked span { background: #ffffff1f; border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+  textarea { width: 340px; height: 40px; border-radius: 10px; border: 0; padding: 8px 12px; font: inherit; font-size: 13px; resize: none; }
+  .send { background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 10px 20px; font: inherit; font-weight: 700; cursor: pointer; }
+  .toast { position: fixed; left: 50%; bottom: 90px; translate: -50% 0; background: #1d7a45; color: #fff; padding: 10px 18px; border-radius: 999px; opacity: 0; transition: opacity .2s; z-index: 30; }
+  .toast.show { opacity: 1; }
+  dialog { border: 0; border-radius: 16px; padding: 0; }
+  dialog::backdrop { background: #000a; }
+  #zoomer { background: #000; width: min(1400px, 94vw); } #zoomer img { width: 100%; display: block; }
+  #recipe { width: min(760px, 94vw); max-height: 90vh; background: var(--card); color: var(--ink); }
+  .rbody { padding: 20px 26px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .rbody .lead { font-size: 17px; line-height: 1.6; margin: 4px 0; }
+  .rbody details { border-top: 1px solid var(--line); padding: 10px 0 2px; }
+  .rbody summary { font-weight: 700; cursor: pointer; }
+  .rbody ul, .rbody ol { margin: 8px 0; padding-left: 22px; line-height: 1.65; font-size: 14.5px; }
+  .rbody p { margin: 6px 0; font-size: 14.5px; line-height: 1.6; }
+  .rbody code { background: #f0eee8; border-radius: 4px; padding: 0 4px; font-size: 13px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12.5px; color: var(--muted); }
+  .tags span::before { content: "#"; }
+  .badge.ex { background: #fff1d6; color: #8a5a00; }
+  .chip small { opacity: .6; margin-left: 2px; }
+  .chip.sm { padding: 4px 11px; font-size: 13px; }
+  .chip.pause { margin-left: 8px; }
+  .sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+  select { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14px; }
+  .tagrow { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; order: 10; }
+  .hint { color: var(--muted); margin: 0 0 18px; font-size: 14px; }
+  .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(560px, 1fr)); gap: 28px; }
+  .cand { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .cand.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .cand .media { aspect-ratio: 16 / 9; background: #111; }
+  .cand .media > * { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #111; }
+  .strip img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; cursor: zoom-in; }
+  footer .wrap { flex-direction: column; align-items: stretch; }
+  footer .row { display: flex; align-items: center; gap: 12px; }
+  .custom summary { cursor: pointer; font-size: 13px; opacity: .8; }
+  .cgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 14px; padding: 10px 0 4px; }
+  .cgrid label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; opacity: .9; }
+  .cgrid label.wide { grid-column: span 2; }
+  .cgrid input:not([type=range]) { border: 0; border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 13px; }
+  .cgrid output { font-weight: 700; }
+  /* previews animate only on screen, and never while paused */
+  .tile, .tile * { animation-play-state: paused !important; }
+  .tile.live, .tile.live * { animation-play-state: running !important; }
+  body.paused .tile, body.paused .tile * { animation-play-state: paused !important; }
+  .tabs { flex-wrap: wrap; }
+  .btn.add { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; white-space: nowrap; }
+  .fx { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .fx.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .fx .media { aspect-ratio: 16 / 9; background: #16171d; position: relative; overflow: hidden; display: grid; place-items: center; color: #fff9; font-size: 13px; }
+  .fx .media img, .fx .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .fx .media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .fx .media video { opacity: 0; transition: opacity .2s; } .fx .media.playing video { opacity: 1; }
+  .fx .desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .fx code, .ref code, .site code { background: #f0eee8; border-radius: 4px; padding: 0 5px; font-size: 12.5px; }
+  .badge.ok { background: #e3f5ea; color: #1d7a45; } .badge.partial { background: #fff1d6; color: #8a5a00; } .badge.latin-only { background: #fde8e8; color: #a12a2a; }
+  .badge.user { background: #ece9ff; color: #4b3cc4; }
+  .kv { font-size: 13.5px; line-height: 1.55; color: #3c3c44; margin: 0; } .kv b { color: var(--muted); font-weight: 500; margin-right: 6px; }
+  .kv .spark { display: block; width: 100%; height: 22px; margin-top: 4px; fill: var(--muted); opacity: .55; } .kv .note { font-size: 12px; color: var(--muted); }
+  .site { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .site a { color: var(--ink); font-weight: 700; text-decoration: none; } .site a:hover { text-decoration: underline; }
+  .site .host { color: var(--muted); font-size: 12.5px; }
+  #addDlg details.more { display: block; } #addDlg.site details.more { display: none; }
+  #addDlg .moregrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; padding-top: 10px; } #addDlg .moregrid label { display: flex; }
+  #addDlg summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+  .seg { display: inline-flex; background: #ece9e2; border-radius: 999px; padding: 3px; gap: 2px; }
+  .seg button { border: 0; background: none; font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 999px; cursor: pointer; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px #0002; }
+  .ex { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
+  .ex.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .ex .media { aspect-ratio: 16 / 9; background: #111; position: relative; overflow: hidden; display: grid; place-items: center; color: #fff9; font-size: 13px; }
+  .ex .media img, .ex .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ex .media video { opacity: 0; transition: opacity .15s; } .ex .media.playing video { opacity: 1; }
+  .ex .src { position: absolute; left: 8px; top: 8px; font-size: 11px; background: #000a; color: #fff; padding: 1px 7px; border-radius: 999px; }
+  .ex .body { padding: 10px 12px 12px; gap: 6px; }
+  .ex .ttl { font-weight: 700; font-size: 14.5px; line-height: 1.35; } .ex .by { font-size: 12.5px; color: var(--muted); }
+  .ex .tagl { display: flex; flex-wrap: wrap; gap: 4px; } .ex .tagl span { font-size: 11.5px; background: #f0eee8; border-radius: 5px; padding: 1px 6px; color: #4a4a52; }
+  .ex .row { display: flex; gap: 6px; margin-top: auto; padding-top: 4px; } .ex .row .btn { padding: 5px 11px; font-size: 13px; }
+  .exgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  .ex .media video.still { opacity: 1; }
+  .ex .media .at { position: absolute; right: 8px; bottom: 8px; font-size: 11px; background: #000a; color: #fff; padding: 1px 7px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+  .ex .note { font-size: 12.5px; line-height: 1.5; color: #3c3c44; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ex .note b { color: var(--muted); font-weight: 500; margin-right: 5px; }
+  .ex.liked { border-color: #1d7a45; box-shadow: 0 0 0 1px #1d7a45; } .ex.disliked { opacity: .62; }
+  .btn.vd.like[aria-pressed="true"] { background: #e3f5ea; border-color: #1d7a45; color: #1d7a45; }
+  .btn.vd.no[aria-pressed="true"] { background: #fde8e8; border-color: #a12a2a; color: #a12a2a; }
+  .vnote { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 13px; width: 100%; }
+  #exDlg { width: min(1100px, 96vw); max-height: 94vh; background: var(--card); color: var(--ink); }
+  #exDlg .exwrap { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); }
+  #exDlg video, #exDlg .still { width: 100%; display: block; background: #000; max-height: 80vh; object-fit: contain; }
+  #exDlg iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; background: #000; }
+  #exDlg .side { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; overflow: auto; max-height: 80vh; }
+  #exDlg .prompt { white-space: pre-wrap; background: #f6f4ef; border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.6; max-height: 260px; overflow: auto; }
+  @media (max-width: 800px) { #exDlg .exwrap { grid-template-columns: 1fr; } }
+  .vars { display: flex; flex-wrap: wrap; gap: 6px; }
+  .vchip { border: 1px solid var(--line); background: #faf9f6; border-radius: 999px; padding: 4px 10px 4px 6px; font: inherit; font-size: 12.5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .vchip:hover { border-color: var(--ink); } .vchip.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, #fff); } .vchip small { color: var(--muted); margin-left: 4px; }
+  .rbody .def { grid-template-columns: 1fr 1fr; }
+  .fam { margin: 0 0 44px; } .fam:last-child { margin-bottom: 0; }
+  .famhead { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 20px; align-items: start; padding: 0 0 16px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .famhead h2 { margin: 0; font-size: 24px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; } .famhead h2 i { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; color: var(--muted); } .famhead h2 small { font-size: 13px; color: var(--muted); font-weight: 400; }
+  .def { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 22px; margin: 4px 0 0; }
+  .def div { font-size: 13.5px; line-height: 1.55; color: #3c3c44; } .def b { color: var(--accent); font-weight: 700; margin-right: 6px; }
+  .famfoot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--muted); align-items: center; }
+  .famfoot code { background: #f0eee8; border-radius: 4px; padding: 0 5px; font-size: 12px; color: #3c3c44; }
+  .sw { display: inline-flex; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); vertical-align: middle; } .sw i { width: 14px; height: 14px; display: block; }
+  .pal { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .pal.sel { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .pal .chips { aspect-ratio: 16 / 7; position: relative; display: flex; align-items: flex-end; gap: 0; }
+  .pal .chips .word { position: absolute; left: 7%; top: 18%; font-weight: 900; font-size: 30px; }
+  .pal .chips span { flex: 1; height: 34%; }
+  .pal .hex { font: 12px ui-monospace, Menlo, monospace; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
+  .graphwrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; height: calc(100vh - 230px); min-height: 480px; }
+  #graph { width: 100%; height: 100%; background: #fff; border: 1px solid var(--line); border-radius: 14px; cursor: grab; touch-action: none; display: block; }
+  #graph.dragging { cursor: grabbing; }
+  .gpanel { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; overflow: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .gpanel h3 { margin: 0; font-size: 17px; } .gpanel ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .gpanel li button { border: 0; background: none; font: inherit; text-align: left; cursor: pointer; padding: 3px 0; color: var(--ink); } .gpanel li button:hover { color: var(--accent); }
+  .gpanel li small { color: var(--muted); margin-left: 6px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+  #addDlg { width: min(640px, 94vw); background: var(--card); color: var(--ink); }
+  #addDlg form { padding: 22px 26px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+  #addDlg h2 { grid-column: 1 / -1; margin: 0; font-size: 20px; }
+  #addDlg label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--muted); }
+  #addDlg label.wide { grid-column: 1 / -1; }
+  #addDlg input, #addDlg select, #addDlg textarea { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 14px; color: var(--ink); background: #fff; width: 100%; height: auto; resize: vertical; }
+  #addDlg .kind { grid-column: 1 / -1; display: flex; gap: 8px; }
+  #addDlg .err { grid-column: 1 / -1; color: #a12a2a; font-size: 13.5px; margin: 0; min-height: 1em; }
+  #addDlg .row2 { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 8px; }
+  #addDlg [data-for="site"] { display: none; } #addDlg.site [data-for="site"] { display: flex; } #addDlg.site [data-for="work"] { display: none; }
+  @media (max-width: 900px) { .graphwrap { grid-template-columns: 1fr; height: auto; } #graph { height: 70vh; } }
+  @media (max-width: 640px) { #addDlg form { grid-template-columns: 1fr; } }
+  @media (max-width: 1100px) { header { position: static; } } /* the filters wrap too tall to stay pinned on a narrow window */
+  @media (max-width: 640px) { .board { grid-template-columns: 1fr; } .cgrid { grid-template-columns: 1fr 1fr; } .wrap { padding: 0 16px; } input[type=search] { width: 100%; margin-left: 0; } .top { flex-wrap: wrap; } textarea { width: 100%; } footer .row { flex-wrap: wrap; } }
+
+  /* ---------- generic preview tiles: one motif per style, looping ---------- */
+  .tile * { position: absolute; }
+  .tile .word { z-index: 5; left: 7%; bottom: 10%; font-size: 9cqw; font-weight: 900; line-height: 1; white-space: nowrap; }
+  .tile .word small { position: static; display: block; font-size: 3.4cqw; font-weight: 600; letter-spacing: .3em; margin-bottom: 1.2cqw; opacity: .8; }
+  .f-serif { font-family: 'Noto Serif TC', serif; }
+  .f-display { font-family: 'Instrument Serif', serif; font-weight: 400 !important; font-style: italic; }
+  .f-mono { font-family: ui-monospace, Menlo, monospace; }
+  .f-sans-light { font-weight: 300 !important; letter-spacing: .08em; }
+  @keyframes rise { 0%, 8% { transform: translateY(120%); opacity: 0 } 22%, 85% { transform: none; opacity: 1 } 100% { transform: translateY(-20%); opacity: 0 } }
+  .tile .word { animation: rise 4s var(--ease) infinite; }
+  @keyframes spin { to { transform: rotate(360deg) } }
+  @keyframes drift { 0%,100% { transform: translate(0,0) } 50% { transform: translate(var(--dx, 20px), var(--dy, -12px)) } }
+  @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.12) } }
+  @keyframes slide { 0%,15% { transform: translateX(-120%) } 35%,80% { transform: none } 100% { transform: translateX(120%) } }
+  @keyframes drop { 0%,10% { transform: translateY(-160%) } 30%,85% { transform: none } 100% { transform: translateY(160%) } }
+  @keyframes draw { from { stroke-dashoffset: var(--len, 600) } 60%, to { stroke-dashoffset: 0 } }
+  @keyframes morph { 0%,100% { border-radius: 42% 58% 61% 39% / 47% 38% 62% 53% } 50% { border-radius: 62% 38% 35% 65% / 58% 61% 39% 42% } }
+  @keyframes floor { to { background-position: 0 40px } }
+  @keyframes flicker { 0%,19%,21%,63%,65%,100% { opacity: 1 } 20%,64% { opacity: .35 } }
+  @keyframes squash { 0%,100% { transform: translateY(0) scale(1,1) } 40% { transform: translateY(-40%) scale(.92,1.08) } 55% { transform: translateY(0) scale(1.15,.85) } 70% { transform: translateY(-8%) scale(.97,1.03) } }
+  @keyframes march { to { transform: translateX(-50%) } }
+  @keyframes tick { 0%,100% { transform: rotate(-2deg) } 50% { transform: rotate(2deg) } }
+  @keyframes eq { 0%,100% { transform: scaleY(.15) } 50% { transform: scaleY(1) } }
+  @keyframes swap3 { 0%,28% { opacity: 1; transform: none } 33%,100% { opacity: 0; transform: translateY(-40%) } }
+  @keyframes pan { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  @keyframes push { from { transform: scale(1) } to { transform: scale(1.18) } }
+  @keyframes fall { 0% { transform: translateY(-130%) } 45% { transform: translateY(0) scale(1.15,.85) } 55% { transform: translateY(0) } 70% { transform: translateY(-30%) } 85%,100% { transform: translateY(0) } }
+  @keyframes walk { 0% { transform: translateX(-30%) } 100% { transform: translateX(130%) } }
+  @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8%) } }
+  @keyframes karaoke { from { background-size: 0 100% } to { background-size: 100% 100% } }
+  @keyframes hue { to { filter: hue-rotate(360deg) } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <h1>風格與參考庫 <em>·</em></h1>
+      <span class="ctx" id="ctx"></span>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="false" data-tab="board" id="boardTab" hidden>本片候選 <span id="nBoard"></span></button>
+        <button class="tab" role="tab" aria-selected="true" data-tab="styles">範例 <span id="nStyles"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="palettes">色票 <span id="nPalettes"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="effects">文字效果 <span id="nEffects"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="cameras">運鏡 <span id="nCameras"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="registry">HyperFrames 元件 <span id="nRegistry"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="sites">參考網站 <span id="nSites"></span></button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="graph">關係圖</button>
+      </div>
+      <button class="btn add" id="addRef">＋ 加入收藏</button>
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+</header>
+<main class="wrap"><div id="view"></div></main>
+<footer id="bar"><div class="wrap">
+  <details class="custom"><summary>調整需求（選填）</summary>
+    <div class="cgrid">
+      <label>用途<input id="cPurpose" placeholder="例：展會開場、社群短片" /></label>
+      <label>長度<input id="cLength" placeholder="例：30 秒、9:16" /></label>
+      <label>色彩<input id="cColours" placeholder="例：沿用品牌色、更暖一點" /></label>
+      <label>字體<input id="cType" placeholder="例：標題用襯線" /></label>
+      <label class="wide">其他<input id="cOther" placeholder="例：A 的質感＋B 的節奏" /></label>
+      <label>創意幅度 <output id="creativityOut"></output><input type="range" id="creativity" min="0" max="100" step="50" value="50" /></label>
+      <label>節奏 <output id="paceOut"></output><input type="range" id="pace" min="0" max="100" step="50" value="50" /></label>
+    </div>
+  </details>
+  <div class="row"><b id="count"></b><div class="picked" id="picked"></div>
+  <textarea id="note" placeholder="補充，例如：A 的質感＋B 的字體"></textarea>
+  <button class="send" id="send">送出選擇</button></div>
+</div></footer>
+<div class="toast" id="toast"></div>
+<dialog id="recipe"><div class="rhead"></div><div class="rbody"></div></dialog>
+<dialog id="zoomer"><img id="zoom" alt="" /></dialog>
+<dialog id="exDlg"><div class="exwrap"><div class="player"></div><div class="side"></div></div></dialog>
+<dialog id="addDlg"><form method="dialog" id="addForm" novalidate>
+  <h2>加入收藏</h2>
+  <div class="kind"><button type="button" class="chip" data-kind="work" aria-pressed="true">作品（影片或圖片）</button><button type="button" class="chip" data-kind="site" aria-pressed="false">參考網站</button></div>
+  <label class="wide">網址<input name="url" type="url" placeholder="Raivcoo、Prompt Motion、X、Vimeo… 的作品網址" /></label>
+  <label class="wide" data-for="work">或上傳圖片<input name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif" /></label>
+  <p class="hint" data-for="work" style="grid-column:1/-1;margin:-4px 0 0">影片、作者、網站的標籤與顏色會自動帶入；圖片的顏色從圖裡取。下面都可以不填。</p>
+  <label class="wide">標題<input name="title" placeholder="不填就用網站上的標題" /></label>
+  <label class="wide" data-for="work">為什麼選<input name="why" placeholder="例：一拍一個概念字，深淺交替" /></label>
+  <label class="wide" data-for="site">這個網站適合找什麼<input name="siteWhy" placeholder="例：電影片頭，多數附製作解說" /></label>
+  <details class="wide more" data-for="work" style="grid-column:1/-1"><summary>更多（可借用什麼、配方、效果、出處）</summary><div class="moregrid">
+  <label class="wide">可借用什麼<textarea name="learn" rows="2" placeholder="例：巨型粗字＋色差、角落 HUD 時間碼"></textarea></label>
+  <label data-for="work">風格方向<select name="direction"></select></label>
+  <label data-for="work">採用<select name="used"><option value="maybe">待定</option><option value="yes">已採用</option><option value="no">未採用</option></select></label>
+  <label class="wide" data-for="work">用到的效果（逗號分隔，可選文字效果或 registry 元件）<input name="effects" list="effectList" placeholder="例：翻牌, rgb-glitch-text" /></label>
+  <label data-for="work">屬於哪支影片<select name="video"></select></label>
+  <label data-for="work">出處網站<select name="source_site"></select></label>
+  </div></details>
+  <label data-for="site">分類<input name="category" list="catList" placeholder="例：文字效果" /></label>
+  <label class="wide">標籤（逗號分隔）<input name="tags" placeholder="例：科技感, 字體動態" /></label>
+  <p class="err" id="addErr"></p>
+  <div class="row2"><button type="button" class="btn" id="addCancel">取消</button><button type="submit" class="send">記錄</button></div>
+</form></dialog>
+<datalist id="effectList"></datalist><datalist id="catList"></datalist>
+<script src="/personal/effect-demos.js"></script>
+<script>
+const EASE = { mech: "cubic-bezier(.7,0,.3,1)", snap: "steps(2, jump-none)", expo: "cubic-bezier(.16,1,.3,1)", slow: "cubic-bezier(.45,0,.55,1)", bounce: "cubic-bezier(.34,1.56,.64,1)",
+  slam: "cubic-bezier(.9,0,.1,1)", pop: "cubic-bezier(.34,1.8,.64,1)", linear: "linear", smooth: "cubic-bezier(.4,0,.2,1)", glitch: "steps(3)", elastic: "cubic-bezier(.5,1.9,.4,.8)", steps: "steps(4)", squash: "cubic-bezier(.3,.7,.4,1.3)" };
+const h = (tag, cls, style = {}, html = "") => { const e = document.createElement(tag); if (cls) e.className = cls; Object.assign(e.style, style); if (html) e.innerHTML = html; return e; };
+const pct = (o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, typeof v === "number" ? `${v}%` : v]));
+
+// Each motif draws a tiny looping scene in the style's palette and motion character.
+const MOTIF = {
+  shapes(t, p) { const [r, b, y] = p.accents;
+    t.append(h("div", "", { ...pct({ left: 52, top: 14, width: 30, height: 53 }), background: b, animation: `drop 4s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 58, top: 30, width: 34, height: 60 }), borderRadius: "50%", background: r, animation: `slide 4s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 74, top: 58, width: 20, height: 32 }), background: y, clipPath: "polygon(50% 0,100% 100%,0 100%)", animation: `spin 4s ${p.e} infinite` })); },
+  mondrian(t, p) { const [r, b, y] = p.accents; const cells = [[0,0,40,62,r],[40,0,35,30,"#fff"],[75,0,25,30,y],[40,30,60,32,"#fff"],[0,62,25,38,"#fff"],[25,62,50,38,b],[75,62,25,38,"#fff"]];
+    cells.forEach(([x, yy, w, hh, c], i) => t.append(h("div", "", { ...pct({ left: x, top: yy, width: w, height: hh }), background: c, outline: "0.9cqw solid #111", animation: i % 3 === 0 ? `drift 3s ${p.e} infinite` : "", "--dx": "6px", "--dy": "0px" }))); },
+  grid(t, p) { for (let i = 0; i < 12; i++) t.append(h("div", "", { ...pct({ left: 4 + i * 7.9, top: 0, width: 6.4, height: 100 }), background: "#11193608" }));
+    t.append(h("div", "", { ...pct({ left: 4, top: 70, width: 92, height: .6 }), background: p.fg, transformOrigin: "left", animation: `slide 4s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 86, top: 64, width: 4, height: 7 }), borderRadius: "50%", background: p.accents[0], animation: `pulse 2s ${p.e} infinite` })); },
+  diagonal(t, p) { t.append(h("div", "", { ...pct({ left: -10, top: 30, width: 130, height: 22 }), background: p.accents[0], transform: "rotate(-18deg)", animation: `slide 3s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 64, top: 8, width: 26, height: 46 }), borderRadius: "50%", background: p.fg, animation: `pulse 3s ${p.e} infinite` })); },
+  minimal(t, p) { t.append(h("div", "", { ...pct({ left: 70, top: 30, width: 6, height: 10.6 }), borderRadius: "50%", background: p.fg, animation: `drift 6s ${p.e} infinite`, "--dx": "-40px", "--dy": "10px" }));
+    t.append(h("div", "", { ...pct({ left: 7, top: 76, width: 40, height: .3 }), background: p.accents[0] })); },
+  deco(t, p) { t.append(h("div", "", { ...pct({ left: 25, top: -40, width: 50, height: 180 }), background: `repeating-conic-gradient(from 0deg at 50% 50%, ${p.accents[0]} 0 4deg, transparent 4deg 12deg)`, opacity: .55, animation: `spin 30s linear infinite` }));
+    t.append(h("div", "", { ...pct({ left: 30, top: 12, width: 40, height: 80 }), border: `0.5cqw solid ${p.accents[0]}`, borderRadius: "50% 50% 0 0 / 30% 30% 0 0" })); },
+  vines(t, p) { t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><path d="M10 85 C 40 40, 60 80, 80 40 S 120 10, 150 30" fill="none" stroke="${p.accents[0]}" stroke-width="2" stroke-dasharray="300" style="--len:300;animation:draw 4s ${p.e} infinite"/><path d="M30 90 C 60 60, 90 70, 110 50 S 140 60, 158 45" fill="none" stroke="${p.accents[1]}" stroke-width="1.5" stroke-dasharray="300" style="--len:300;animation:draw 4s ${p.e} .6s infinite"/><circle cx="80" cy="40" r="5" fill="${p.accents[1]}"/><circle cx="150" cy="30" r="4" fill="${p.accents[0]}"/></svg>`); },
+  memphis(t, p) { const [a, b, c, d] = p.accents;
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><path d="M95 20 q6 -8 12 0 t12 0 t12 0 t12 0" fill="none" stroke="${p.fg}" stroke-width="2.5" style="transform-origin:120px 20px;animation:tick .8s ${p.e} infinite"/></svg>`);
+    t.append(h("div", "", { ...pct({ left: 70, top: 40, width: 16, height: 28 }), background: a, clipPath: "polygon(50% 0,100% 100%,0 100%)", animation: `spin 2.4s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 86, top: 52, width: 10, height: 18 }), borderRadius: "50%", background: c, border: `0.5cqw solid ${p.fg}`, animation: `squash 1.2s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 60, top: 8, width: 14, height: 25 }), background: `radial-gradient(${d} 30%, transparent 32%) 0 0/1.4cqw 1.4cqw`, animation: `drift 2s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 82, top: 12, width: 10, height: 18 }), background: b, transform: "rotate(20deg)" })); },
+  cards(t, p) { const [y, m, l] = p.accents;
+    t.append(h("div", "", { ...pct({ left: 52, top: 12, width: 40, height: 50 }), background: "#fff", border: "0.6cqw solid #111", boxShadow: "1.2cqw 1.2cqw 0 #111", animation: `pulse 1s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 60, top: 52, width: 26, height: 16 }), background: y, border: "0.6cqw solid #111", transform: "rotate(-6deg)" }));
+    const tk = h("div", "", { ...pct({ left: 0, bottom: 0, height: 11, width: 200 }), background: "#111", color: y, fontWeight: 900, fontSize: "3cqw", display: "flex", alignItems: "center", whiteSpace: "nowrap", animation: "march 6s linear infinite" }, " 品牌標語 SAMPLE ★".repeat(16)); t.append(tk); },
+  halftone(t, p) { t.append(h("div", "", { inset: 0, background: `radial-gradient(${p.accents[0]} 28%, transparent 30%) 0 0/2.4cqw 2.4cqw`, opacity: .45 }));
+    t.append(h("div", "", { ...pct({ left: 54, top: 8, width: 40, height: 70 }), background: p.accents[1], clipPath: "polygon(50% 0,61% 30%,95% 20%,72% 48%,100% 70%,64% 68%,58% 100%,45% 72%,10% 92%,30% 60%,0 40%,35% 34%)", animation: `pulse .9s ${p.e} infinite` })); },
+  rings(t, p) { t.append(h("div", "", { inset: "-40%", background: `repeating-radial-gradient(circle at 50% 50%, ${p.fg} 0 1.4cqw, transparent 1.4cqw 2.8cqw)`, animation: `pulse 2.6s ${EASE.slow} infinite` })); },
+  melt(t, p) { t.append(h("div", "", { ...pct({ left: 50, top: 8, width: 40, height: 70 }), background: `linear-gradient(160deg, ${p.accents[0]}, ${p.accents[1]})`, animation: `morph 6s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 62, top: 2, width: 10, height: 18 }), borderRadius: "50%", background: "#fff", boxShadow: "0 3cqw 2cqw -1cqw #0003", animation: `drift 4s ${p.e} infinite`, "--dy": "-10px" })); },
+  orbit(t, p) { const [o, y, g] = p.accents;
+    t.append(h("div", "", { ...pct({ left: 0, bottom: 0, width: 100, height: 30 }), background: `repeating-linear-gradient(0deg, ${o} 0 1cqw, ${y} 1cqw 2cqw, ${g} 2cqw 3cqw, transparent 3cqw 6cqw)`, opacity: .8 }));
+    t.append(h("div", "", { ...pct({ left: 60, top: 14, width: 26, height: 46 }), borderRadius: "50%", background: y }));
+    const ring = h("div", "", { ...pct({ left: 52, top: 30, width: 42, height: 14 }), border: `0.6cqw solid ${p.fg}`, borderRadius: "50%", animation: `spin 5s linear infinite` }); t.append(ring); },
+  vapor(t, p) { const [pk, cy, pu] = p.accents;
+    t.append(h("div", "", { ...pct({ left: 55, top: 8, width: 30, height: 53 }), borderRadius: "50%", background: `linear-gradient(${pk}, ${pu})`, maskImage: "repeating-linear-gradient(0deg, #000 0 70%, transparent 70% 100%)", maskSize: "100% 12%" }));
+    t.append(h("div", "", { ...pct({ left: -20, bottom: 0, width: 140, height: 40 }), background: `linear-gradient(${cy} 2px, transparent 2px) 0 0/100% 20px, linear-gradient(90deg, ${pk} 2px, transparent 2px) 0 0/20px 100%`, transform: "perspective(120px) rotateX(55deg)", transformOrigin: "bottom", animation: "floor 1s linear infinite" })); },
+  neon(t, p) { const [c, m, y] = p.accents;
+    t.append(h("div", "", { inset: 0, background: "repeating-linear-gradient(0deg, #ffffff08 0 2px, transparent 2px 4px)" }));
+    t.append(h("div", "", { ...pct({ left: 56, top: 14, width: 36, height: 46 }), border: `0.5cqw solid ${c}`, boxShadow: `0 0 2cqw ${c}, inset 0 0 2cqw ${c}`, animation: `flicker 2.2s steps(1) infinite` }));
+    t.append(h("div", "", { ...pct({ left: 64, top: 26, width: 20, height: 22 }), border: `0.5cqw solid ${m}`, boxShadow: `0 0 2cqw ${m}`, transform: "rotate(45deg)", animation: `flicker 1.7s steps(1) infinite` })); },
+  chrome(t, p) { p.accents.forEach((c, i) => t.append(h("div", "", { ...pct({ left: 10 + i * 30, top: -10 + (i % 2) * 40, width: 50, height: 90 }), borderRadius: "50%", background: c, filter: "blur(3cqw)", animation: `drift ${5 + i}s ${p.e} infinite` })));
+    t.append(h("div", "", { ...pct({ left: 62, top: 14, width: 26, height: 46 }), borderRadius: "50%", background: "linear-gradient(180deg,#fff 0%,#dfe3ee 32%,#7d849c 49%,#232741 52%,#a3abc4 72%,#fff 100%)", boxShadow: "0 2cqw 3cqw #5b5fa855", animation: `squash 2s ${p.e} infinite` })); },
+  wabi(t, p) { t.append(h("div", "", { inset: 0, background: `radial-gradient(circle at 30% 20%, #fff8, transparent 60%)`, animation: `drift 8s ${p.e} infinite`, "--dx": "30px", "--dy": "10px" }));
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><path d="M118 24 a22 22 0 1 0 6 16" fill="none" stroke="${p.fg}" stroke-width="4" stroke-linecap="round" stroke-dasharray="160" style="--len:160;animation:draw 5s ${p.e} infinite;opacity:.85"/></svg>`); },
+  paper(t, p) { const [np, v, n] = p.accents; const tor = "polygon(0 6%,8% 0,20% 5%,34% 1%,50% 6%,66% 0,80% 5%,100% 2%,98% 94%,86% 100%,70% 95%,52% 100%,36% 94%,18% 100%,0 95%)";
+    t.append(h("div", "", { ...pct({ left: 44, top: 8, width: 50, height: 62 }), background: np, clipPath: tor, filter: "drop-shadow(0 1cqw 1cqw #0004)", animation: `drop 4s ${p.e} infinite` }));
+    t.append(h("div", "", { ...pct({ left: 50, top: 50, width: 40, height: 16 }), background: n, clipPath: tor, transform: "rotate(-3deg)", animation: `slide 4s ${p.e} .3s infinite` }));
+    t.append(h("div", "", { ...pct({ left: 56, top: 4, width: 18, height: 8 }), background: "#ecdcaedd", transform: "rotate(-8deg)" })); },
+  clay(t, p) { p.accents.forEach((c, i) => t.append(h("div", "", { ...pct({ left: 50 + i * 15, top: 40, width: 13, height: 23 }), borderRadius: "46% 54% 48% 52%", background: c, boxShadow: `inset -1cqw -1.2cqw 0 #0002, inset 0.8cqw 0.8cqw 0 #fff6, 0 1.4cqw 1cqw -0.6cqw #0003`, animation: `squash 1.4s ${p.e} ${i * .2}s infinite` }))); },
+  ui(t, p) { const [a, b, c] = p.accents; // floating UI cards on a soft gradient, a cursor clicking
+    t.append(h("div", "", { inset: "-30%", background: `radial-gradient(circle at 70% 30%, ${a}, transparent 45%), radial-gradient(circle at 85% 80%, ${b}, transparent 40%)`, filter: "blur(2cqw)", animation: `drift 6s ${EASE.slow} infinite`, "--dx": "-20px", "--dy": "10px" }));
+    const card = (l, tp, w, hh, d, inner = "") => t.append(h("div", "", { ...pct({ left: l, top: tp, width: w, height: hh }), background: "#fff", borderRadius: "1.6cqw", boxShadow: "0 1.4cqw 3cqw -1cqw #0002", animation: `drop 4s ${p.e} ${d}s infinite` }, inner));
+    card(52, 12, 38, 30, 0, `<div style="position:absolute;left:8%;top:22%;width:60%;height:12%;border-radius:1cqw;background:#eee"></div><div style="position:absolute;left:8%;top:50%;width:40%;height:22%;border-radius:1cqw;background:${c}"></div>`);
+    card(60, 50, 32, 22, 0.25, `<div style="position:absolute;left:10%;top:30%;width:70%;height:40%;border-radius:1cqw;background:#f2f0f7"></div>`);
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 24 24" style="left:72%;top:36%;width:5%;animation:drift 2s ${p.e} infinite;--dx:-14px;--dy:8px"><path d="M3 2l16 9-7 2-3 7z" fill="#111" stroke="#fff" stroke-width="1.2"/></svg>`); },
+  gradtype(t, p) { const [a, b, c] = p.accents, g = `linear-gradient(90deg, ${a}, ${b}, ${c})`; // gradient-filled words, rows sliding past
+    [18, 46, 74].forEach((top, i) => t.append(h("div", "", { left: 0, top: `${top}%`, whiteSpace: "nowrap", fontSize: "5cqw", fontWeight: 700, opacity: i === 1 ? 0 : 0.25, color: "transparent", backgroundImage: g, backgroundClip: "text", WebkitBackgroundClip: "text", animation: `march ${i % 2 ? 9 : 7}s linear infinite ${i % 2 ? "reverse" : ""}` }, "Write · Plan · Learn · Create · ".repeat(6))));
+    t.append(h("div", "", { ...pct({ left: 58, top: 22, width: 30, height: 52 }), borderRadius: "2cqw", border: `0.3cqw solid ${b}`, boxShadow: `0 0 3cqw ${b}66`, transform: "perspective(300px) rotateY(-22deg)", animation: `pulse 3s ${EASE.slow} infinite` })); },
+  modules(t, p) { const [a, b, c] = p.accents, u = 7; // shapes on a grid, a signal running along an outline
+    t.append(h("div", "", { inset: 0, background: `linear-gradient(${p.fg}10 1px, transparent 1px) 0 0/${u}cqw ${u}cqw, linear-gradient(90deg, ${p.fg}10 1px, transparent 1px) 0 0/${u}cqw ${u}cqw` }));
+    const sq = (x, y, col, shape, d) => t.append(h("div", "", { left: `${x * u}cqw`, top: `${y * u}cqw`, width: `${u}cqw`, height: `${u}cqw`, background: col, borderRadius: shape === "c" ? "50%" : 0, clipPath: shape === "t" ? "polygon(0 100%,50% 0,100% 100%)" : "", transformOrigin: "0 100%", animation: `pulse 2.4s ${p.e} ${d}s infinite` }));
+    sq(8, 1, a, "s", 0); sq(9, 1, a, "s", 0.1); sq(10, 1, a, "s", 0.2); sq(9, 2, b, "c", 0.3); sq(11, 3, c, "t", 0.4); sq(8, 3, a, "s", 0.5);
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 100 56" style="inset:0;width:100%;height:100%"><rect x="55" y="6" width="34" height="27" fill="none" stroke="${p.fg}" stroke-width=".5" stroke-dasharray="122" style="--len:122;animation:draw 4s ${p.e} infinite"/></svg>`); },
+  // ---- effect previews (one per presentation effect; drawn in whatever palette is chosen) ----
+  bigtype(t, p) { t.dataset.ownText = 1; // giant words swapping on the beat, cropped by the frame
+    ["主張", "一拍", "一詞"].forEach((w, i) => t.append(h("div", "", { left: "4%", top: "8%", fontSize: "34cqw", lineHeight: 0.9, fontWeight: 900, color: i === 1 ? p.accents[0] : p.fg, whiteSpace: "nowrap", opacity: 0, animation: `swap3 3s steps(1) ${i}s infinite` }, w))); },
+  hud(t, p) { const a = p.accents[0];
+    for (const [x, y, r] of [[4, 6, "0 0"], [96, 6, "100% 0"], [4, 94, "0 100%"], [96, 94, "100% 100%"]]) t.append(h("div", "", { left: `${x}%`, top: `${y}%`, width: "4%", height: "7%", translate: `${x > 50 ? -100 : 0}% ${y > 50 ? -100 : 0}%`, borderTop: y < 50 ? `0.3cqw solid ${p.fg}` : "", borderBottom: y > 50 ? `0.3cqw solid ${p.fg}` : "", borderLeft: x < 50 ? `0.3cqw solid ${p.fg}` : "", borderRight: x > 50 ? `0.3cqw solid ${p.fg}` : "" }));
+    t.append(h("div", "", { right: "7%", top: "8%", font: "600 2.2cqw ui-monospace,Menlo,monospace", color: p.fg, opacity: 0.7 }, "00:00:04:12"));
+    t.append(h("div", "", { ...pct({ left: 62, top: 18, width: 28, height: 50 }), borderRadius: "50%", background: `radial-gradient(circle, ${a} 0 1.1cqw, transparent 1.2cqw) 0 0/3cqw 3cqw`, maskImage: "radial-gradient(circle, #000 60%, transparent 70%)", animation: `spin 8s linear infinite` }));
+    t.append(h("div", "", { ...pct({ left: 58, top: 12, width: 36, height: 62 }), borderRadius: "50%", border: `0.25cqw solid ${a}`, animation: `pulse 1.2s ${p.e} infinite` })); },
+  bars(t, p) { const [a, b] = p.accents; // bars growing and a counter, a dotted guide
+    [38, 62, 48, 80, 66].forEach((v, i) => t.append(h("div", "", { left: `${52 + i * 8}%`, bottom: "16%", width: "5.5%", height: `${v * 0.62}%`, background: i === 3 ? a : b ?? p.fg, transformOrigin: "bottom", animation: `eq 3s ${p.e} ${i * 0.12}s infinite` })));
+    t.append(h("div", "", { left: "50%", right: "6%", bottom: "16%", height: "0.3cqw", background: p.fg }));
+    t.append(h("div", "", { left: "52%", top: "12%", fontSize: "7cqw", fontWeight: 900, color: p.fg, animation: `pulse 3s ${p.e} infinite` }, "+48%")); },
+  walker(t, p) { const [a, b] = p.accents; // a simple character walking through, bobbing
+    const c = h("div", "", { left: 0, bottom: "18%", width: "16%", height: "52%", animation: `walk 5s linear infinite` });
+    c.innerHTML = `<div style="position:absolute;left:28%;top:0;width:44%;aspect-ratio:1;border-radius:50%;background:${p.fg};animation:bob .5s ${p.e} infinite"></div><div style="position:absolute;left:20%;top:30%;width:60%;height:46%;border-radius:40% 40% 10% 10%;background:${a};animation:bob .5s ${p.e} infinite"></div><div style="position:absolute;left:28%;bottom:0;width:14%;height:28%;background:${p.fg};transform-origin:top;animation:tick .5s linear infinite"></div><div style="position:absolute;right:28%;bottom:0;width:14%;height:28%;background:${p.fg};transform-origin:top;animation:tick .5s linear infinite reverse"></div>`;
+    t.append(h("div", "", { left: 0, right: 0, bottom: "18%", height: "0.4cqw", background: b ?? p.fg }), c); },
+  letterbox(t, p) { t.dataset.ownText = 1; // slow push on an image-like field, letterbox bars, grain, restrained title
+    t.append(h("div", "", { inset: "-5%", background: `radial-gradient(circle at 65% 45%, ${p.accents[0]}, transparent 55%), linear-gradient(160deg, ${p.accents[1] ?? p.fg}, ${p.bg})`, animation: `push 6s ${EASE.slow} infinite alternate` }));
+    t.append(h("div", "", { inset: 0, background: "repeating-radial-gradient(circle at 30% 40%, #ffffff10 0 1px, transparent 1px 3px)", mixBlendMode: "overlay" }));
+    t.append(h("div", "", { left: 0, right: 0, top: 0, height: "12%", background: "#000" }), h("div", "", { left: 0, right: 0, bottom: 0, height: "12%", background: "#000" }));
+    t.append(h("div", "", { left: 0, right: 0, top: "46%", textAlign: "center", fontSize: "4cqw", letterSpacing: ".5em", color: "#fff", animation: `rise 6s ${EASE.slow} infinite` }, "品 牌 標 題")); },
+  captions(t, p) { t.dataset.ownText = 1; // a talking-head frame with word-by-word captions
+    t.append(h("div", "", { ...pct({ left: 34, top: 10, width: 32, height: 70 }), borderRadius: "48% 48% 0 0", background: p.accents[1] ?? p.fg, opacity: 0.9 }));
+    t.append(h("div", "", { ...pct({ left: 42, top: 14, width: 16, height: 28 }), borderRadius: "50%", background: p.fg }));
+    t.append(h("div", "", { left: "50%", bottom: "12%", translate: "-50% 0", padding: "0.6cqw 1.6cqw", borderRadius: "1cqw", background: "#000c", color: "#fff", fontSize: "4.6cqw", fontWeight: 900, whiteSpace: "nowrap" }, `這句<span style="color:${p.accents[0]};display:inline-block;animation:pulse 1s ${p.e} infinite">重點</span>放大`)); },
+  wall(t, p) { const [a, b, c] = p.accents; // a wall of pictures panning, one pushed in
+    const row = (top, d, dir) => { const r = h("div", "", { left: 0, top: `${top}%`, display: "flex", gap: "1.2cqw", width: "200%", animation: `pan ${d}s linear infinite ${dir}` }); for (let i = 0; i < 12; i++) r.append(Object.assign(h("div", "", { position: "relative", flex: "0 0 13cqw", height: "15cqw", borderRadius: "1cqw", background: [a, b ?? p.fg, c ?? a][i % 3], opacity: 0.85 }))); t.append(r); };
+    row(4, 12, ""); row(50, 16, "reverse"); },
+  shader(t, p) { const [a, b, c] = p.accents; // a generated, flowing field
+    t.append(h("div", "", { inset: "-40%", background: `conic-gradient(from 0deg at 50% 50%, ${a}, ${b ?? p.fg}, ${c ?? a}, ${a})`, filter: "blur(4cqw)", animation: `spin 9s linear infinite` }));
+    t.append(h("div", "", { inset: 0, background: "repeating-linear-gradient(0deg, #ffffff0d 0 1px, transparent 1px 3px)" })); },
+  bounce(t, p) { const [a, b, c] = p.accents; // balls dropping, squashing and bouncing inside a ring
+    t.append(h("div", "", { ...pct({ left: 54, top: 8, width: 38, height: 68 }), borderRadius: "50%", border: `0.4cqw solid ${p.fg}` }));
+    [a, b ?? p.fg, c ?? a].forEach((col, i) => t.append(h("div", "", { left: `${62 + i * 9}%`, top: "52%", width: "6%", height: "10.6%", borderRadius: "50%", background: col, animation: `fall 1.6s cubic-bezier(.5,0,.5,1) ${i * 0.22}s infinite` }))); },
+  timeline(t, p) { // a camera tracking along a dated line
+    const lane = h("div", "", { left: 0, top: "30%", width: "200%", height: "40%", animation: `pan 8s linear infinite` });
+    lane.innerHTML = `<div style="position:absolute;left:0;right:0;top:50%;height:.35cqw;background:${p.fg}"></div>` + ["1984", "1998", "2012", "2026", "1984", "1998", "2012", "2026"].map((y, i) => `<div style="position:absolute;left:${6 + i * 12.5}%;top:50%;width:1.6cqw;height:1.6cqw;border-radius:50%;background:${p.accents[i % 2]};translate:-50% -50%"></div><div style="position:absolute;left:${6 + i * 12.5}%;top:8%;translate:-50% 0;font:900 3.4cqw sans-serif;color:${p.fg}">${y}</div>`).join("");
+    t.append(lane); },
+  eq(t, p) { // bars and a waveform driven by the music
+    for (let i = 0; i < 18; i++) t.append(h("div", "", { left: `${50 + i * 2.6}%`, bottom: "18%", width: "1.6%", height: "58%", background: i % 5 === 0 ? p.accents[0] : p.fg, transformOrigin: "bottom", animation: `eq ${0.5 + (i * 37 % 7) / 10}s ${EASE.slow} ${(i * 13 % 9) / 10}s infinite` }));
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><path d="M80 20 Q 90 5 100 20 T 120 20 T 140 20 T 160 20" fill="none" stroke="${p.accents[1] ?? p.fg}" stroke-width="1.2" style="animation:drift 1s ${EASE.slow} infinite;--dx:-6px;--dy:0px"/></svg>`); },
+  silhouette(t, p) { // black cut-outs in front of a moving light
+    t.append(h("div", "", { inset: 0, background: `radial-gradient(circle at 70% 45%, ${p.accents[0]}, ${p.bg} 60%)`, animation: `drift 6s ${EASE.slow} infinite`, "--dx": "-30px", "--dy": "0px" }));
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><path d="M0 90 V72 Q40 64 80 72 T160 70 V90Z" fill="#111"/><g style="animation:slide 6s ${EASE.slow} infinite"><circle cx="112" cy="46" r="4" fill="#111"/><path d="M106 72 L109 52 Q112 48 115 52 L118 72Z" fill="#111"/></g><path d="M128 72 V40 L132 34 L136 40 V72Z" fill="#111"/></svg>`); },
+  logo(t, p) { t.dataset.ownText = 1; // a mark assembling from parts, then holding still
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><g transform="translate(80 40)"><circle r="16" fill="none" stroke="${p.fg}" stroke-width="3" stroke-dasharray="101" style="--len:101;animation:draw 3s ${p.e} infinite"/><rect x="-6" y="-6" width="12" height="12" fill="${p.accents[0]}" style="transform-origin:center;transform-box:fill-box;animation:pulse 3s ${p.e} infinite"/></g><text x="80" y="76" text-anchor="middle" font-size="9" font-weight="900" fill="${p.fg}" letter-spacing="2">BRAND</text></svg>`); },
+  lowpoly(t, p) { const [a, b, c] = p.accents;
+    t.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 160 90" style="inset:0;width:100%;height:100%"><g style="transform-origin:118px 42px;animation:spin 12s linear infinite"><polygon points="118,10 140,30 118,42" fill="${a}"/><polygon points="118,10 96,30 118,42" fill="${b}"/><polygon points="96,30 118,42 104,62" fill="${c}"/><polygon points="140,30 118,42 132,62" fill="${a}" opacity=".7"/><polygon points="104,62 118,42 132,62" fill="${b}" opacity=".8"/><polygon points="104,62 132,62 118,76" fill="${c}" opacity=".6"/></g></svg>`); },
+};
+
+// One tile per presentation effect, drawn in the palette chosen above the grid (neutral by default),
+// so effects are compared by how they move, not by colour.
+const NEUTRAL = { bg: "#efede8", fg: "#1a1a1f", accents: ["#1a1a1f", "#8a8a93", "#c9c6bf"] };
+function familyTile(f) {
+  const pal = state.palette === "neutral" ? NEUTRAL : state.data.palettes.find((x) => x.id === state.palette)?.colors ?? NEUTRAL;
+  const acc = [...pal.accents, ...NEUTRAL.accents].slice(0, 3);
+  const p = { bg: pal.bg, fg: pal.fg, accents: acc, font: "sans", motif: f.motif, e: EASE.expo };
+  const t = h("div", "tile", { background: p.bg, color: p.fg, "--ease": p.e });
+  (MOTIF[p.motif] ?? (() => {}))(t, p);
+  if (!t.dataset.ownText) t.append(h("div", "word", {}, `<small>SAMPLE</small>品牌標題`));
+  return t;
+}
+
+function tile(s) {
+  const p = { ...s.preview, e: EASE[s.preview.ease] ?? "ease" };
+  const t = h("div", "tile", { background: p.bg, color: p.fg, "--ease": p.e });
+  (MOTIF[p.motif] ?? (() => {}))(t, p);
+  t.append(h("div", `word f-${p.font}`, {}, `<small>SAMPLE</small>品牌標題`)); // generic copy: the tile shows the style, not a client
+  return t;
+}
+
+const STATUS = { radar: "觀察中", trial: "試用", adopted: "採用", classic: "經典", retired: "淘汰" };
+const SECTIONS = ["需要提供", "方向", "結構", "製作", "注意", "參數", "參考"];
+const state = { tab: "styles", src: "pm", color: "all", lib: null, palette: "neutral", family: "all", pfam: "all", group: "all", tag: "all", status: "all", q: "", paused: false, picked: new Map(), data: null,
+  cjk: "all", efrom: "all", egroup: "all", ccat: "all", cconf: "all", rtype: "all", rtag: "all", by: "all", reftag: "all", verdict: "all", cat: "all", registry: null, graph: null };
+const CJK = { ok: "中文可用", partial: "中文需測試", "latin-only": "只支援英文" };
+const USED = { yes: "已採用", no: "未採用", maybe: "待定" };
+const CAMCAT = { "push-pull": "推拉", zoom: "變焦", "pan-tilt": "搖鏡", lateral: "橫移", vertical: "升降", orbit: "環繞", rotate: "旋轉", body: "手持／貼身", vehicle: "載具", transition: "轉場", time: "時間", lens: "鏡頭效果", hold: "固定", other: "其他" };
+const CAMCONF = { clear: "量得清楚", weak: "動得很小", none: "預覽沒動" };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const md = (s) => { // tiny markdown: bullets, numbered steps, `code`
+  const inline = (t) => esc(t).replace(/`([^`]+)`/g, "<code>$1</code>");
+  let out = "", list = null;
+  for (const line of (s || "").split("\n")) {
+    const m = line.match(/^\s*(?:([-*])|(\d+)\.)\s+(.*)$/);
+    const kind = m ? (m[1] ? "ul" : "ol") : null;
+    if (list && kind !== list) { out += `</${list}>`; list = null; }
+    if (kind) { if (!list) { out += `<${kind}>`; list = kind; } out += `<li>${inline(m[3])}</li>`; }
+    else if (line.trim()) out += `<p>${inline(line)}</p>`;
+  }
+  return out + (list ? `</${list}>` : "");
+};
+
+// Only tiles on screen animate; the whole page can be paused.
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  e.target.classList.toggle("live", e.isIntersecting);
+  const v = e.target.querySelector("video"); if (v) e.isIntersecting && !state.paused ? v.play().catch(() => {}) : v.pause();
+}), { rootMargin: "100px" });
+
+function styleMatches(s, q) {
+  return (state.family === "all" || s.family === state.family) && (state.tag === "all" || s.tags.includes(state.tag))
+    && (state.status === "all" || s.status === state.status) && (!q || JSON.stringify(s).toLowerCase().includes(q));
+}
+
+function renderFilters() {
+  const f = $("filters"); f.innerHTML = "";
+  const chip = (label, on, fn) => { const b = h("button", "chip", {}, label); b.setAttribute("aria-pressed", on); b.onclick = fn; f.append(b); return b; };
+  if (state.tab === "styles") {
+    const seg = h("div", "seg");
+    const segBtn = (k, label) => { const b = h("button", "", {}, label); b.setAttribute("aria-pressed", state.src === k); b.onclick = () => { state.src = k; state.cat = "all"; state.reftag = "all"; state.color = "all"; state.verdict = "all"; state.q = ""; render(); }; seg.append(b); };
+    segBtn("pm", `Prompt Motion <small>${state.lib?.items?.length ?? "…"}</small>`);
+    segBtn("mine", `我的收藏 <small>${myWorks().length}</small>`);
+    segBtn("recipes", `配方 <small>${state.data.catalog.styles.length}</small>`);
+    f.append(seg);
+  }
+  const row = () => { const r = h("div", "tagrow"); f.append(r); return r; };
+  const pill = (parent, label, on, fn, sm = true) => { const b = h("button", sm ? "chip sm" : "chip", {}, label); b.setAttribute("aria-pressed", on); b.onclick = fn; parent.append(b); };
+  const count = (arr) => { const c = {}; arr.forEach((t) => (c[t] = (c[t] || 0) + 1)); return Object.entries(c).sort((a, b) => b[1] - a[1]); };
+  if (state.tab === "effects") {
+    const E = state.data.effects, mine = E.filter((e) => e.from.includes("mine"));
+    chip(`全部 <small>${E.length}</small>`, state.efrom === "all", () => { state.efrom = "all"; state.egroup = "all"; render(); });
+    if (mine.length) chip(`我的清單 <small>${mine.length}</small>`, state.efrom === "mine", () => { state.efrom = "mine"; render(); });
+    chip(`內建 <small>${E.filter((e) => e.from.includes("built-in")).length}</small>`, state.efrom === "built-in", () => { state.efrom = "built-in"; state.egroup = "all"; render(); });
+    f.append(h("span", "sep"));
+    const sel = h("select"); sel.innerHTML = `<option value="all">中文可用性</option>` + Object.entries(CJK).map(([k, v]) => `<option value="${k}"${state.cjk === k ? " selected" : ""}>${v}（${E.filter((e) => e.cjk === k).length}）</option>`).join("");
+    sel.onchange = () => { state.cjk = sel.value; renderView(); }; f.append(sel);
+    const G = state.data.effectGroups ?? {};
+    if (Object.keys(G).length && state.efrom !== "built-in") {
+      const r = row(); pill(r, "所有類型", state.egroup === "all", () => { state.egroup = "all"; render(); });
+      for (const [g, label] of Object.entries(G)) pill(r, `${g}・${esc(label)} <small>${mine.filter((e) => e.group === g).length}</small>`, state.egroup === g, () => { state.egroup = g; state.efrom = "mine"; render(); });
+    }
+  }
+  if (state.tab === "cameras") {
+    const C = state.data.cameras;
+    chip(`全部 <small>${C.length}</small>`, state.ccat === "all", () => { state.ccat = "all"; render(); });
+    for (const [k, label] of Object.entries(CAMCAT)) { const n = C.filter((c) => c.category === k).length; if (n) chip(`${label} <small>${n}</small>`, state.ccat === k, () => { state.ccat = k; render(); }); }
+    f.append(h("span", "sep"));
+    const sel = h("select"); sel.innerHTML = `<option value="all">量測</option><option value="3d"${state.cconf === "3d" ? " selected" : ""}>要 3D／分層（${C.filter((c) => c.needs3d).length}）</option>` + Object.entries(CAMCONF).map(([k, v]) => `<option value="${k}"${state.cconf === k ? " selected" : ""}>${v}（${C.filter((c) => c.measured.confidence === k).length}）</option>`).join("");
+    sel.onchange = () => { state.cconf = sel.value; renderView(); }; f.append(sel);
+  }
+  if (state.tab === "registry" && state.registry) {
+    const R = state.registry.items;
+    chip(`全部 <small>${R.length}</small>`, state.rtype === "all", () => { state.rtype = "all"; render(); });
+    chip(`區塊 block <small>${R.filter((i) => i.type === "block").length}</small>`, state.rtype === "block", () => { state.rtype = "block"; render(); });
+    chip(`元件 component <small>${R.filter((i) => i.type === "component").length}</small>`, state.rtype === "component", () => { state.rtype = "component"; render(); });
+    const r = row(); pill(r, "所有標籤", state.rtag === "all", () => { state.rtag = "all"; render(); });
+    count(R.flatMap((i) => i.tags ?? [])).slice(0, 36).forEach(([t, n]) => pill(r, `${esc(t)} <small>${n}</small>`, state.rtag === t, () => { state.rtag = t; render(); }));
+  }
+  if (state.tab === "refs") {
+    const R = state.data.refs;
+    chip(`全部 <small>${R.length}</small>`, state.by === "all", () => { state.by = "all"; render(); });
+    chip(`我提供的 <small>${R.filter((r) => r.by === "user").length}</small>`, state.by === "user", () => { state.by = "user"; render(); });
+    chip(`Claude 找的 <small>${R.filter((r) => r.by !== "user").length}</small>`, state.by === "claude", () => { state.by = "claude"; render(); });
+    const r = row(); pill(r, "所有標籤", state.reftag === "all", () => { state.reftag = "all"; render(); });
+    count(R.flatMap((x) => x.tags ?? [])).forEach(([t, n]) => pill(r, `${esc(t)} <small>${n}</small>`, state.reftag === t, () => { state.reftag = t; render(); }));
+  }
+  if (state.tab === "styles" && state.src === "pm" && state.lib) {
+    const r1 = row(), I = state.lib.items;
+    pill(r1, `全部 <small>${I.length}</small>`, state.cat === "all", () => { state.cat = "all"; render(); });
+    for (const c of state.lib.categories) { const n = I.filter((i) => i.categories.includes(c)).length; if (n) pill(r1, `${esc(c)} <small>${n}</small>`, state.cat === c, () => { state.cat = c; render(); }); }
+    pill(r1, `附 skill <small>${I.filter((i) => i.kind === "skill").length}</small>`, state.cat === "skill", () => { state.cat = "skill"; render(); });
+  }
+  if (state.tab === "styles" && state.src === "mine") {
+    const W = myWorks(), r0 = row(), r1 = row(), r2 = row(), Wt = W.filter((w) => state.reftag === "all" || kw(w).includes(state.reftag));
+    const nv = (v) => Wt.filter((w) => (v === "none" ? !w.verdict?.v : w.verdict?.v === v)).length;
+    for (const [k, label] of [["all", "全部"], ["like", "喜歡"], ["dislike", "不喜歡"], ["none", "還沒標"]]) pill(r0, `${label} <small>${k === "all" ? Wt.length : nv(k)}</small>`, state.verdict === k, () => { state.verdict = k; render(); });
+    pill(r1, "所有標籤", state.reftag === "all", () => { state.reftag = "all"; render(); });
+    count(W.flatMap(kw)).slice(0, 30).forEach(([t, n]) => pill(r1, `${esc(t)} <small>${n}</small>`, state.reftag === t, () => { state.reftag = t; render(); }));
+    pill(r2, "所有顏色", state.color === "all", () => { state.color = "all"; render(); });
+    const CS = { black: "#111", white: "#f4f4f4", gray: "#8a8a8a", red: "#d33", orange: "#f08c28", yellow: "#f0d232", green: "#3caa50", blue: "#325ad2", purple: "#8246be", pink: "#eb78aa", brown: "#82552f" };
+    count(W.flatMap((w) => w.site_tags?.colors ?? [])).forEach(([c, n]) => pill(r2, `<span class="dot" style="background:${CS[c] ?? c};border:1px solid #0002"></span>${esc(c)} <small>${n}</small>`, state.color === c, () => { state.color = c; render(); }));
+  }
+  if (state.tab === "palettes") {
+    const P = state.data.palettes, famOf = (p) => new Set(p.from.map((id) => state.data.catalog.styles.find((s) => s.id === id)?.family));
+    chip(`全部 <small>${P.length}</small>`, state.pfam === "all", () => { state.pfam = "all"; render(); });
+    for (const [k, f] of Object.entries(state.data.catalog.families ?? {})) { const n = P.filter((p) => famOf(p).has(k)).length; if (n) chip(`${esc(f.zh)} <small>${n}</small>`, state.pfam === k, () => { state.pfam = k; render(); }); }
+  }
+  if (state.tab === "sites") {
+    const S = state.data.sites;
+    chip(`全部 <small>${S.length}</small>`, state.cat === "all", () => { state.cat = "all"; render(); });
+    count(S.flatMap((x) => x.categories)).forEach(([c, n]) => chip(`${esc(c.replace(/（.*）/, ""))} <small>${n}</small>`, state.cat === c, () => { state.cat = c; render(); }));
+  }
+  if (!["board", "graph"].includes(state.tab)) {
+    const q = h("input"); q.type = "search"; q.placeholder = { styles: "搜尋標題、作者、標籤…", palettes: "搜尋色票或色碼…", effects: "搜尋效果名稱、樣子、元件…", cameras: "搜尋運鏡：名稱、樣子、GSAP…", registry: "搜尋 registry：名稱、描述、標籤…", refs: "搜尋參考…", sites: "搜尋網站…" }[state.tab]; q.value = state.q;
+    q.oninput = () => { state.q = q.value; renderView(); }; f.append(q);
+  }
+  if (state.tab === "styles" || state.tab === "board") {
+    const p = chip(state.paused ? "▶ 播放預覽" : "❚❚ 暫停預覽", state.paused, () => { state.paused = !state.paused; document.body.classList.toggle("paused", state.paused); renderFilters(); });
+    p.classList.add("pause");
+  }
+}
+
+function toggle(key, label) { if (state.picked.has(key)) state.picked.delete(key); else state.picked.set(key, label); renderBar(); }
+function pickBtn(key, label, rerender) {
+  const b = h("button", "btn pick", {}, state.picked.has(key) ? "已選" : "選擇"); b.setAttribute("aria-pressed", state.picked.has(key));
+  b.onclick = (e) => { e.stopPropagation(); toggle(key, label); rerender(); }; return b;
+}
+
+function openRecipe(s) {
+  const d = $("recipe"), body = d.querySelector(".rbody");
+  d.querySelector(".rhead").replaceChildren(tile(s));
+  body.innerHTML = `<div class="name"><b>${esc(s.zh)}</b><i>${esc(s.en)}</i></div>
+    <div class="meta"><span class="badge">${esc(state.data.catalog.families?.[s.family]?.zh ?? state.data.catalog.groups[s.group] ?? "")}</span><span class="badge ${s.status}">${STATUS[s.status]}</span>${s.example ? `<span class="badge ex">有範例實作</span>` : ""}<span class="badge">更新 ${esc(s.updated)}</span></div>
+    <p class="lead">${esc(s.sections["一句話"])}</p>
+    ${SECTIONS.filter((k) => s.sections[k]).map((k, i) => `<details${i < 4 ? " open" : ""}><summary>${k}</summary>${md(s.sections[k])}</details>`).join("")}`;
+  const a = h("div", "actions");
+  a.append(pickBtn(`style:${s.id}`, s.zh, () => openRecipe(s)));
+  const copy = h("button", "btn", {}, "複製配方"); copy.onclick = async () => { await navigator.clipboard?.writeText(s.raw); toast("已複製配方"); }; a.append(copy);
+  const close = h("button", "btn", {}, "關閉"); close.onclick = () => d.close(); a.append(close);
+  body.append(a);
+  if (!d.open) d.showModal();
+  io.observe(d.querySelector(".tile"));
+}
+
+// The 風格 tab: one card per presentation effect. The styles that share an effect (Swiss, editorial
+// magazine, newsprint…) are combinations under it — font, palette, texture — listed as chips.
+function renderStyles(v, q) {
+  const fams = state.data.catalog.families ?? {}, S = state.data.catalog.styles;
+  const g = h("div", "grid");
+  for (const [id, f] of Object.entries(fams)) {
+    const vars = S.filter((s) => s.family === id);
+    if (state.family === "has" && !vars.length || state.family === "new" && vars.length) continue;
+    if (state.tag !== "all" && !vars.some((s) => s.tags.includes(state.tag))) continue;
+    if (q && !match({ f, v: vars.map((s) => [s.zh, s.en, s.id, s.visual]) }, q)) continue;
+    const key = `effect:${id}`, card = h("article", `card${state.picked.has(key) ? " sel" : ""}`);
+    const t = familyTile(f); card.append(t); io.observe(t);
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(f.zh)}</b><i>${esc(f.en)}</i>`));
+    b.append(h("div", "meta", {}, vars.length ? `<span class="badge">${vars.length} 種組合</span>${vars.some((s) => s.example) ? `<span class="badge ex">有範例實作</span>` : ""}` : `<span class="badge trial">新找到，待寫配方</span>`));
+    b.append(h("p", "desc", {}, `${esc(f.define?.["構圖"] ?? "")}；${esc(f.define?.["動態"] ?? "")}`));
+    if (vars.length) {
+      const row = h("div", "vars");
+      for (const s of vars) {
+        const c = h("button", `vchip${state.picked.has(`style:${s.id}`) ? " on" : ""}`, {}, `<span class="sw">${[s.preview.bg, s.preview.fg, ...s.preview.accents].slice(0, 4).map((x) => `<i style="background:${esc(x)}"></i>`).join("")}</span>${esc(s.zh)}`);
+        c.title = `${s.zh}（${s.en}）：字體 ${s.preview.font}、${s.visual}`; c.onclick = (e) => { e.stopPropagation(); openRecipe(s); };
+        row.append(c);
+      }
+      b.append(row);
+    }
+    const a = h("div", "actions");
+    a.append(pickBtn(key, `呈現效果：${f.zh}`, renderView));
+    const d = h("button", "btn", {}, "看定義"); d.onclick = (e) => { e.stopPropagation(); openFamily(id); }; a.append(d);
+    b.append(a); card.append(b); card.onclick = (e) => { if (!e.target.closest("button")) openFamily(id); };
+    g.append(card);
+  }
+  v.append(g.children.length ? g : h("p", "empty", {}, "沒有符合的呈現效果"));
+}
+
+// ---------- 範例: the big library (Prompt Motion, live) and my collection, shown the way those sites do ----------
+const myWorks = () => state.data.allRefs.filter((r) => r.kind !== "site" && !state.data.sites.some((s) => s.url === r.url) && !/^配樂/.test(r.title));
+const loadLib = () => state.lib ? Promise.resolve(state.lib) : fetch("/library.json").then((r) => r.json()).then((l) => { state.lib = l; if (state.tab === "styles") renderFilters(); return l; });
+// Files on this machine: inbox images by name, anything else (e.g. a render of our own film) through /local,
+// which serves only paths that are logged references.
+const mediaUrl = (u) => (u && u.startsWith("/") && !u.startsWith("/inbox/") ? (u.includes("/inbox/") ? `/inbox/${u.split("/").pop()}` : `/local?p=${encodeURIComponent(u)}`) : u);
+const refKey = (e) => e.url + (e.at?.length ? `#t=${e.at.map((s) => s.join("-")).join(",")}` : "");
+const kw = (w) => [...new Set([...(w.site_tags?.keywords ?? []), ...(w.tags ?? [])])];
+const ytId = (u) => String(u ?? "").match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/)?.[1];
+const fmtT = (t) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
+const atLabel = (at) => at.map(([a, b]) => `${fmtT(a)}–${fmtT(b)}`).join("・");
+// A reference that names its moments (at: [[start, end], …]) plays only those, one after another, round and round.
+function loopAt(v, at) {
+  if (!at?.length) return;
+  let i = 0; const go = () => { v.currentTime = at[i][0]; };
+  if (v.readyState >= 1) go(); else v.addEventListener("loadedmetadata", go, { once: true });
+  v.addEventListener("timeupdate", () => { const [a, b] = at[i]; if (v.currentTime >= b || v.currentTime < a - 0.5) { i = (i + 1) % at.length; go(); } });
+}
+function exMedia(m, label, at) {
+  const box = h("div", "media");
+  const poster = m?.poster || m?.image, yt = ytId(m?.video);
+  const clip = yt ? null : mediaUrl(at?.length ? m?.video : m?.preview || m?.video); // the moments are timed on the full video
+  let v = null, looping = false;
+  const mk = (preload) => { v = Object.assign(h("video"), { src: clip, muted: true, loop: !at?.length, playsInline: true, preload }); box.append(v); return v; };
+  if (poster) box.append(Object.assign(h("img"), { src: mediaUrl(poster), alt: "", loading: "lazy" }));
+  else if (clip) { // no poster: the still is the end of the first moment (the effect done), or the first frame
+    mk("metadata").classList.add("still");
+    v.addEventListener("loadedmetadata", () => { if (!looping) v.currentTime = at?.length ? Math.max(at[0][0], at[0][1] - 0.3) : 0.1; }, { once: true });
+  } else box.textContent = yt ? "YouTube：點開播放" : "沒有預覽";
+  if (clip) {
+    box.onmouseenter = () => { if (!v) mk("auto"); if (!looping) { looping = true; loopAt(v, at); } box.classList.add("playing"); v.play().catch(() => {}); };
+    box.onmouseleave = () => { box.classList.remove("playing"); v?.pause(); };
+  }
+  if (label) box.append(h("span", "src", {}, esc(label)));
+  if (at?.length) box.append(h("span", "at", {}, atLabel(at)));
+  return box;
+}
+// 喜歡／不喜歡 on a logged reference: saved into its entry (references-log.jsonl), so Claude reads it with `refs.mjs verdicts`.
+async function saveVerdict(e, v, note = e.verdict?.note ?? "") {
+  const r = await fetch("/refs/verdict", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ key: refKey(e), v, note }) });
+  const out = await r.json();
+  if (!r.ok) return toast(`沒有存到：${out.error}`);
+  if (out.entry.verdict) e.verdict = out.entry.verdict; else delete e.verdict;
+}
+function verdictBtns(e, after) {
+  const V = [["like", "喜歡"], ["dislike", "不喜歡"]], show = () => btns.forEach((b, i) => b.setAttribute("aria-pressed", e.verdict?.v === V[i][0]));
+  const btns = V.map(([v, label]) => {
+    const b = h("button", `btn vd ${v === "like" ? "like" : "no"}`, {}, label);
+    b.onclick = async (ev) => { ev.stopPropagation(); await saveVerdict(e, e.verdict?.v === v ? null : v); show(); after(); };
+    return b;
+  });
+  show();
+  return btns;
+}
+function exCard({ key, label, title, by, tags, media, src, collected, onCollect, onOpen, entry }) {
+  const c = h("article", `ex${state.picked.has(key) ? " sel" : ""}${entry?.verdict?.v === "like" ? " liked" : entry?.verdict?.v === "dislike" ? " disliked" : ""}`);
+  c.append(exMedia(media, src, entry?.at));
+  const b = h("div", "body");
+  b.append(h("div", "ttl", {}, esc(title)), h("div", "by", {}, esc(by ?? "")));
+  if (entry?.notes) for (const [k, v] of Object.entries(entry.notes).slice(0, 2)) b.append(h("p", "note", {}, `<b>${esc(k)}</b>${esc(v)}`));
+  if (tags?.length) b.append(h("div", "tagl", {}, tags.slice(0, 5).map((t) => `<span>${esc(t)}</span>`).join("")));
+  const row = h("div", "row");
+  row.append(pickBtn(key, label, renderView));
+  if (entry) row.append(...verdictBtns(entry, renderView));
+  if (onCollect) { const k = h("button", "btn", {}, collected ? "已收藏" : "收藏"); k.disabled = collected; k.onclick = (e) => { e.stopPropagation(); onCollect(k); }; row.append(k); }
+  b.append(row); c.append(b);
+  c.onclick = (e) => { if (!e.target.closest("button")) onOpen(); };
+  return c;
+}
+async function collect(url, btn) {
+  if (btn) { btn.textContent = "收藏中…"; btn.disabled = true; }
+  const r = await fetch("/refs", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ url }) });
+  const out = await r.json();
+  if (!r.ok) { toast(`沒有收藏：${out.error}`); if (btn) { btn.textContent = "收藏"; btn.disabled = false; } return; }
+  await reload(); state.lib = null; await loadLib(); renderView(); toast(`已收藏：${out.entry.title}`);
+}
+function renderStyles(v, q) {
+  if (state.src === "recipes") return renderRecipes(v, q);
+  if (state.src === "pm") {
+    if (!state.lib) { v.append(h("p", "empty", {}, "正在讀取 Prompt Motion…")); loadLib().then(() => state.tab === "styles" && renderView()); return; }
+    if (state.lib.error) v.append(h("p", "hint", {}, esc(state.lib.error)));
+    const list = state.lib.items.filter((i) => (state.cat === "all" || (state.cat === "skill" ? i.kind === "skill" : i.categories.includes(state.cat))) && match([i.title, i.author, i.categories], q));
+    v.append(h("p", "hint", {}, `直接讀 Prompt Motion 的作品（Claude 做的動態影片，多數附提示詞）。滑過看動態，點開看提示詞；喜歡就「收藏」，做片子時從「我的收藏」挑。`));
+    const g = h("div", "exgrid"), shown = list.slice(0, state.more ?? 60);
+    for (const i of shown) g.append(exCard({ key: `ref:${i.url}`, label: i.title, title: i.title, by: `@${i.author}・${i.date}`, tags: i.categories, media: i, src: i.kind === "skill" ? "skill" : "", collected: i.collected,
+      onCollect: (btn) => collect(i.url, btn), onOpen: () => openExample({ url: i.url, title: i.title, by: `@${i.author}`, tags: i.categories, media: i, page: i.url, collected: i.collected }) }));
+    v.append(list.length ? g : h("p", "empty", {}, "沒有符合的作品"));
+    if (list.length > shown.length) { const m = h("button", "btn", { margin: "24px auto 0", display: "block" }, `再顯示 60 支（還有 ${list.length - shown.length} 支）`); m.onclick = () => { state.more = (state.more ?? 60) + 60; renderView(); }; v.append(m); }
+    return;
+  }
+  const W = myWorks().filter((w) => (state.reftag === "all" || kw(w).includes(state.reftag)) && (state.color === "all" || (w.site_tags?.colors ?? []).includes(state.color))
+    && (state.verdict === "all" || (state.verdict === "none" ? !w.verdict?.v : w.verdict?.v === state.verdict)) && match(w, q));
+  v.append(h("p", "hint", {}, `你收藏的範例：影片與標籤來自原網站，筆記是你或 Claude 寫的。做片子時在這裡「選擇」1–3 支，Claude 會照它們寫或套用配方。`));
+  const g = h("div", "exgrid");
+  for (const w of W) {
+    const recipe = state.data.catalog.styles.find((s) => s.id === w.direction);
+    g.append(exCard({ key: `ref:${refKey(w)}`, label: w.title, title: w.title, by: [w.author, w.source].filter(Boolean).join("・"), tags: [...(recipe ? [`配方：${recipe.zh}`] : []), ...kw(w)], media: w.media, src: w.source, entry: w,
+      onOpen: () => openExample({ key: `ref:${refKey(w)}`, url: w.url, title: w.title, by: w.author, tags: kw(w), media: w.media, page: w.page ?? w.source_site ?? w.url, entry: w, recipe }) }));
+  }
+  v.append(W.length ? g : h("p", "empty", {}, "還沒有收藏。到 Prompt Motion 按「收藏」，或右上角「＋ 加入收藏」貼網址、傳圖片。"));
+}
+function renderRecipes(v, q) {
+  const S = state.data.catalog.styles.filter((s) => match([s.zh, s.en, s.id, s.visual, s.tags], q));
+  const used = (id) => myWorks().filter((w) => w.direction === id).length;
+  v.append(h("p", "hint", {}, "配方是「怎麼做」：Claude 照它產生預覽。範例挑好後會自動對到配方；沒有對應的，Claude 會照範例寫一份新的。"));
+  const g = h("div", "grid");
+  for (const s of S) {
+    const key = `style:${s.id}`, card = h("article", `card${state.picked.has(key) ? " sel" : ""}`), t = tile(s); card.append(t); io.observe(t);
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(s.zh)}</b><i>${esc(s.en)}</i>`));
+    b.append(h("div", "meta", {}, `<span class="badge">${esc(state.data.catalog.families?.[s.family]?.zh ?? "")}</span>${used(s.id) ? `<span class="badge user">${used(s.id)} 個範例</span>` : `<span class="badge">還沒有範例</span>`}${s.example ? `<span class="badge ex">範例實作</span>` : ""}`));
+    b.append(h("p", "desc", {}, esc(s.sections?.["一句話"] || s.visual)));
+    const a = h("div", "actions"); a.append(pickBtn(key, s.zh, renderView)); const r = h("button", "btn", {}, "看配方"); r.onclick = () => openRecipe(s); a.append(r);
+    b.append(a); card.append(b); card.onclick = (e) => { if (!e.target.closest("button")) openRecipe(s); }; g.append(card);
+  }
+  v.append(g);
+}
+async function openExample(x) {
+  const d = $("exDlg"), player = d.querySelector(".player"), side = d.querySelector(".side");
+  const m = x.media ?? {}, e = x.entry, at = e?.at, yt = ytId(m.video);
+  player.innerHTML = yt ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&mute=1&rel=0${at?.length ? `&start=${Math.floor(at[0][0])}&end=${Math.ceil(at[0][1])}` : ""}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`
+    : m.video ? `<video controls autoplay muted ${at?.length ? "" : "loop"} playsinline src="${esc(mediaUrl(m.video))}" poster="${esc(mediaUrl(m.poster ?? ""))}"></video>` : m.poster || m.image ? `<img class="still" src="${esc(mediaUrl(m.poster || m.image))}" alt="">` : `<div class="still" style="aspect-ratio:16/9;display:grid;place-items:center;color:#fff8">沒有預覽</div>`;
+  if (!yt && at?.length) { const v = player.querySelector("video"); if (v) loopAt(v, at); }
+  side.innerHTML = `<div class="name"><b>${esc(x.title)}</b></div><div class="by">${esc(x.by ?? "")}</div>
+    ${x.tags?.length ? `<div class="tagl">${x.tags.map((t) => `<span class="badge">${esc(t)}</span>`).join(" ")}</div>` : ""}
+    ${e?.palette?.length ? `<div>顏色　${e.palette.map((c) => `<span class="sw"><i style="background:${esc(c)}"></i></span>`).join(" ")}</div>` : ""}
+    ${at?.length ? `<p class="kv"><b>片段</b>${atLabel(at)}${yt ? "（YouTube 播第一段）" : ""}</p>` : ""}
+    ${e?.notes ? Object.entries(e.notes).map(([k, v]) => `<p class="kv"><b>${esc(k)}</b>${esc(v)}</p>`).join("") : ""}
+    ${e?.why ? `<p class="kv"><b>為什麼選</b>${esc(e.why)}</p>` : ""}${e?.learn ? `<p class="kv"><b>可借用</b>${esc(e.learn)}</p>` : ""}
+    <div id="exPrompt">${e?.prompt ? `<b>提示詞</b><div class="prompt">${esc(e.prompt)}</div>` : ""}</div>
+    <p class="kv">${link(x.page ?? x.url, "到原網站看 ↗")}</p>`;
+  if (x.recipe) { const r = h("button", "btn", {}, `看配方：${esc(x.recipe.zh)}`); r.onclick = () => { d.close(); openRecipe(x.recipe); }; side.append(r); }
+  if (e) { // 喜歡／不喜歡 and why, saved into the entry
+    const vrow = h("div", "actions"), note = Object.assign(h("input", "vnote"), { placeholder: "原因（選填，離開欄位就存）", value: e.verdict?.note ?? "" });
+    vrow.append(...verdictBtns(e, renderView)); note.onchange = async () => { await saveVerdict(e, e.verdict?.v ?? null, note.value); renderView(); toast("已存"); };
+    side.append(vrow, note);
+  }
+  const a = h("div", "actions");
+  a.append(pickBtn(x.key ?? `ref:${x.url}`, x.title, () => openExample(x)));
+  if (!e) { const k = h("button", "btn", {}, x.collected ? "已收藏" : "收藏"); k.disabled = x.collected; k.onclick = () => collect(x.url, k); a.append(k); }
+  const close = h("button", "btn", {}, "關閉"); close.onclick = () => d.close(); a.append(close);
+  side.append(a);
+  if (!d.open) d.showModal();
+  if (!e?.prompt && /prompt-motion\.com/.test(x.page ?? x.url)) {
+    const meta = await (await fetch(`/library/item?url=${encodeURIComponent(x.page ?? x.url)}`)).json();
+    if (meta.prompt && d.open) $("exPrompt").innerHTML = `<b>提示詞</b><div class="prompt">${esc(meta.prompt)}</div>`;
+  }
+}
+
+function openFamily(id) {
+  const f = state.data.catalog.families[id], d = $("recipe"), body = d.querySelector(".rbody");
+  const vars = state.data.catalog.styles.filter((s) => s.family === id), fx = new Map(state.data.effects.map((e) => [e.id, e]));
+  const pals = state.data.palettes.filter((p) => p.from.some((x) => vars.some((s) => s.id === x)));
+  d.querySelector(".rhead").replaceChildren(familyTile(f));
+  body.innerHTML = `<div class="name"><b>${esc(f.zh)}</b><i>${esc(f.en)}</i></div>
+    <div class="def">${Object.entries(f.define ?? {}).map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join("")}</div>
+    ${f.fits ? `<p><b>適合</b>　${esc(f.fits)}</p>` : ""}
+    ${f.textEffects?.length ? `<p><b>文字效果</b>　${f.textEffects.map((x) => `<code>${esc(fx.get(x)?.zh ?? x)}</code>`).join(" ")}</p>` : ""}
+    ${pals.length ? `<p><b>常用色票</b>　${pals.map((p) => `<span class="sw" title="${esc(p.zh)}">${[p.colors.bg, p.colors.fg, ...p.colors.accents].map((c) => `<i style="background:${esc(c)}"></i>`).join("")}</span>`).join(" ")}</p>` : ""}
+    ${f.sources?.length ? `<p><b>參考</b>　${f.sources.map(esc).join("、")}</p>` : ""}
+    <p><b>組合</b>　${vars.length ? "" : "還沒有配方：可以從參考裡挑一個例子，寫成這個效果的第一個配方。"}</p>`;
+  const list = h("div", "vars");
+  for (const s of vars) { const c = h("button", "vchip", {}, `${esc(s.zh)}<small>${esc(s.en)}</small>`); c.onclick = () => openRecipe(s); list.append(c); }
+  body.append(list);
+  const a = h("div", "actions");
+  a.append(pickBtn(`effect:${id}`, `呈現效果：${f.zh}`, () => openFamily(id)));
+  const close = h("button", "btn", {}, "關閉"); close.onclick = () => d.close(); a.append(close);
+  body.append(a);
+  if (!d.open) d.showModal();
+  io.observe(d.querySelector(".tile"));
+}
+
+function renderPalettes(v, q) {
+  const famOf = (p) => p.from.map((id) => state.data.catalog.styles.find((s) => s.id === id)?.family);
+  const list = state.data.palettes.filter((p) => (state.pfam === "all" || famOf(p).includes(state.pfam)) && match(p, q));
+  v.append(h("p", "hint", {}, "色票和呈現效果分開選：同一個效果可以配不同色票。品牌片以品牌套件的顏色為準，色票用來定輔助色與氣氛。"));
+  const g = h("div", "grid");
+  for (const p of list) {
+    const key = `palette:${p.id}`, c = h("article", `pal${state.picked.has(key) ? " sel" : ""}`), C = p.colors;
+    const chips = h("div", "chips", { background: C.bg }); chips.append(h("div", "word", { color: C.fg }, "標題 Aa"));
+    for (const a of C.accents) chips.append(h("span", "", { background: a }));
+    c.append(chips);
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(p.zh)}</b>`));
+    const fams = [...new Set(famOf(p))].map((f) => state.data.catalog.families?.[f]?.zh).filter(Boolean);
+    b.append(h("div", "meta", {}, `${fams.map((f) => `<span class="badge">${esc(f)}</span>`).join("")}${p.personal ? `<span class="badge user">我的</span>` : ""}`));
+    b.append(h("div", "hex", {}, [C.bg, C.fg, ...C.accents].map((x) => `<span><span class="sw"><i style="background:${esc(x)}"></i></span> ${esc(x)}</span>`).join("")));
+    b.append(h("p", "kv", {}, `<b>出自</b>${p.from.map((id) => esc(state.data.catalog.styles.find((s) => s.id === id)?.zh ?? id)).join("、")}`));
+    const a = h("div", "actions"); a.append(pickBtn(key, p.zh, renderView));
+    const cp = h("button", "btn", {}, "複製色碼"); cp.onclick = async () => { await navigator.clipboard?.writeText([C.bg, C.fg, ...C.accents].join(" ")); toast("已複製色碼"); }; a.append(cp);
+    b.append(a); c.append(b); g.append(c);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, "沒有符合的色票"));
+}
+
+function renderBoard(v) {
+  const C = state.data.candidates;
+  v.append(h("p", "hint", {}, `${C.length} 個候選風格，用本片內容與品牌套件產生。靜態分鏡依序為 Logo・產品・數據・行動呼籲；有動態預覽的會在畫面內自動播放。`));
+  const g = h("div", "board");
+  for (const c of C) {
+    const s = state.data.catalog.styles.find((x) => x.id === c.id) ?? { zh: c.id, en: "", sections: {}, tags: [] };
+    const key = `style:${c.id}`, card = h("article", `cand${state.picked.has(key) ? " sel" : ""}`);
+    const media = h("div", "media");
+    if (c.preview) { const vid = h("video"); Object.assign(vid, { src: c.preview, muted: true, loop: true, playsInline: true, preload: "metadata" }); media.append(vid); io.observe(media); }
+    else if (c.stills[0]) media.append(Object.assign(h("img"), { src: c.stills[0], alt: "" }));
+    const strip = h("div", "strip");
+    c.stills.forEach((src, i) => { const im = Object.assign(h("img"), { src, alt: `beat ${i + 1}` }); im.onclick = () => { $("zoom").src = src; $("zoomer").showModal(); }; strip.append(im); });
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(s.zh)}</b><i>${esc(s.en)}</i>`));
+    b.append(h("div", "meta", {}, `<span class="badge ${c.source === "authored" ? "adopted" : "ex"}">${c.source === "authored" ? "本片撰寫" : "範例實作"}</span>${c.preview ? `<span class="badge">動態預覽</span>` : `<span class="badge">靜態分鏡</span>`}`));
+    b.append(h("p", "desc", {}, esc(s.sections["一句話"] || "")));
+    const a = h("div", "actions"); a.append(pickBtn(key, s.zh, renderView));
+    if (s.sections && s.raw) { const r = h("button", "btn", {}, "看配方"); r.onclick = () => openRecipe(s); a.append(r); }
+    b.append(a);
+    card.append(media, strip, b); g.append(card);
+  }
+  v.append(C.length ? g : h("p", "empty", {}, "這支影片還沒有候選預覽。跑 node scripts/preview.mjs <影片> <風格,風格…> 產生。"));
+}
+
+const match = (o, q) => !q || JSON.stringify(o).toLowerCase().includes(q);
+const link = (url, text) => `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+const regByName = () => new Map((state.registry?.items ?? []).map((i) => [i.name, i]));
+const installBtn = (name) => { const b = h("button", "btn", {}, "複製安裝指令"); b.onclick = async () => { await navigator.clipboard?.writeText(`npm run hf -- add ${name}`); toast(`已複製：npm run hf -- add ${name}`); }; return b; };
+// Registry previews: the catalog's own (poster, video on hover) when its links answer, else the 4
+// local frames from scripts/registry-previews.mjs (middle frame, flipping through all on hover).
+function mediaFor(item, fallback) {
+  const m = h("div", "media"), p = item?.preview, local = item?.local;
+  if (p?.video) {
+    const v = Object.assign(h("video"), { muted: true, loop: true, playsInline: true, preload: "metadata", poster: p.poster || local?.[1] || "" });
+    v.src = p.poster || local ? p.video : `${p.video}#t=0.6`; // no poster: let the video show a frame of itself
+    if (!p.poster && !local) v.style.opacity = 1;
+    m.append(v);
+    m.onmouseenter = () => { m.classList.add("playing"); v.play().catch(() => {}); };
+    m.onmouseleave = () => { m.classList.remove("playing"); v.pause(); };
+    if (p.poster || local) m.prepend(Object.assign(h("img"), { src: p.poster || local[1], alt: "", loading: "lazy" }));
+  } else if (p?.poster) m.append(Object.assign(h("img"), { src: p.poster, alt: "", loading: "lazy" }));
+  else if (local) {
+    const img = Object.assign(h("img"), { src: local[1] ?? local[0], alt: "", loading: "lazy" }); m.append(img);
+    let timer = 0, k = 0;
+    m.onmouseenter = () => { local.forEach((u) => (new Image().src = u)); timer = setInterval(() => { k = (k + 1) % local.length; img.src = local[k]; }, 420); };
+    m.onmouseleave = () => { clearInterval(timer); img.src = local[1] ?? local[0]; };
+    m.append(h("span", "", { position: "absolute", right: "8px", bottom: "6px", fontSize: "11px", color: "#fff", background: "#0008", padding: "1px 6px", borderRadius: "4px" }, "本機預覽"));
+  } else m.textContent = item?.previewNote ?? fallback;
+  return m;
+}
+
+// A personal demo (<profile>/effect-demos.js): its own 640×360 page in a frame, zoomed to the card.
+function demoFrame(d) {
+  const m = h("div", "media"), f = h("iframe");
+  f.loading = "lazy"; f.title = "效果預覽";
+  f.srcdoc = `<!doctype html><meta charset="utf-8"><style>@font-face{font-family:'Noto Sans TC';src:url('/fonts/NotoSansTC-VF.ttf');font-weight:100 900}@font-face{font-family:'Noto Serif TC';src:url('/fonts/NotoSerifTC-VF.ttf');font-weight:200 900}
+html,body{margin:0;width:640px;height:360px;overflow:hidden}body{background:${d.bg};display:grid;place-items:center;font-family:'Noto Sans TC',sans-serif;font-weight:900;position:relative}b{font-weight:900}${d.css}</style>${d.html}
+<script>const z=()=>document.documentElement.style.zoom=innerWidth/640;z();onresize=z;${d.js ?? ""}<\/script>`;
+  m.append(f, h("span", "", { position: "absolute", right: "8px", bottom: "6px", fontSize: "11px", color: "#fff", background: "#0008", padding: "1px 6px", borderRadius: "4px" }, "示意"));
+  return m;
+}
+
+function renderEffects(v, q) {
+  const reg = regByName();
+  const list = state.data.effects.filter((e) => (state.cjk === "all" || e.cjk === state.cjk) && (state.efrom === "all" || e.from.includes(state.efrom))
+    && (state.egroup === "all" || e.group === state.egroup) && match(e, q))
+    .sort((a, b) => (a.no ?? 1e3) - (b.no ?? 1e3)); // my numbered list first, in its own order
+  const g = h("div", "grid");
+  for (const e of list) {
+    const key = `effect:${e.id}`, comp = String(e.hyperframes).replace(/[()]/g, ""), item = reg.get(e.hyperframes);
+    const c = h("article", `fx${state.picked.has(key) ? " sel" : ""}`);
+    const demo = window.EFFECT_DEMOS?.[e.id];
+    c.append(!(item?.preview || item?.local) && demo ? demoFrame(demo) : mediaFor(item, !state.registry ? "載入預覽中…" : item ? "還沒有預覽" : /^\(GSAP/.test(e.hyperframes) ? "用 GSAP 自製（registry 沒有對應元件）" : "registry 沒有對應元件"));
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(e.zh)}</b><i>${esc(e.en)}</i>`));
+    b.append(h("div", "meta", {}, `${e.no ? `<span class="badge user">#${String(e.no).padStart(2, "0")} ${esc(e.group)}</span>` : ""}<span class="badge ${e.cjk}">${CJK[e.cjk] ?? esc(e.cjk)}</span>${(e.use ?? []).map((u) => `<span class="badge">${esc(u)}</span>`).join("")}`));
+    b.append(h("p", "desc", {}, esc(e.look) + (e.also && e.also.zh !== e.zh ? `<br><span>內建名稱：${esc(e.also.zh)}・${esc(e.also.en)}</span>` : "")));
+    b.append(h("p", "kv", {}, `<b>HyperFrames</b><code>${esc(comp)}</code>`));
+    b.append(h("p", "kv", {}, `<b>GSAP</b>${esc(e.gsap)}`));
+    const a = h("div", "actions"); a.append(pickBtn(key, e.zh, renderView)); if (item) a.append(installBtn(item.name));
+    b.append(a); c.append(b); g.append(c);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, "沒有符合的文字效果"));
+}
+
+// One line from the measured path: which way, how much, and when it moves fastest (t10–t90 drifts with small jitter, the peak does not).
+function camMeasure(m) {
+  const parts = [];
+  if (Math.abs(m.zoom - 1) >= 0.08) parts.push(m.zoom > 1 ? `推近 ×${m.zoom.toFixed(2)}` : `拉遠 ×${(1 / m.zoom).toFixed(2)}`);
+  if (Math.abs(m.pan_pct) >= 8) parts.push(`${m.pan_pct > 0 ? "往右" : "往左"} ${Math.abs(Math.round(m.pan_pct))}% 畫面寬`);
+  if (Math.abs(m.tilt_pct) >= 8) parts.push(`${m.tilt_pct > 0 ? "往下" : "往上"} ${Math.abs(Math.round(m.tilt_pct))}% 畫面高`);
+  if (Math.abs(m.roll_deg) >= 8) parts.push(`旋轉 ${Math.round(m.roll_deg)}°`);
+  if (!parts.length) return "幾乎不動";
+  return `${parts.join("・")}；最快在 ${Math.round(m.peak_at * 100)}%（${m.seconds} 秒的預覽）`;
+}
+const spark = (p) => { const mx = Math.max(...p, 0.01); return `<svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none" aria-label="速度曲線">${p.map((v, i) => `<rect x="${i * 10 + 1}" y="${24 - (v / mx) * 22}" width="8" height="${(v / mx) * 22 + 0.5}" rx="1"/>`).join("")}</svg>`; };
+
+function renderCameras(v, q) {
+  const list = state.data.cameras.filter((c) => (state.ccat === "all" || c.category === state.ccat)
+    && (state.cconf === "all" || (state.cconf === "3d" ? c.needs3d : c.measured.confidence === state.cconf)) && match(c, q));
+  v.append(h("p", "hint", {}, `${list.length} 種運鏡，名稱取自 Higgsfield 的 Camera Controls；滑過畫面看它的預覽（AI 生成的單一樣本）。量測是 <code>scripts/measure/globalmotion.py</code> 從預覽量到的方向、量級與時間，GSAP 作法作用在鏡頭層 <code>.world</code>。來源與限制見 <code>docs/research/higgsfield-camera-presets.md</code>。`));
+  const g = h("div", "grid");
+  for (const c of list) {
+    const key = `camera:${c.id}`, m = c.measured, card = h("article", `fx${state.picked.has(key) ? " sel" : ""}`);
+    card.append(mediaFor({ preview: { video: c.higgsfield.preview } }, "沒有預覽"));
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(c.zh)}</b><i>${esc(c.en)}</i>`));
+    b.append(h("div", "meta", {}, `<span class="badge">${esc(CAMCAT[c.category] ?? c.category)}</span>${c.needs3d ? `<span class="badge partial">要 3D／分層</span>` : ""}<span class="badge ${{ clear: "ok", weak: "partial", none: "latin-only" }[m.confidence]}">${CAMCONF[m.confidence]}</span>`));
+    b.append(h("p", "desc", {}, esc(c.look)));
+    b.append(h("p", "kv", {}, `<b>GSAP</b>${esc(c.gsap)}`));
+    b.append(h("p", "kv", {}, `<b>量測</b>${esc(camMeasure(m))}${spark(m.profile)}` + (m.limit ? `<br><span class="note">${esc(m.limit)}</span>` : "")));
+    const a = h("div", "actions"); a.append(pickBtn(key, c.zh, renderView)); b.append(a); card.append(b); g.append(card);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, "沒有符合的運鏡"));
+}
+
+function renderRegistry(v, q) {
+  if (!state.registry) { v.append(h("p", "empty", {}, "正在讀取 HyperFrames registry…")); loadRegistry().then(() => state.tab === "registry" && render()); return; }
+  if (state.registry.error) v.append(h("p", "hint", {}, esc(state.registry.error)));
+  const list = state.registry.items.filter((i) => (state.rtype === "all" || i.type === state.rtype) && (state.rtag === "all" || (i.tags ?? []).includes(state.rtag)) && match(i, q));
+  const missing = state.registry.items.filter((i) => !i.preview && !i.local).length;
+  v.append(h("p", "hint", {}, `HyperFrames registry v${esc(state.registry.version ?? "")}：${list.length} 個。滑過畫面看動態預覽；用「複製安裝指令」加進影片專案。` + (missing ? `還有 ${missing} 個沒有預覽：執行 <code>node scripts/registry-previews.mjs</code> 在本機產生。` : "")));
+  const g = h("div", "grid"), shown = list.slice(0, state.more ?? 60);
+  for (const i of shown) {
+    const key = `registry:${i.name}`, c = h("article", `fx${state.picked.has(key) ? " sel" : ""}`);
+    c.append(mediaFor(i, "還沒有預覽"));
+    const b = h("div", "body");
+    b.append(h("div", "name", {}, `<b>${esc(i.title || i.name)}</b><i>${esc(i.name)}</i>`));
+    b.append(h("div", "meta", {}, `<span class="badge">${i.type === "block" ? "區塊" : "元件"}</span>${i.duration ? `<span class="badge">${i.duration} 秒</span>` : ""}${i.dimensions ? `<span class="badge">${i.dimensions.width}×${i.dimensions.height}</span>` : ""}`));
+    b.append(h("p", "desc", {}, esc(i.description)));
+    b.append(h("div", "tags", {}, (i.tags ?? []).slice(0, 8).map((t) => `<span>${esc(t)}</span>`).join("")));
+    const a = h("div", "actions"); a.append(pickBtn(key, i.title || i.name, renderView), installBtn(i.name));
+    b.append(a); c.append(b); g.append(c);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, "沒有符合的效果"));
+  if (list.length > shown.length) { const m = h("button", "btn", { margin: "28px auto 0", display: "block" }, `再顯示 60 個（還有 ${list.length - shown.length} 個）`); m.onclick = () => { state.more = (state.more ?? 60) + 60; renderView(); }; v.append(m); }
+}
+
+function renderRefs(v, q) {
+  const list = state.data.refs.filter((r) => (state.by === "all" || (state.by === "user" ? r.by === "user" : r.by !== "user")) && (state.reftag === "all" || (r.tags ?? []).includes(state.reftag)) && match(r, q));
+  const g = h("div", "refs");
+  for (const r of list) {
+    const key = `ref:${r.url}`, c = h("article", `ref${state.picked.has(key) ? " sel" : ""}`);
+    c.append(h("div", "", { position: "static" }, link(r.url, r.title)));
+    c.append(h("div", "meta", {}, `${r.by === "user" ? `<span class="badge user">我提供的</span>` : ""}<span class="badge">${USED[r.used] ?? esc(r.used)}</span>${r.direction ? `<span class="badge">方向：${esc(r.direction)}</span>` : ""}<span class="badge">${esc(r.video || "整個資源庫")}</span><span class="badge">${esc(r.date)}</span>`));
+    if (r.why) c.append(h("p", "desc", {}, esc(r.why)));
+    if (r.learn) c.append(h("p", "kv", {}, `<b>可借用</b>${esc(r.learn)}`));
+    if (r.effects?.length) c.append(h("p", "kv", {}, `<b>效果</b>${r.effects.map((x) => `<code>${esc(x)}</code>`).join(" ")}`));
+    if (r.tags?.length) c.append(h("div", "tags", {}, r.tags.map((t) => `<span>${esc(t)}</span>`).join("")));
+    const a = h("div", "actions"); a.append(pickBtn(key, r.title, renderView)); c.append(a); g.append(c);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, state.data.refs.length ? "沒有符合的參考" : "還沒有參考紀錄。按右上角「＋ 新增參考」記下第一個。"));
+}
+
+function renderSites(v, q) {
+  const list = state.data.sites.filter((s) => (state.cat === "all" || s.categories.includes(state.cat)) && match(s, q));
+  const g = h("div", "refs");
+  for (const s of list) {
+    const c = h("article", "site");
+    c.append(h("div", "", {}, link(s.url, s.name)));
+    c.append(h("div", "host", {}, esc(new URL(s.url).host)));
+    c.append(h("div", "meta", {}, s.categories.map((x) => `<span class="badge">${esc(x.replace(/（.*）/, ""))}</span>`).join("") + (s.from === "added" ? `<span class="badge user">新增的 ${esc(s.date ?? "")}</span>` : "")));
+    if (s.note) c.append(h("p", "desc", {}, esc(s.note)));
+    g.append(c);
+  }
+  v.append(list.length ? g : h("p", "empty", {}, "沒有符合的網站"));
+}
+
+function renderView() {
+  const v = $("view"); v.innerHTML = ""; io.disconnect(); stopGraph();
+  const q = state.q.trim().toLowerCase();
+  ({ styles: renderStyles, palettes: renderPalettes, board: renderBoard, effects: renderEffects, cameras: renderCameras, registry: renderRegistry, refs: renderRefs, sites: renderSites, graph: renderGraph })[state.tab](v, q);
+}
+
+function renderBar() {
+  $("bar").classList.toggle("show", state.picked.size > 0);
+  $("count").textContent = `已選 ${state.picked.size}`;
+  $("picked").innerHTML = [...state.picked.values()].map((l) => `<span>${esc(l)}</span>`).join("");
+}
+
+function render() {
+  document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", t.dataset.tab === state.tab));
+  renderFilters(); renderView(); renderBar();
+}
+
+document.querySelectorAll(".tab").forEach((t) => (t.onclick = () => { state.tab = t.dataset.tab; state.q = ""; state.more = 60; render(); }));
+$("exDlg").addEventListener("close", () => $("exDlg").querySelector("video")?.pause());
+for (const d of ["recipe", "zoomer", "addDlg", "exDlg"]) $(d).onclick = (e) => { if (e.target.id === d) $(d).close(); };
+const slider = (id, out, labels) => { const upd = () => ($(out).textContent = labels[Math.round($(id).value / 50)]); $(id).oninput = upd; upd(); };
+slider("creativity", "creativityOut", ["保守", "適中", "大膽"]);
+slider("pace", "paceOut", ["沉穩", "適中", "急促"]);
+$("send").onclick = async () => {
+  const val = (id) => $(id).value.trim();
+  const body = {
+    picked: [...state.picked.keys()], labels: [...state.picked.values()], note: val("note"),
+    customize: { purpose: val("cPurpose"), length: val("cLength"), colours: val("cColours"), typeface: val("cType"), other: val("cOther"), creativity: +$("creativity").value, pace: +$("pace").value },
+    at: new Date().toISOString(),
+  };
+  try {
+    const r = await fetch("/select", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    toast(r.ok ? (await r.text()) : "送出失敗");
+  } catch { await navigator.clipboard?.writeText(JSON.stringify(body, null, 2)); toast("已複製選擇內容，貼回對話即可"); }
+};
+
+// ---------- 關係圖: a force layout of everything linked by a written-down field ----------
+const GT = { family: ["呈現效果", "#be185d"], style: ["風格", "#725ff7"], effect: ["文字效果", "#e0703a"], registry: ["動畫效果", "#159a8c"], ref: ["參考", "#16171d"], site: ["參考網站", "#2f8f3a"], tag: ["標籤", "#a8a59c"] };
+const G = { on: { family: true, style: true, effect: true, registry: true, ref: true, site: true, tag: true }, lonely: false, q: "", sel: null, raf: 0 };
+const loadRegistry = () => state.registry ? Promise.resolve(state.registry) : fetch("/registry.json").then((r) => r.json()).then((r) => { state.registry = r; $("nRegistry").textContent = r.items.length; return r; });
+const loadGraph = (force) => (state.graph && !force ? Promise.resolve(state.graph) : fetch("/graph.json").then((r) => r.json()).then((g) => (state.graph = g)));
+function stopGraph() { cancelAnimationFrame(G.raf); G.raf = 0; window.removeEventListener("resize", G.resize ?? (() => {})); }
+
+function renderGraph(v) {
+  const bar = h("div", "filters", { padding: "0 0 14px" });
+  for (const [t, [label, col]] of Object.entries(GT)) { const b = h("button", "chip sm", {}, `<span class="dot" style="background:${col}"></span>${label}`); b.setAttribute("aria-pressed", G.on[t]); b.onclick = () => { G.on[t] = !G.on[t]; renderView(); }; bar.append(b); }
+  const lone = h("button", "chip sm", {}, "顯示沒有連線的"); lone.setAttribute("aria-pressed", G.lonely); lone.onclick = () => { G.lonely = !G.lonely; renderView(); }; bar.append(lone);
+  const fitB = h("button", "chip sm", {}, "置中"); fitB.onclick = () => G.fit?.(); bar.append(fitB);
+  const q = h("input"); q.type = "search"; q.placeholder = "找節點…"; q.value = G.q; q.oninput = () => { G.q = q.value.trim().toLowerCase(); G.wake?.(); }; bar.append(q);
+  const wrap = h("div", "graphwrap"), cv = h("canvas"); cv.id = "graph";
+  const panel = h("aside", "gpanel", {}, `<p class="hint" style="margin:0">點一個節點看它連到哪些東西。拖曳節點移動、拖曳空白處平移、滾輪縮放。連線只來自紀錄裡寫下的欄位：參考的方向、出處、用到的效果與標籤，文字效果對應的元件，配方提到的效果。</p>`);
+  wrap.append(cv, panel); v.append(bar, wrap);
+  loadGraph().then((g) => state.tab === "graph" && drawGraph(cv, panel, g));
+}
+
+function drawGraph(cv, panel, g) {
+  let nodes = g.nodes.filter((n) => G.on[n.type]);
+  const ids = new Set(nodes.map((n) => n.id));
+  const edges = g.edges.filter((e) => ids.has(e.a) && ids.has(e.b));
+  const deg = {}; edges.forEach((e) => { deg[e.a] = (deg[e.a] || 0) + 1; deg[e.b] = (deg[e.b] || 0) + 1; });
+  if (!G.lonely) nodes = nodes.filter((n) => deg[n.id]);
+  const W = () => cv.clientWidth, H = () => cv.clientHeight;
+  // Stable start: a seeded spiral per type, so the picture is the same on every visit.
+  const types = Object.keys(GT);
+  const N = nodes.map((n, i) => { const k = types.indexOf(n.type), a = i * 2.39996, r = 40 + 9 * Math.sqrt(i); return { ...n, x: Math.cos(a + k) * r, y: Math.sin(a + k) * r, vx: 0, vy: 0, d: deg[n.id] || 0 }; });
+  const by = new Map(N.map((n) => [n.id, n]));
+  const E = edges.map((e) => ({ ...e, s: by.get(e.a), t: by.get(e.b) })).filter((e) => e.s && e.t);
+  const nb = new Map(N.map((n) => [n.id, []])); E.forEach((e) => { nb.get(e.s.id).push([e.t, e.why]); nb.get(e.t.id).push([e.s, e.why]); });
+  const view = { x: 0, y: 0, k: 1 }; let alpha = 1, hover = null, drag = null, pan = null;
+  const dpr = window.devicePixelRatio || 1, ctx = cv.getContext("2d");
+  const size = () => { cv.width = W() * dpr; cv.height = H() * dpr; };
+  G.resize = () => { size(); G.wake(); }; window.addEventListener("resize", G.resize); size();
+  const R = (n) => (4 + Math.min(10, Math.sqrt(n.d) * 2.2)) / view.k; // constant size on screen at any zoom
+  function tick() {
+    for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) {
+      const a = N[i], b = N[j]; let dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy || 1; if (d2 > 90000) continue;
+      const f = (900 / d2) * alpha; dx *= f; dy *= f; a.vx -= dx; a.vy -= dy; b.vx += dx; b.vy += dy;
+    }
+    for (const e of E) { const dx = e.t.x - e.s.x, dy = e.t.y - e.s.y, d = Math.hypot(dx, dy) || 1, f = ((d - 46) / d) * 0.06 * alpha; e.s.vx += dx * f; e.s.vy += dy * f; e.t.vx -= dx * f; e.t.vy -= dy * f; }
+    for (const n of N) { if (n === drag) continue; n.vx -= n.x * 0.012 * alpha; n.vy -= n.y * 0.012 * alpha; n.x += (n.vx *= 0.6); n.y += (n.vy *= 0.6); }
+    alpha *= 0.985;
+  }
+  const lit = () => { const s = G.sel && by.get(G.sel); return s ? new Set([s.id, ...nb.get(s.id).map(([n]) => n.id)]) : null; };
+  function paint() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W(), H());
+    ctx.translate(W() / 2 + view.x, H() / 2 + view.y); ctx.scale(view.k, view.k);
+    const L = lit(), q = G.q, hit = (n) => q && n.label.toLowerCase().includes(q);
+    ctx.lineWidth = 1 / view.k;
+    for (const e of E) { const on = L && L.has(e.s.id) && L.has(e.t.id) && (e.s.id === G.sel || e.t.id === G.sel); ctx.strokeStyle = on ? "#725ff7aa" : L ? "#0000000d" : "#00000021"; ctx.beginPath(); ctx.moveTo(e.s.x, e.s.y); ctx.lineTo(e.t.x, e.t.y); ctx.stroke(); }
+    for (const n of N) {
+      const dim = (L && !L.has(n.id)) || (q && !hit(n));
+      ctx.globalAlpha = dim ? 0.18 : 1; ctx.fillStyle = GT[n.type][1]; ctx.beginPath(); ctx.arc(n.x, n.y, R(n), 0, 7); ctx.fill();
+      if (n.id === G.sel || hit(n)) { ctx.lineWidth = 2.5 / view.k; ctx.strokeStyle = "#725ff7"; ctx.stroke(); ctx.lineWidth = 1 / view.k; }
+    }
+    ctx.globalAlpha = 1; ctx.font = `${12 / view.k}px 'Noto Sans TC', sans-serif`; ctx.textBaseline = "middle";
+    for (const n of N) {
+      const show = n === hover || (L ? L.has(n.id) : (q ? hit(n) : n.d >= 5 || view.k > 1.6));
+      if (!show) continue;
+      const tx = n.x + R(n) + 4 / view.k; ctx.lineWidth = 3 / view.k; ctx.strokeStyle = "#fff"; ctx.strokeText(n.label, tx, n.y); ctx.fillStyle = "#16171d"; ctx.fillText(n.label, tx, n.y);
+    }
+  }
+  function loop() { if (alpha > 0.02 || drag) tick(); paint(); G.raf = alpha > 0.02 || drag ? requestAnimationFrame(loop) : 0; }
+  G.wake = (heat = 0) => { alpha = Math.max(alpha, heat); if (!G.raf) G.raf = requestAnimationFrame(loop); };
+  const at = (ev) => { const r = cv.getBoundingClientRect(); return [(ev.clientX - r.left - W() / 2 - view.x) / view.k, (ev.clientY - r.top - H() / 2 - view.y) / view.k]; };
+  const pick = (ev) => { const [x, y] = at(ev); let best = null, bd = 1e9; for (const n of N) { const d = Math.hypot(n.x - x, n.y - y); if (d < R(n) + 5 / view.k && d < bd) { best = n; bd = d; } } return best; };
+  cv.onpointerdown = (ev) => { cv.setPointerCapture(ev.pointerId); const n = pick(ev); if (n) { drag = n; drag.moved = false; } else pan = [ev.clientX - view.x, ev.clientY - view.y]; cv.classList.add("dragging"); };
+  cv.onpointermove = (ev) => {
+    if (drag) { const [x, y] = at(ev); drag.x = x; drag.y = y; drag.vx = drag.vy = 0; drag.moved = true; G.wake(0.3); return; }
+    if (pan) { view.x = ev.clientX - pan[0]; view.y = ev.clientY - pan[1]; G.wake(); return; }
+    const n = pick(ev); if (n !== hover) { hover = n; cv.style.cursor = n ? "pointer" : ""; G.wake(); }
+  };
+  cv.onpointerup = (ev) => { cv.classList.remove("dragging"); if (drag && !drag.moved) select(drag.id); else if (pan && !drag && Math.abs(ev.clientX - view.x - pan[0]) < 2) {} drag = null; pan = null; };
+  cv.onwheel = (ev) => { ev.preventDefault(); const k = Math.min(4, Math.max(0.25, view.k * Math.exp(-ev.deltaY * 0.0015))); const r = cv.getBoundingClientRect(), mx = ev.clientX - r.left - W() / 2, my = ev.clientY - r.top - H() / 2; view.x = mx - ((mx - view.x) * k) / view.k; view.y = my - ((my - view.y) * k) / view.k; view.k = k; G.wake(); };
+  cv.ondblclick = () => { select(null); };
+  function select(id) {
+    G.sel = id; G.wake();
+    const n = id && by.get(id);
+    if (!n) { panel.innerHTML = `<p class="hint" style="margin:0">${N.length} 個節點、${E.length} 條連線。點一個節點看它連到哪些東西。</p>`; return; }
+    const tabOf = { family: "styles", style: "styles", effect: "effects", registry: "registry", ref: "refs", site: "sites" }[n.type];
+    panel.innerHTML = `<div><span class="dot" style="background:${GT[n.type][1]}"></span><small>${GT[n.type][0]}</small></div><h3>${esc(n.label)}</h3>`;
+    if (/^https?:/.test(n.key ?? "")) panel.append(h("div", "", {}, link(n.key, "開啟網址 ↗")));
+    const groups = {}; for (const [m, why] of nb.get(n.id)) (groups[why] ??= []).push(m);
+    for (const [why, ms] of Object.entries(groups)) {
+      panel.append(h("b", "", {}, `${esc(why)}（${ms.length}）`));
+      const ul = h("ul"); ms.sort((a, b) => b.d - a.d).forEach((m) => { const li = h("li"), b = h("button", "", {}, `<span class="dot" style="background:${GT[m.type][1]}"></span>${esc(m.label)}<small>${GT[m.type][0]}</small>`); b.onclick = () => select(m.id); li.append(b); ul.append(li); }); panel.append(ul);
+    }
+    if (tabOf) { const go = h("button", "btn", { marginTop: "6px", alignSelf: "flex-start" }, `到「${GT[n.type][0]}」分頁查看`); go.onclick = () => { state.tab = tabOf; if (n.type === "family") { state.family = n.key; state.q = ""; } else state.q = n.type === "ref" || n.type === "site" ? n.label : n.key; render(); }; panel.append(go); }
+  }
+  select(G.sel && by.has(G.sel) ? G.sel : null);
+  // Settle before the first frame (so it does not fly in), then fit everything in the canvas.
+  function fit() {
+    if (!N.length) return;
+    const xs = N.map((n) => n.x), ys = N.map((n) => n.y), [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    view.k = Math.min(2.2, (W() - 60) / (x1 - x0 + 120), (H() - 60) / (y1 - y0 + 40));
+    view.x = -((x0 + x1) / 2) * view.k; view.y = -((y0 + y1) / 2) * view.k; G.wake();
+  }
+  G.fit = fit;
+  for (let i = 0; i < 300; i++) tick();
+  fit();
+}
+
+// ---------- 新增參考 ----------
+function openAdd() {
+  const d = $("addDlg"), f = $("addForm"); f.reset(); $("addErr").textContent = ""; setKind("work");
+  f.direction.innerHTML = `<option value="">（不指定）</option>` + state.data.catalog.styles.map((s) => `<option value="${esc(s.id)}">${esc(s.zh)}・${esc(s.id)}</option>`).join("");
+  f.video.innerHTML = `<option value="">整個資源庫（不屬於某支片）</option>` + state.data.videos.map((n) => `<option${n === state.data.video ? " selected" : ""}>${esc(n)}</option>`).join("");
+  f.source_site.innerHTML = `<option value="">（不指定）</option>` + state.data.sites.map((s) => `<option value="${esc(s.url)}">${esc(s.name)}</option>`).join("");
+  $("catList").innerHTML = [...new Set(state.data.sites.flatMap((s) => s.categories))].map((c) => `<option value="${esc(c)}">`).join("");
+  $("effectList").innerHTML = state.data.effects.map((e) => `<option value="${esc(e.zh)}">${esc(e.en)}</option>`).join("") + (state.registry?.items ?? []).map((i) => `<option value="${esc(i.name)}">${esc(i.title)}</option>`).join("");
+  d.showModal(); f.url.focus();
+}
+function setKind(k) { $("addDlg").classList.toggle("site", k === "site"); document.querySelectorAll("#addDlg .kind .chip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.kind === k)); $("addDlg").dataset.kind = k; }
+document.querySelectorAll("#addDlg .kind .chip").forEach((b) => (b.onclick = () => setKind(b.dataset.kind)));
+$("addRef").onclick = () => openAdd();
+$("addCancel").onclick = () => $("addDlg").close();
+$("addForm").onsubmit = async (ev) => {
+  ev.preventDefault();
+  const f = $("addForm"), kind = $("addDlg").dataset.kind, val = (n) => f[n].value.trim();
+  const img = f.image.files?.[0];
+  if (!val("url") && !(kind === "work" && img)) { $("addErr").textContent = kind === "site" ? "請填網址" : "請填網址或上傳一張圖片"; return; }
+  if (kind === "site" && !val("title")) { $("addErr").textContent = "參考網站請填名稱"; return; }
+  let file = "";
+  if (kind === "work" && img && !val("url")) {
+    $("addErr").textContent = "上傳圖片中…";
+    const data = await new Promise((done) => { const r = new FileReader(); r.onload = () => done(r.result); r.readAsDataURL(img); });
+    const up = await (await fetch("/upload", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: img.name, data }) })).json();
+    if (!up.file) { $("addErr").textContent = `沒有上傳：${up.error}`; return; }
+    file = up.file;
+  }
+  const body = kind === "site"
+    ? { kind: "site", url: val("url"), title: val("title"), why: val("siteWhy"), category: val("category"), tags: val("tags") }
+    : { url: val("url") || file, file, title: val("title") || (file ? img.name.replace(/\.[^.]+$/, "") : ""), why: val("why"), learn: val("learn"), direction: val("direction"), used: val("used"), effects: val("effects"), video: val("video"), source_site: val("source_site"), tags: val("tags") };
+  $("addErr").textContent = file ? "記錄中…" : "檢查連結、讀取網站資料中…";
+  try {
+    const r = await fetch("/refs", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    const out = await r.json();
+    if (!r.ok) { $("addErr").textContent = `沒有記錄：${out.error ?? r.status}`; return; }
+    $("addDlg").close();
+    await reload(); state.graph = null;
+    state.tab = kind === "site" ? "sites" : "styles"; state.src = "mine"; state.q = ""; render();
+    toast(out.warning ? `已記錄（${out.warning}）` : `已記錄：${out.entry.title}`);
+  } catch { $("addErr").textContent = "連不到 gallery 伺服器，確認它還在跑"; }
+};
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2400); }
+
+const reload = () => fetch("/data.json").then((r) => r.json()).then((d) => {
+  state.data = d;
+  $("nStyles").textContent = ""; $("nPalettes").textContent = d.palettes.length; $("nEffects").textContent = d.effects.length; $("nCameras").textContent = d.cameras.length; $("nSites").textContent = d.sites.length;
+  $("ctx").textContent = d.video ? `影片：${d.video}` : "全部專案";
+  return d;
+});
+reload().then((d) => {
+  if (d.video) { $("boardTab").hidden = false; $("nBoard").textContent = d.candidates.length; if (d.candidates.length) state.tab = "board"; }
+  render();
+  loadRegistry().then(() => state.tab === "effects" && renderView()); // effect cards show registry previews once loaded
+});
+</script>
+</body>
+</html>

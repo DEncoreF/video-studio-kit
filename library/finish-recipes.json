@@ -1,0 +1,78 @@
+{
+ "about": "光、陰影與材質的做法表（video-direction references/look-extraction.md）。每一筆：固定名稱、看起來怎樣、量到的數字、做法、出處。數字一律換算成 1920×1080 的 px（尺片是 1280×720，量到的 ×1.5）。status：approved = 使用者核可過的片子裡的元件，照抄數值；measured = 從參考量到，做法是起點，做完要用 finish.py 量自己的版本和參考比；untested = 只有做法，還沒有參考量過。量法見 scripts/measure/finish.py 與 css-effects.mjs。",
+ "recipes": [
+  {
+   "id": "glow-text-halo", "kind": "glow", "zh": "字的光暈", "en": "text halo",
+   "look": "亮色大字外面一圈同色系的柔光，黑底；光從字緣往外約一個字高的三分之一淡掉",
+   "numbers": { "sigma_px": 33, "css_blur_px": 66, "halo_at_edge": "#33223c", "background": "#000000" },
+   "how": { "css": "text-shadow: 0 0 22px rgba(150,110,255,.55), 0 0 66px rgba(140,90,255,.35)", "note": "兩層：一層緊貼（σ 的 1/3）給亮邊，一層照量到的 blur 給範圍；顏色取字的主色、降低飽和" },
+   "source": [{ "ref": "rulers/apple-creator-studio.mp4", "at": 10, "lines": ["849,295,960,295", "590,221,590,120"], "measured_720p": { "css_blur_px": [42.9, 44.7] } }],
+   "status": "measured",
+   "avoid": "光暈不要蓋過字形；不要每個字都發光，只給主角字"
+  },
+  {
+   "id": "glow-stage-violet", "kind": "glow", "zh": "主體後的品牌色光", "en": "stage glow behind the subject",
+   "look": "深色舞台上，主體正後方一團很淡的品牌紫光，邊緣看不出來",
+   "numbers": { "size_px": [1500, 900], "alpha_center": 0.28, "alpha_at_60pct": 0.06 },
+   "how": { "css": "background: radial-gradient(closest-side, rgba(114,95,247,.28), rgba(114,95,247,.06) 60%, transparent); width: 1500px; height: 900px; border-radius: 50%" },
+   "source": [{ "ref": "studio 品牌套件裡核可過的元件 CSS", "approved": "film D，2026-10-27" }],
+   "status": "approved",
+   "avoid": "紫色是 D 片的選擇，不是每支片的預設；其他片換成該片 frame.md 的強調色"
+  },
+  {
+   "id": "glow-neon-edge", "kind": "glow", "zh": "沿邊跑的光", "en": "light running an edge",
+   "look": "一段光沿著面板或圓的邊緣移動，拖著三層柔光",
+   "how": { "registry": ["lt-neon-border", "light-edge"], "note": "light-edge 是 WebGPU shader，算圖要支援 WebGPU 的 Chrome" },
+   "source": [],
+   "status": "untested"
+  },
+  {
+   "id": "edge-crisp-selection", "kind": "edge", "zh": "銳利的選取框", "en": "crisp selection border",
+   "look": "深色圓角磚，選中的那一個加一圈亮灰色實線框，沒有任何光暈",
+   "numbers": { "sigma_px": 0.75, "border_px": 16, "border_share_of_tile": 0.025, "border": "#848889", "background": "#090909" },
+   "how": { "css": "box-shadow: inset 0 0 0 16px #8a8e90  /* 邊框約磚寬的 2.5%；不要加 blur */" },
+   "source": [{ "ref": "rulers/raycast.mp4", "at": 16, "lines": ["833,360,792,360", "1060,585,1060,628"], "measured_720p": { "sigma_px": [0.5, 0.5] } }],
+   "status": "measured",
+   "avoid": "選取狀態不用光暈表現；Raycast 的質感來自銳利，不是發光"
+  },
+  {
+   "id": "shadow-layered-card", "kind": "shadow", "zh": "分層卡片陰影", "en": "layered card shadow",
+   "look": "白卡浮在深色舞台上：頂邊一道亮線、一圈細邊、貼近的環境陰影、往下拉長的主陰影，最外一層帶品牌色",
+   "numbers": { "layers": 5, "key_blur_px": 60, "key_offset_px": 30, "key_alpha": 0.75, "lift_blur_px": 160, "lift_alpha": 0.45 },
+   "how": { "css": "box-shadow: inset 0 1.5px 0 #fff, 0 0 0 1px rgba(255,255,255,.14), 0 2px 4px rgba(3,4,12,.35), 0 30px 60px -20px rgba(3,4,12,.75), 0 80px 160px -40px rgba(114,95,247,.45)",
+            "note": "同一個光源（正上方）、多層疊加、最外層帶表面的色相（Josh Comeau〈Designing Beautiful Shadows in CSS〉）" },
+   "source": [{ "ref": "studio 品牌套件裡核可過的元件 CSS", "approved": "film D，2026-10-27" }],
+   "status": "approved",
+   "avoid": "最外層的紫色換成該片的強調色；淺色舞台上 key_alpha 降到 .2 以下"
+  },
+  {
+   "id": "shadow-faint-pill", "kind": "shadow", "zh": "幾乎看不見的陰影", "en": "barely-there shadow",
+   "look": "淺色底上的膠囊或卡片，靠底色差與極淡的陰影分層，看起來像浮著但找不到陰影",
+   "numbers": { "css_blur_px": [11, 17], "offset_px": [16, 22], "alpha": [0.02, 0.03] },
+   "how": { "css": "box-shadow: 0 16px 14px rgba(20,40,80,.03), 0 2px 6px rgba(20,40,80,.02)" },
+   "source": [{ "ref": "rulers/google-vids.mp4", "at": 12, "lines": ["600,262,600,170", "312,350,230,350"], "measured_720p": { "css_blur_px": [11.4, 7.4], "alpha": [0.03, 0.02] } }],
+   "status": "measured",
+   "avoid": "淺色片不要用深色片的陰影數值；alpha 超過 .1 就像網頁卡片"
+  },
+  {
+   "id": "glass-frosted", "kind": "glass", "zh": "霧面玻璃", "en": "frosted glass",
+   "look": "半透明面板，後面的東西看得到、糊開，字在面板上清楚",
+   "numbers": { "opacity": 0.35, "backdrop_blur_px": [20, 40] },
+   "how": { "css": "background: rgba(255,255,255,.35); backdrop-filter: blur(24px) saturate(1.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.5)",
+            "registry": ["liquid-glass-widgets", "liquid-glass-notification", "glass-hero", "ios26-liquid-glass", "macos-tahoe-liquid-glass"],
+            "note": "liquid-glass 系列是 WebGPU；不透明度約 35% 出自 looks.md §2（film C 的質感測試）" },
+   "source": [{ "ref": "video-direction references/looks.md §2", "approved": "film C 的規則，2026-10-24" }],
+   "status": "untested",
+   "avoid": "字上不能有反光；不要做成不透明的厚玻璃（film C：像印上去的塑膠板）"
+  },
+  {
+   "id": "grain-fine", "kind": "grain", "zh": "細顆粒", "en": "fine grain",
+   "look": "整個畫面一層看不太出來的雜訊，漸層不會出現色階",
+   "numbers": { "opacity": 0.06, "grain_std": 0.8, "grain_std_note": "finish.py frame 量這層疊在 1280×720 畫面上的值（tests/finish.test.mjs）；Raycast 尺片量到 0.31" },
+   "how": { "css": ".grain { position: absolute; inset: 0; opacity: .06; pointer-events: none; background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\") }",
+            "registry": ["grain-overlay"] },
+   "source": [{ "ref": "studio 品牌套件裡核可過的元件 CSS", "approved": "film D，2026-10-27" }],
+   "status": "approved"
+  }
+ ]
+}

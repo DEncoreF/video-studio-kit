@@ -1,0 +1,17 @@
+#root { background: #f2ece0; color: #141414; font-family: 'Noto Sans TC', sans-serif; }
+.abs { position: absolute; }
+.rule { position: absolute; background: #141414; }
+.shape { position: absolute; will-change: transform; }
+.circle { border-radius: 50%; background: #d83a2b; overflow: hidden; }
+.circle .half { position: absolute; left: 0; top: 50%; width: 100%; height: 50%; background: #141414; }
+.square { background: #2a4fa3; }
+.tri { background: #f2c230; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.t-kicker { font-weight: 900; font-size: 64px; letter-spacing: 6px; color: #f2ece0; background: #141414; padding: 14px 34px 18px; }
+.t-title { font-weight: 900; font-size: 128px; line-height: 0.98; letter-spacing: -4px; }
+.t-line { font-weight: 500; font-size: 38px; line-height: 1.5; }
+.t-tag { width: 210px; height: 210px; border-radius: 50%; background: #f2c230; display: grid; place-items: center; font-weight: 900; font-size: 44px; }
+.t-num { font-weight: 900; font-size: 520px; line-height: 0.8; letter-spacing: -30px; }
+.t-label { font-weight: 900; font-size: 64px; }
+.bar { position: absolute; bottom: 160px; width: 110px; transform-origin: bottom; }
+.t-cta { font-weight: 900; font-size: 84px; letter-spacing: -1px; }
+.t-url { font-weight: 700; font-size: 40px; color: #d83a2b; letter-spacing: 1px; }

@@ -1,0 +1,6 @@
+#root { background: #f4f4f0; color: #0b0b0b; font-family: 'Noto Sans TC', sans-serif; }
+#op { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.plate { position: absolute; background: #f4f4f0; color: #0b0b0b; padding: 26px 44px 30px; }
+.plate.dark { background: #0b0b0b; color: #f4f4f0; }
+.diff { mix-blend-mode: difference; color: #f4f4f0; font-weight: 900; }

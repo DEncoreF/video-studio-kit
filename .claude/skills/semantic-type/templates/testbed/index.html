@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- Semantic-type test bed (made by semtype.mjs init). A product-page layout: the title (#title) is the only thing that
+     moves; everything with class "nb" is a neighbour that must never be touched by the effect. ?static (or the
+     data-static attribute) builds the plain layout without the effect: that is the reference the check compares with. -->
+<html lang="zh-Hant" data-resolution="landscape" data-theme="{{THEME}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <style>
+      @font-face { font-family: 'Noto Sans TC'; src: url('fonts/NotoSansTC-VF.ttf') format('truetype'); font-weight: 100 900; font-display: block; }
+      @font-face { font-family: 'Noto Serif TC'; src: url('fonts/NotoSerifTC-VF.ttf') format('truetype'); font-weight: 200 900; font-display: block; }
+      :root { --bg: #10132a; --ink: #f4f3ef; --muted: #a8a6c8; --accent: #8a7cf8; --line: rgba(255, 255, 255, 0.14); --panel: rgba(255, 255, 255, 0.045); }
+      [data-theme="light"] { --bg: #f4f3ef; --ink: #121633; --muted: #5d607a; --accent: #5b4cf0; --line: rgba(18, 22, 51, 0.14); --panel: rgba(18, 22, 51, 0.04); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--ink); font-family: 'Noto Sans TC', sans-serif; background: var(--bg); }
+      .nb { position: absolute; }
+      #dept { left: 150px; top: 250px; font-size: 28px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted); }
+      #title { position: absolute; left: 146px; top: 300px; font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 120px; line-height: 1; white-space: nowrap; color: var(--ink); }
+      #sw { left: 150px; top: 470px; font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); white-space: nowrap; }
+      #line { left: 150px; top: 540px; width: 600px; font-size: 26px; line-height: 1.6; color: var(--muted); }
+      #stamp { left: 150px; top: 720px; padding: 6px 16px; border: 2px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: 22px; font-weight: 700; transform: rotate(-3deg); }
+      #panel { left: 900px; top: 180px; width: 860px; height: 720px; border: 1px solid var(--line); border-radius: 28px; background: var(--panel); padding: 56px; display: flex; flex-direction: column; gap: 26px; }
+      #panel i { display: block; height: 18px; border-radius: 9px; background: var(--line); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{DURATION}}" data-width="1920" data-height="1080" data-fps="30">
+      <div class="nb" id="dept">{{DEPT}}</div>
+      <div id="title">{{TITLE}}</div>
+      <div class="nb" id="sw">{{SW}}</div>
+      <div class="nb" id="line">{{LINE}}</div>
+      <div class="nb" id="stamp">示意</div>
+      <div class="nb" id="panel"><i style="width:42%"></i><i style="width:88%"></i><i style="width:76%"></i><i style="width:64%"></i><i style="width:82%"></i><i style="width:52%"></i></div>
+    </div>
+    <script src="vendor/gsap.min.js"></script>
+    <script src="lib/semantic-type.js"></script>
+    <script src="effect.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true }), title = document.getElementById("title");
+        const plain = location.search.includes("static") || document.documentElement.hasAttribute("data-static");
+        // cue = the moment the key action lands (e.g. the impact); the sound cue for it goes in sfx.json
+        if (!plain && window.SEMANTIC_EFFECT) window.SEMANTIC_EFFECT({ tl, title, root: document.getElementById("root"), cue: {{CUE}}, lib: window.SemType });
+        tl.set({}, {}, {{DURATION}});
+        (window.__timelines ??= {})["main"] = tl;
+        tl.seek(0);
+      })();
+    </script>
+  </body>
+</html>

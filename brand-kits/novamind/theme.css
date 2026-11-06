@@ -1,0 +1,21 @@
+/* NovaMind brand theme — generated from brand.json */
+:root {
+  --bg: #FFFFFF;
+  --fg: #141414;
+  --muted: color-mix(in srgb, #141414 55%, #FFFFFF);
+  --surface: color-mix(in srgb, #141414 4%, #FFFFFF);
+  --border: color-mix(in srgb, #141414 18%, #FFFFFF);
+  --brand: #141414;
+  --accent: #12A39A;
+  --accent-2: color-mix(in srgb, #12A39A 35%, #FFFFFF);
+  --font-display: "Noto Serif TC", "Instrument Serif", serif;
+  --font-body: "Noto Sans TC", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 32px;
+  --dur-beat: 0.5s;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-emphasis: cubic-bezier(0.65, 0, 0.35, 1);
+}

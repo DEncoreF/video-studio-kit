@@ -1,0 +1,14 @@
+{
+  "brand": "novamind",
+  "PRODUCT": "NovaMind Enterprise",
+  "MESSAGE": "企業的 AI 用量，一張報表看清楚",
+  "KICKER": "企業級 AI 管理",
+  "TAG": "用量透明",
+  "TITLE": "每一次呼叫都有紀錄",
+  "LINE": "部門用量、成本、權限，同一個儀表板",
+  "NUM": "100%",
+  "LABEL": "呼叫可追溯",
+  "CTA": "預約 30 分鐘導入諮詢",
+  "QR": { "label": "掃碼預約" },
+  "product": "tests/fixtures/images/neutral-device.png"
+}

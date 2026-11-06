@@ -1,0 +1,14 @@
+{
+  "kestrel": {
+    "KICKER": "合作夥伴計畫",
+    "TAG": "生態系",
+    "TITLE": "一起把方案帶給客戶",
+    "LINE": "共同行銷、聯合方案、技術支援",
+    "NUM": "48",
+    "LABEL": "家夥伴已加入",
+    "CTA": "成為下一個夥伴",
+    "URL": "kestrel.example",
+    "product": "tests/fixtures/images/neutral-device.png",
+    "brand": "kestrel"
+  }
+}

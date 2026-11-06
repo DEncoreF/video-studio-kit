@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+**/renders/
+**/.media/cache/
+*.log
+.venv/
+videos/*/selection.json
+# direction previews: keep only per-video style code + shortlist; everything else is rebuilt
+videos/*/direction/*/*
+!videos/*/direction/*/style/
+!videos/*/direction/*/meta.json
+videos/*/qa/
+.claude/skills/video-skills-workspace/
+tests/.tmp/
+# semantic-type test beds and test copies: rebuilt by semtype.mjs init; each carries ~30 MB of fonts
+videos/_semantic-*/
+__pycache__/
+# graphify knowledge-graph output (rebuilt by /graphify)
+graphify-out/

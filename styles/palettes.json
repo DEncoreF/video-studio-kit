@@ -1,0 +1,630 @@
+{
+  "source": "2026-10-20 從各風格的預覽色票抽出；色票和呈現效果分開選，品牌片仍以品牌套件的顏色為準",
+  "palettes": [
+    {
+      "id": "bauhaus",
+      "zh": "包浩斯配色",
+      "colors": {
+        "bg": "#f2ece0",
+        "fg": "#141414",
+        "accents": [
+          "#d83a2b",
+          "#2a4fa3",
+          "#f2c230"
+        ]
+      },
+      "from": [
+        "bauhaus"
+      ]
+    },
+    {
+      "id": "de-stijl",
+      "zh": "風格派配色",
+      "colors": {
+        "bg": "#f4f1ea",
+        "fg": "#111111",
+        "accents": [
+          "#d4271b",
+          "#1f4fa0",
+          "#f1c40f"
+        ]
+      },
+      "from": [
+        "de-stijl"
+      ]
+    },
+    {
+      "id": "swiss",
+      "zh": "瑞士國際主義配色",
+      "colors": {
+        "bg": "#f4f3ef",
+        "fg": "#111936",
+        "accents": [
+          "#e3221b"
+        ]
+      },
+      "from": [
+        "swiss"
+      ]
+    },
+    {
+      "id": "constructivism",
+      "zh": "俄國構成主義配色",
+      "colors": {
+        "bg": "#efe6d2",
+        "fg": "#141414",
+        "accents": [
+          "#c8231b"
+        ]
+      },
+      "from": [
+        "constructivism"
+      ]
+    },
+    {
+      "id": "minimalism",
+      "zh": "極簡主義配色",
+      "colors": {
+        "bg": "#f6f5f1",
+        "fg": "#1a1a1a",
+        "accents": [
+          "#9a9a94"
+        ]
+      },
+      "from": [
+        "minimalism"
+      ]
+    },
+    {
+      "id": "art-deco",
+      "zh": "裝飾藝術配色",
+      "colors": {
+        "bg": "#101820",
+        "fg": "#e8d9a8",
+        "accents": [
+          "#c9a24a",
+          "#f1e3b4"
+        ]
+      },
+      "from": [
+        "art-deco"
+      ]
+    },
+    {
+      "id": "art-nouveau",
+      "zh": "新藝術配色",
+      "colors": {
+        "bg": "#efe7d4",
+        "fg": "#2f3b2a",
+        "accents": [
+          "#7a8f5a",
+          "#c58b5b"
+        ]
+      },
+      "from": [
+        "art-nouveau"
+      ]
+    },
+    {
+      "id": "memphis",
+      "zh": "孟菲斯配色",
+      "colors": {
+        "bg": "#fff6e9",
+        "fg": "#111111",
+        "accents": [
+          "#ff5aa5",
+          "#2ec4b6",
+          "#ffd23f",
+          "#6c63ff"
+        ]
+      },
+      "from": [
+        "memphis"
+      ]
+    },
+    {
+      "id": "neo-brutalism",
+      "zh": "新粗獷主義配色",
+      "colors": {
+        "bg": "#fff4e0",
+        "fg": "#111111",
+        "accents": [
+          "#ffe14d",
+          "#7be0ad",
+          "#c4b5fd",
+          "#ff8a5c"
+        ]
+      },
+      "from": [
+        "neo-brutalism"
+      ]
+    },
+    {
+      "id": "pop-art",
+      "zh": "普普藝術配色",
+      "colors": {
+        "bg": "#ffe600",
+        "fg": "#111111",
+        "accents": [
+          "#ff2d55",
+          "#00a8e8"
+        ]
+      },
+      "from": [
+        "pop-art"
+      ]
+    },
+    {
+      "id": "op-art",
+      "zh": "歐普藝術配色",
+      "colors": {
+        "bg": "#f4f4f0",
+        "fg": "#0b0b0b",
+        "accents": []
+      },
+      "from": [
+        "op-art"
+      ]
+    },
+    {
+      "id": "surrealism",
+      "zh": "超現實主義配色",
+      "colors": {
+        "bg": "#d7dfe8",
+        "fg": "#2b2a3a",
+        "accents": [
+          "#e9b38a",
+          "#7f9cc4"
+        ]
+      },
+      "from": [
+        "surrealism"
+      ]
+    },
+    {
+      "id": "retro-futurism",
+      "zh": "復古未來主義配色",
+      "colors": {
+        "bg": "#132a3e",
+        "fg": "#f6e7c8",
+        "accents": [
+          "#ff7a3d",
+          "#ffc857",
+          "#46b3a6"
+        ]
+      },
+      "from": [
+        "retro-futurism"
+      ]
+    },
+    {
+      "id": "vaporwave",
+      "zh": "蒸氣波配色",
+      "colors": {
+        "bg": "#1d0f3b",
+        "fg": "#ffffff",
+        "accents": [
+          "#ff71ce",
+          "#01cdfe",
+          "#b967ff"
+        ]
+      },
+      "from": [
+        "vaporwave"
+      ]
+    },
+    {
+      "id": "cyberpunk",
+      "zh": "賽博龐克配色",
+      "colors": {
+        "bg": "#07080f",
+        "fg": "#e8f7ff",
+        "accents": [
+          "#00f0ff",
+          "#ff2a6d",
+          "#f9f871"
+        ]
+      },
+      "from": [
+        "cyberpunk"
+      ]
+    },
+    {
+      "id": "y2k",
+      "zh": "Y2K 數位美學配色",
+      "colors": {
+        "bg": "#eef0ff",
+        "fg": "#1b1d3a",
+        "accents": [
+          "#b8e6ff",
+          "#ffc6e8",
+          "#c9b8ff"
+        ]
+      },
+      "from": [
+        "y2k"
+      ]
+    },
+    {
+      "id": "wabi-sabi",
+      "zh": "侘寂配色",
+      "colors": {
+        "bg": "#e9e3d8",
+        "fg": "#3b342c",
+        "accents": [
+          "#a39882",
+          "#6f6656"
+        ]
+      },
+      "from": [
+        "wabi-sabi"
+      ]
+    },
+    {
+      "id": "collage",
+      "zh": "剪紙拼貼配色",
+      "colors": {
+        "bg": "#cdb48c",
+        "fg": "#111936",
+        "accents": [
+          "#f1ece0",
+          "#725ff7",
+          "#111936"
+        ]
+      },
+      "from": [
+        "collage"
+      ]
+    },
+    {
+      "id": "claymation",
+      "zh": "黏土定格配色",
+      "colors": {
+        "bg": "#f3d9c4",
+        "fg": "#3a2a22",
+        "accents": [
+          "#ff8c69",
+          "#7fc8a9",
+          "#ffd166"
+        ]
+      },
+      "from": [
+        "claymation"
+      ]
+    },
+    {
+      "id": "low-poly",
+      "zh": "低多邊形配色",
+      "colors": {
+        "bg": "#1f2a44",
+        "fg": "#f2f4f8",
+        "accents": [
+          "#5b8def",
+          "#7fd1b9",
+          "#f2c14e"
+        ]
+      },
+      "from": [
+        "low-poly"
+      ]
+    },
+    {
+      "id": "risograph",
+      "zh": "Risograph 印刷配色",
+      "colors": {
+        "bg": "#f3efe6",
+        "fg": "#111936",
+        "accents": [
+          "#725ff7",
+          "#ff5b8a"
+        ]
+      },
+      "from": [
+        "risograph"
+      ]
+    },
+    {
+      "id": "editorial-magazine",
+      "zh": "編輯雜誌排版配色",
+      "colors": {
+        "bg": "#f5f1e8",
+        "fg": "#1b1b1b",
+        "accents": [
+          "#c2410c",
+          "#1e3a8a"
+        ]
+      },
+      "from": [
+        "editorial-magazine"
+      ]
+    },
+    {
+      "id": "kinetic-typography",
+      "zh": "動態字體配色",
+      "colors": {
+        "bg": "#111111",
+        "fg": "#f5f5f5",
+        "accents": [
+          "#ffd23f",
+          "#725ff7"
+        ]
+      },
+      "from": [
+        "kinetic-typography"
+      ]
+    },
+    {
+      "id": "newsprint",
+      "zh": "報紙頭版配色",
+      "colors": {
+        "bg": "#ecebe4",
+        "fg": "#141414",
+        "accents": [
+          "#c8231b"
+        ]
+      },
+      "from": [
+        "newsprint"
+      ]
+    },
+    {
+      "id": "big-type-poster",
+      "zh": "超大字海報配色",
+      "colors": {
+        "bg": "#f2f2ee",
+        "fg": "#0f0f0f",
+        "accents": [
+          "#ff4d2e"
+        ]
+      },
+      "from": [
+        "big-type-poster"
+      ]
+    },
+    {
+      "id": "duotone-photo",
+      "zh": "雙色調攝影配色",
+      "colors": {
+        "bg": "#1d1b4f",
+        "fg": "#ffffff",
+        "accents": [
+          "#725ff7",
+          "#ffb3c7"
+        ]
+      },
+      "from": [
+        "duotone-photo"
+      ]
+    },
+    {
+      "id": "sketchbook",
+      "zh": "手繪筆記配色",
+      "colors": {
+        "bg": "#fbf8f1",
+        "fg": "#2b2b2b",
+        "accents": [
+          "#ffe066",
+          "#725ff7"
+        ]
+      },
+      "from": [
+        "sketchbook"
+      ]
+    },
+    {
+      "id": "engraving-collage",
+      "zh": "雕版插畫拼貼配色",
+      "colors": {
+        "bg": "#efe8da",
+        "fg": "#161616",
+        "accents": [
+          "#725ff7",
+          "#e0533d"
+        ]
+      },
+      "from": [
+        "engraving-collage"
+      ]
+    },
+    {
+      "id": "linocut",
+      "zh": "木刻／麻膠版畫配色",
+      "colors": {
+        "bg": "#f1ebe0",
+        "fg": "#1a1a1a",
+        "accents": [
+          "#d94b2b"
+        ]
+      },
+      "from": [
+        "linocut"
+      ]
+    },
+    {
+      "id": "line-art",
+      "zh": "單線條插畫配色",
+      "colors": {
+        "bg": "#faf8f3",
+        "fg": "#1f1f1f",
+        "accents": [
+          "#725ff7"
+        ]
+      },
+      "from": [
+        "line-art"
+      ]
+    },
+    {
+      "id": "paper-diorama",
+      "zh": "立體紙雕配色",
+      "colors": {
+        "bg": "#f6e9d7",
+        "fg": "#2d2a26",
+        "accents": [
+          "#725ff7",
+          "#7fc8a9",
+          "#f4a259"
+        ]
+      },
+      "from": [
+        "paper-diorama"
+      ]
+    },
+    {
+      "id": "saul-bass",
+      "zh": "Saul Bass 片頭配色",
+      "colors": {
+        "bg": "#f1e6cf",
+        "fg": "#141414",
+        "accents": [
+          "#e04e2a",
+          "#725ff7"
+        ]
+      },
+      "from": [
+        "saul-bass"
+      ]
+    },
+    {
+      "id": "mid-century-modern",
+      "zh": "中世紀現代插畫配色",
+      "colors": {
+        "bg": "#f3e7cf",
+        "fg": "#2f2a24",
+        "accents": [
+          "#e0a526",
+          "#6b7f3a",
+          "#e2683c"
+        ]
+      },
+      "from": [
+        "mid-century-modern"
+      ]
+    },
+    {
+      "id": "retro-70s",
+      "zh": "70 年代復古配色",
+      "colors": {
+        "bg": "#f6e3c3",
+        "fg": "#4a2c1d",
+        "accents": [
+          "#e2711d",
+          "#f4b33d",
+          "#8c4a2f"
+        ]
+      },
+      "from": [
+        "retro-70s"
+      ]
+    },
+    {
+      "id": "ukiyo-e",
+      "zh": "浮世繪配色",
+      "colors": {
+        "bg": "#efe4cc",
+        "fg": "#1b2a41",
+        "accents": [
+          "#2e5c8a",
+          "#c0563b",
+          "#d9b26f"
+        ]
+      },
+      "from": [
+        "ukiyo-e"
+      ]
+    },
+    {
+      "id": "ink-wash",
+      "zh": "東方水墨配色",
+      "colors": {
+        "bg": "#f5f2ea",
+        "fg": "#1c1c1c",
+        "accents": [
+          "#b23a2b"
+        ]
+      },
+      "from": [
+        "ink-wash"
+      ]
+    },
+    {
+      "id": "infographic",
+      "zh": "資訊圖表動態配色",
+      "colors": {
+        "bg": "#f7f8fb",
+        "fg": "#14213d",
+        "accents": [
+          "#725ff7",
+          "#2ec4b6",
+          "#ff9f1c"
+        ]
+      },
+      "from": [
+        "infographic"
+      ]
+    },
+    {
+      "id": "blueprint",
+      "zh": "藍圖工程圖配色",
+      "colors": {
+        "bg": "#0f2a4a",
+        "fg": "#e8f1ff",
+        "accents": [
+          "#7fdbff",
+          "#725ff7"
+        ]
+      },
+      "from": [
+        "blueprint"
+      ]
+    },
+    {
+      "id": "isometric",
+      "zh": "等角插畫配色",
+      "colors": {
+        "bg": "#eef1f7",
+        "fg": "#1f2a44",
+        "accents": [
+          "#725ff7",
+          "#7fd1b9",
+          "#f2c14e"
+        ]
+      },
+      "from": [
+        "isometric"
+      ]
+    },
+    {
+      "id": "pixel-art",
+      "zh": "像素藝術配色",
+      "colors": {
+        "bg": "#1b1b2f",
+        "fg": "#f5f5f5",
+        "accents": [
+          "#ff5d8f",
+          "#3ddc97",
+          "#ffd166"
+        ]
+      },
+      "from": [
+        "pixel-art"
+      ]
+    },
+    {
+      "id": "soft-3d",
+      "zh": "軟質 3D配色",
+      "colors": {
+        "bg": "#f4eefc",
+        "fg": "#2b2440",
+        "accents": [
+          "#725ff7",
+          "#ff9ecf",
+          "#8ee3c8"
+        ]
+      },
+      "from": [
+        "soft-3d"
+      ]
+    }
+  ]
+}

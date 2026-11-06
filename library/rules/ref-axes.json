@@ -1,0 +1,81 @@
+{
+  "about": "參考卡的設計軸：每張卡在這些軸上是什麼樣子（refs.mjs card --axis 軸=值），每支片要什麼樣子（direction/axes.json）。refs.mjs match 用兩者的重疊排出最適合當這支片 seed 的參考。要加軸或值只改這個檔。 形式（form）不在訪談問：它從 seed 參考來，挑方向時一起定。",
+  "axes": {
+    "form": {
+      "zh": "形式",
+      "values": {
+        "continuous": "一鏡到底",
+        "montage": "蒙太奇",
+        "hybrid": "連續主幹加快切"
+      }
+    },
+    "pacing": {
+      "zh": "節奏",
+      "values": {
+        "slow": "慢",
+        "medium": "中",
+        "fast": "快",
+        "contrast": "快慢對比"
+      }
+    },
+    "tone": {
+      "zh": "調性",
+      "values": {
+        "calm": "沉穩",
+        "warm": "溫暖",
+        "playful": "活潑",
+        "bold": "強烈",
+        "premium": "精緻",
+        "technical": "理性"
+      }
+    },
+    "material": {
+      "zh": "材質",
+      "values": {
+        "flat": "平面",
+        "paper": "紙",
+        "glass": "玻璃",
+        "metal": "金屬",
+        "photo": "實拍",
+        "volume": "立體"
+      }
+    },
+    "space": {
+      "zh": "空間感",
+      "values": {
+        "flat": "平面",
+        "layered": "分層",
+        "deep": "縱深"
+      }
+    },
+    "camera": {
+      "zh": "鏡頭語言",
+      "values": {
+        "static": "不動",
+        "push": "推拉",
+        "pan": "平移",
+        "orbit": "環繞"
+      }
+    },
+    "text": {
+      "zh": "文字使用",
+      "values": {
+        "none": "無字",
+        "minimal": "少字",
+        "kinetic": "動態字為主",
+        "editorial": "編排感"
+      }
+    },
+    "transition": {
+      "zh": "轉場手法",
+      "values": {
+        "cut": "硬切",
+        "match": "配對剪接",
+        "wipe": "掃過",
+        "whip": "甩鏡",
+        "morph": "變形",
+        "mask": "遮罩"
+      }
+    }
+  }
+}

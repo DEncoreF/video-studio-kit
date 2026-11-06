@@ -1,0 +1,1857 @@
+{
+ "source": {
+  "what": "Higgsfield 的 Camera Controls / Motion 運鏡 preset（higgsfield.ai/camera-controls 頁面 SSR 資料，2026-10-31）",
+  "measured_by": "scripts/measure/globalmotion.py：每支 preset 的預覽片逐格做區塊比對＋相似變換擬合；預覽是 AI 生成的單一樣本，數值是方向與量級的參考，不是 Higgsfield 的參數",
+  "fields": {
+   "pan_pct": "鏡頭往右為正，累計畫面寬 %",
+   "tilt_pct": "鏡頭往下為正，累計畫面高 %",
+   "zoom": "結尾相對開頭的放大倍數",
+   "roll_deg": "累計旋轉角",
+   "t10/t50/t90": "動態累計到 10/50/90% 的時間（片長比例）",
+   "profile": "十等分的平均速度",
+   "confidence": "clear 量得清楚、weak 動很小、none 預覽幾乎沒動（只用名稱與 look）"
+  },
+  "gsap": "作用在包住整個畫面的鏡頭層（.world）；標 3d 的需要分層視差或 three.js"
+ },
+ "presets": [
+  {
+   "id": "orbit-360",
+   "en": "360 Orbit",
+   "zh": "360 環繞",
+   "category": "orbit",
+   "look": "繞主體整整一圈",
+   "gsap": "three.js 鏡頭繞 y 軸 360°，5 秒，sine.inOut；2D 只能用多張角度圖接，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -177.3,
+    "tilt_pct": 10.9,
+    "zoom": 1.096,
+    "roll_deg": 4.2,
+    "t10": 0.11,
+    "t50": 0.41,
+    "t90": 0.74,
+    "peak_at": 0.41,
+    "profile": [1.2, 1.6, 1.72, 2.31, 2.35, 1.98, 1.37, 0.99, 0.55, 0.26],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "d7c180bc-793c-4d29-83ba-c2d5e84e53d4",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/d7c180bc-793c-4d29-83ba-c2d5e84e53d4.mp4"
+   }
+  },
+  {
+   "id": "rotation-3d",
+   "en": "3D Rotation",
+   "zh": "立體旋轉",
+   "category": "rotate",
+   "look": "畫面在空間中翻轉",
+   "gsap": "rotationY/rotationZ 15–20°，perspective 1200px，power2.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -10.2,
+    "tilt_pct": -1.9,
+    "zoom": 0.937,
+    "roll_deg": 17.4,
+    "t10": 0.24,
+    "t50": 0.57,
+    "t90": 0.88,
+    "peak_at": 0.54,
+    "profile": [0.0, 0.34, 0.93, 0.73, 0.92, 1.96, 1.22, 0.89, 1.09, 0.64],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "6f06f47e-922e-4660-9fe9-754e4be69696",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/6f06f47e-922e-4660-9fe9-754e4be69696.mp4"
+   }
+  },
+  {
+   "id": "aerial-pullback",
+   "en": "Aerial Pullback",
+   "zh": "空拍後拉",
+   "category": "vehicle",
+   "look": "從主體往後往上飛開，露出大場景",
+   "gsap": "scale 4.5→1 + y，前 30% 最快，power2.out，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.04,
+    "pan_pct": -19.8,
+    "tilt_pct": 10.8,
+    "zoom": 0.214,
+    "roll_deg": -13.3,
+    "t10": 0.11,
+    "t50": 0.39,
+    "t90": 0.84,
+    "peak_at": 0.27,
+    "profile": [1.53, 2.06, 2.64, 2.49, 1.74, 1.58, 1.39, 1.32, 1.18, 1.02],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "a0bfa1b6-2dc7-4bbe-889f-fc04c27288ba",
+    "families": ["kling"],
+    "preview": "https://cdn.higgsfield.ai/kling_motion/a6fc0f13-7d44-4fd7-b6ca-1f27254bf62e.mp4"
+   }
+  },
+  {
+   "id": "arc-left",
+   "en": "Arc Left",
+   "zh": "左弧繞",
+   "category": "orbit",
+   "look": "繞著主體往左走一段弧",
+   "gsap": "主體 rotationY 0→-25° + 背景 x 位移（視差），後段加速，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 10.0,
+    "tilt_pct": -0.3,
+    "zoom": 0.791,
+    "roll_deg": -9.2,
+    "t10": 0.23,
+    "t50": 0.8,
+    "t90": 0.95,
+    "peak_at": 0.89,
+    "profile": [0.11, 0.37, 0.33, 0.22, 0.27, 0.27, 0.38, 0.93, 1.54, 1.32],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "2a5d8f86-aef3-4b34-b5ee-fb2020daa131",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/2a5d8f86-aef3-4b34-b5ee-fb2020daa131.mp4"
+   }
+  },
+  {
+   "id": "arc-right",
+   "en": "Arc Right",
+   "zh": "右弧繞",
+   "category": "orbit",
+   "look": "繞著主體往右走一段弧",
+   "gsap": "鏡像 arc-left，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 14.7,
+    "tilt_pct": 0.1,
+    "zoom": 0.713,
+    "roll_deg": 23.2,
+    "t10": 0.13,
+    "t50": 0.68,
+    "t90": 0.94,
+    "peak_at": 0.95,
+    "profile": [0.47, 0.45, 0.4, 0.29, 0.33, 0.71, 0.84, 0.89, 1.17, 1.13],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "0bdbf318-f918-4f9b-829a-74cab681d806",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/0bdbf318-f918-4f9b-829a-74cab681d806.mp4"
+   }
+  },
+  {
+   "id": "bts",
+   "en": "BTS",
+   "zh": "幕後花絮",
+   "category": "other",
+   "look": "幕後花絮式手持拉開",
+   "gsap": "scale 2.8→1 拉開露出劇組 + 手持晃",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": -2.7,
+    "tilt_pct": 4.2,
+    "zoom": 0.355,
+    "roll_deg": 1.6,
+    "t10": 0.38,
+    "t50": 0.62,
+    "t90": 0.91,
+    "peak_at": 0.52,
+    "profile": [0.07, 0.08, 0.26, 0.63, 1.24, 1.71, 1.22, 1.14, 1.31, 0.98]
+   },
+   "higgsfield": {
+    "id": "b779cfda-9624-4f61-80bc-f5d0461f3959",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/46c18815-5523-4dd9-ab09-113416a090ec.mp4"
+   }
+  },
+  {
+   "id": "buckle-up",
+   "en": "Buckle Up",
+   "zh": "繫好安全帶",
+   "category": "vehicle",
+   "look": "一開頭猛然急停或急衝，之後穩住",
+   "gsap": "scale 1.5→1 + y 衝擊，開頭 0.2 秒，back.out",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 4.0,
+    "pan_pct": -8.0,
+    "tilt_pct": -12.7,
+    "zoom": 0.673,
+    "roll_deg": -1.9,
+    "t10": 0.05,
+    "t50": 0.34,
+    "t90": 0.86,
+    "peak_at": 0.06,
+    "profile": [1.51, 1.49, 0.98, 1.07, 0.7, 0.8, 0.57, 0.69, 0.61, 0.76]
+   },
+   "higgsfield": {
+    "id": "4ef72175-227a-418b-923d-2831dcdf7d4f",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/4ef72175-227a-418b-923d-2831dcdf7d4f.mp4"
+   }
+  },
+  {
+   "id": "bullet-time",
+   "en": "Bullet Time",
+   "zh": "子彈時間",
+   "category": "time",
+   "look": "時間幾乎凍結，鏡頭繞著主體走",
+   "gsap": "主體動作 timeScale 0.05；鏡頭弧繞（arc），3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 70.0,
+    "tilt_pct": 2.6,
+    "zoom": 1.031,
+    "roll_deg": -17.6,
+    "t10": 0.15,
+    "t50": 0.53,
+    "t90": 0.91,
+    "peak_at": 0.61,
+    "profile": [0.43, 0.65, 0.73, 0.71, 0.83, 0.8, 0.79, 0.7, 0.75, 0.86],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "9312c53a-f191-4aab-94fb-6b1dbdfdc946",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/9312c53a-f191-4aab-94fb-6b1dbdfdc946.mp4"
+   }
+  },
+  {
+   "id": "car-chasing",
+   "en": "Car Chasing",
+   "zh": "追車",
+   "category": "vehicle",
+   "look": "跟著車輛高速移動",
+   "gsap": "背景層連續 x 捲動 + 微晃，主體固定",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -19.3,
+    "tilt_pct": -5.5,
+    "zoom": 0.33,
+    "roll_deg": 20.5,
+    "t10": 0.21,
+    "t50": 0.62,
+    "t90": 0.97,
+    "peak_at": 0.98,
+    "profile": [0.55, 0.65, 1.02, 1.55, 1.33, 1.19, 0.73, 1.43, 1.5, 3.04]
+   },
+   "higgsfield": {
+    "id": "a76f2e99-0a41-4fdf-934d-9c95b0ee85bf",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/a76f2e99-0a41-4fdf-934d-9c95b0ee85bf.mp4"
+   }
+  },
+  {
+   "id": "car-grip",
+   "en": "Car Grip",
+   "zh": "車身固定",
+   "category": "vehicle",
+   "look": "鏡頭鎖在車上，車和鏡頭一起動",
+   "gsap": "主體固定；背景層捲動 + 路面震動 y ±0.3%",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.06,
+    "pan_pct": -0.5,
+    "tilt_pct": 1.0,
+    "zoom": 0.786,
+    "roll_deg": 0.7,
+    "t10": 0.11,
+    "t50": 0.41,
+    "t90": 0.86,
+    "peak_at": 0.34,
+    "profile": [0.39, 0.56, 0.55, 0.73, 0.5, 0.29, 0.24, 0.53, 0.62, 0.29]
+   },
+   "higgsfield": {
+    "id": "d4c62a9d-df77-4222-af4e-5645b81844e0",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/d4c62a9d-df77-4222-af4e-5645b81844e0.mp4"
+   }
+  },
+  {
+   "id": "crane-down",
+   "en": "Crane Down",
+   "zh": "降鏡",
+   "category": "vertical",
+   "look": "鏡頭整台往下降",
+   "gsap": "鏡像 crane-up，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": -0.7,
+    "tilt_pct": -0.0,
+    "zoom": 0.972,
+    "roll_deg": 2.3,
+    "t10": 0.23,
+    "t50": 0.58,
+    "t90": 0.73,
+    "peak_at": 0.68,
+    "profile": [0.02, 0.03, 0.05, 0.01, 0.08, 0.11, 0.12, 0.09, 0.01, 0.0],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "494db3c2-2297-4cf7-bef7-cba0cebe73ee",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/494db3c2-2297-4cf7-bef7-cba0cebe73ee.mp4"
+   }
+  },
+  {
+   "id": "crane-over-the-head",
+   "en": "Crane Over The Head",
+   "zh": "過頭升鏡",
+   "category": "vertical",
+   "look": "從主角面前升起越過頭頂往下看",
+   "gsap": "y 一個畫面高以上 + rotationX 0→60°，前 10% 最快，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.38,
+    "pan_pct": 0.7,
+    "tilt_pct": 115.5,
+    "zoom": 1.129,
+    "roll_deg": -6.2,
+    "t10": 0.05,
+    "t50": 0.21,
+    "t90": 0.85,
+    "peak_at": 0.09,
+    "profile": [4.62, 4.4, 2.42, 1.32, 1.19, 1.08, 1.03, 1.03, 1.09, 1.52],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "f77584f2-7442-4128-91b5-095829b108c7",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/f77584f2-7442-4128-91b5-095829b108c7.mp4"
+   }
+  },
+  {
+   "id": "crane-up",
+   "en": "Crane Up",
+   "zh": "升鏡",
+   "category": "vertical",
+   "look": "鏡頭整台往上升",
+   "gsap": "y 往下移 25–30%，前景層移更多，power1.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 2.5,
+    "tilt_pct": -28.0,
+    "zoom": 0.849,
+    "roll_deg": -5.6,
+    "t10": 0.19,
+    "t50": 0.54,
+    "t90": 0.86,
+    "peak_at": 0.53,
+    "profile": [0.22, 0.29, 0.34, 0.48, 0.73, 0.78, 0.66, 0.56, 0.45, 0.31],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "45d7f47f-2c7b-4c5e-84b7-943758a39dcc",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/2da63d27-94e0-48e0-8e2e-936274bd176e.mp4"
+   }
+  },
+  {
+   "id": "crash-zoom-in",
+   "en": "Crash Zoom In",
+   "zh": "急推",
+   "category": "zoom",
+   "look": "一瞬間猛推到臉上再停住",
+   "gsap": "scale 1→3，0.3–0.4 秒，expo.out，前 20% 內完成，之後停；加 2–3 格動態模糊",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.06,
+    "pan_pct": 23.4,
+    "tilt_pct": -21.9,
+    "zoom": 3.174,
+    "roll_deg": -0.2,
+    "t10": 0.06,
+    "t50": 0.16,
+    "t90": 0.64,
+    "peak_at": 0.16,
+    "profile": [4.39, 12.48, 3.42, 0.3, 0.38, 1.48, 0.4, 1.13, 0.75, 0.41]
+   },
+   "higgsfield": {
+    "id": "a2dddb76-03fa-429e-9905-577bffdf9d38",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/a2dddb76-03fa-429e-9905-577bffdf9d38.mp4"
+   }
+  },
+  {
+   "id": "crash-zoom-out",
+   "en": "Crash Zoom Out",
+   "zh": "急拉",
+   "category": "zoom",
+   "look": "一瞬間從近景猛拉到遠景",
+   "gsap": "scale 3→1（量到 ×0.08），0.3 秒，expo.out，在 20% 處",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -6.1,
+    "tilt_pct": 25.8,
+    "zoom": 0.084,
+    "roll_deg": 1.2,
+    "t10": 0.21,
+    "t50": 0.42,
+    "t90": 0.9,
+    "peak_at": 0.22,
+    "profile": [0.01, 0.85, 7.38, 0.87, 1.8, 1.15, 1.41, 2.01, 1.63, 1.96]
+   },
+   "higgsfield": {
+    "id": "3972c090-a448-4fd4-b8f0-cb71b4b523ee",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/3972c090-a448-4fd4-b8f0-cb71b4b523ee.mp4"
+   }
+  },
+  {
+   "id": "dolly-in",
+   "en": "Dolly In",
+   "zh": "推軌前進",
+   "category": "push-pull",
+   "look": "鏡頭慢慢往前推近主體",
+   "gsap": "scale 1→1.15–1.25，4–5 秒，power1.inOut；要視差就分前後景層，近層多推",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.04,
+    "pan_pct": -1.2,
+    "tilt_pct": -3.4,
+    "zoom": 1.235,
+    "roll_deg": -1.2,
+    "t10": 0.13,
+    "t50": 0.52,
+    "t90": 0.87,
+    "peak_at": 0.67,
+    "profile": [0.19, 0.33, 0.3, 0.33, 0.34, 0.33, 0.37, 0.33, 0.33, 0.25]
+   },
+   "higgsfield": {
+    "id": "8d582076-10e2-40f7-bbef-6384532147c2",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://cdn.higgsfield.ai/wan2_5_motion/e42c01f2-ff4a-431b-82f1-87dba12b3082.mp4"
+   }
+  },
+  {
+   "id": "dolly-left",
+   "en": "Dolly Left",
+   "zh": "左橫移",
+   "category": "lateral",
+   "look": "鏡頭往左平移，前後景有視差",
+   "gsap": "x 往右移 15–20%（畫面內容右移），前景層移更多，power1.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -16.4,
+    "tilt_pct": 1.0,
+    "zoom": 0.621,
+    "roll_deg": -5.9,
+    "t10": 0.51,
+    "t50": 0.74,
+    "t90": 0.94,
+    "peak_at": 0.83,
+    "profile": [0.0, 0.0, 0.01, 0.08, 0.34, 0.69, 0.83, 0.97, 0.99, 0.86],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "b03fa9e3-8e69-4fa2-bcc2-b18e362f9fba",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/b03fa9e3-8e69-4fa2-bcc2-b18e362f9fba.mp4"
+   }
+  },
+  {
+   "id": "dolly-out",
+   "en": "Dolly Out",
+   "zh": "推軌後退",
+   "category": "push-pull",
+   "look": "鏡頭慢慢往後拉開",
+   "gsap": "scale 1.2→1，4–5 秒，power1.inOut",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.04,
+    "pan_pct": -0.9,
+    "tilt_pct": -3.4,
+    "zoom": 0.89,
+    "roll_deg": 0.0,
+    "t10": 0.23,
+    "t50": 0.61,
+    "t90": 0.86,
+    "peak_at": 0.85,
+    "profile": [0.07, 0.08, 0.09, 0.11, 0.25, 0.25, 0.24, 0.21, 0.39, 0.09]
+   },
+   "higgsfield": {
+    "id": "c1a8c847-4ea8-4d31-9cec-ef62897a2d17",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://cdn.higgsfield.ai/wan2_5_motion/787d00f6-67ae-4595-afe0-247ffe6ac45d.mp4"
+   }
+  },
+  {
+   "id": "dolly-right",
+   "en": "Dolly Right",
+   "zh": "右橫移",
+   "category": "lateral",
+   "look": "鏡頭往右平移，前後景有視差",
+   "gsap": "鏡像 dolly-left，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 16.4,
+    "tilt_pct": -0.0,
+    "zoom": 0.831,
+    "roll_deg": 7.9,
+    "t10": 0.3,
+    "t50": 0.57,
+    "t90": 0.89,
+    "peak_at": 0.56,
+    "profile": [0.08, 0.06, 0.2, 0.38, 0.55, 0.53, 0.48, 0.37, 0.31, 0.27],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "22f946c2-ed60-44bf-bca3-2be92c07d261",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/17a8f1d4-88a4-4bb5-a662-c28e8ea7d023.mp4"
+   }
+  },
+  {
+   "id": "dolly-zoom-in",
+   "en": "Dolly Zoom In",
+   "zh": "滑動變焦（推）",
+   "category": "lens",
+   "look": "主體大小不變，背景往前壓近（Vertigo 效果）",
+   "gsap": "主體層固定；背景層 scale 1→1.3，4 秒，power1.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.6,
+    "pan_pct": 0.7,
+    "tilt_pct": -6.5,
+    "zoom": 0.635,
+    "roll_deg": -1.5,
+    "t10": 0.11,
+    "t50": 0.53,
+    "t90": 0.91,
+    "peak_at": 0.85,
+    "profile": [0.87, 1.01, 1.04, 1.01, 1.06, 1.01, 1.1, 1.18, 1.31, 1.14],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "114245a3-93fb-434a-9299-44ca9e4656a3",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/7d1c4551-e7cb-4728-b473-6b0b85f82b44.mp4"
+   }
+  },
+  {
+   "id": "dolly-zoom-out",
+   "en": "Dolly Zoom Out",
+   "zh": "滑動變焦（拉）",
+   "category": "lens",
+   "look": "主體大小不變，背景往後退開",
+   "gsap": "主體層固定；背景層 scale 1.3→1，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "none",
+    "seconds": 5.37,
+    "pan_pct": -0.0,
+    "tilt_pct": -0.1,
+    "zoom": 1.003,
+    "roll_deg": 0.2,
+    "t10": 0.16,
+    "t50": 0.55,
+    "t90": 0.67,
+    "peak_at": 0.59,
+    "profile": [0.0, 0.0, 0.0, 0.01, 0.0, 0.01, 0.01, 0.0, 0.0, 0.0],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "e057dbd5-1734-4462-bb4c-7d64fe20795e",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/e057dbd5-1734-4462-bb4c-7d64fe20795e.mp4"
+   }
+  },
+  {
+   "id": "double-dolly",
+   "en": "Double Dolly",
+   "zh": "雙段推進",
+   "category": "push-pull",
+   "look": "推一段、停一下、再推一段",
+   "gsap": "兩段 scale ×1.1，中間停 0.4–0.6 秒",
+   "needs3d": false,
+   "measured": {
+    "confidence": "none",
+    "seconds": 5.37,
+    "pan_pct": 0.1,
+    "tilt_pct": 0.8,
+    "zoom": 1.007,
+    "roll_deg": 1.4,
+    "t10": 0.24,
+    "t50": 0.75,
+    "t90": 0.94,
+    "peak_at": 0.78,
+    "profile": [0.01, 0.03, 0.02, 0.02, 0.03, 0.03, 0.03, 0.07, 0.09, 0.06]
+   },
+   "higgsfield": {
+    "id": "e522bff4-da3b-4f7d-8c6e-f925b60979c5",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/e522bff4-da3b-4f7d-8c6e-f925b60979c5.mp4"
+   }
+  },
+  {
+   "id": "dutch-angle",
+   "en": "Dutch Angle",
+   "zh": "傾斜鏡頭",
+   "category": "rotate",
+   "look": "鏡頭慢慢歪斜，構圖不安",
+   "gsap": "rotation 0→-7–15°，3 秒，power1.inOut，停住",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 0.4,
+    "tilt_pct": -7.2,
+    "zoom": 0.942,
+    "roll_deg": -15.7,
+    "t10": 0.05,
+    "t50": 0.25,
+    "t90": 0.59,
+    "peak_at": 0.11,
+    "profile": [0.64, 0.69, 0.66, 0.52, 0.3, 0.21, 0.1, 0.06, 0.15, 0.01]
+   },
+   "higgsfield": {
+    "id": "b593944e-ae3e-47ce-8c6d-ea8dd87fe01f",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/28a18555-b8ed-4cac-aad6-40ecaaad9345.mp4"
+   }
+  },
+  {
+   "id": "eating-zoom",
+   "en": "Eating Zoom",
+   "zh": "吃東西推近",
+   "category": "push-pull",
+   "look": "主角吃東西時推近嘴邊",
+   "gsap": "transformOrigin 在嘴，scale 1→1.5 搭配咬下那一格，power2.out",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": 9.7,
+    "tilt_pct": -8.8,
+    "zoom": 1.001,
+    "roll_deg": -9.3,
+    "t10": 0.04,
+    "t50": 0.32,
+    "t90": 0.68,
+    "peak_at": 0.06,
+    "profile": [2.29, 0.54, 1.14, 0.75, 0.97, 0.87, 0.85, 0.51, 0.04, 0.15]
+   },
+   "higgsfield": {
+    "id": "f61ad61c-e2fc-4452-bcf2-91499c865241",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/80da2f09-dfce-4b5e-b3ed-92f9c6e1dde9.mp4"
+   }
+  },
+  {
+   "id": "eyes-in",
+   "en": "Eyes In",
+   "zh": "推進眼睛",
+   "category": "push-pull",
+   "look": "一路推到眼睛的大特寫",
+   "gsap": "transformOrigin 設在眼睛，scale 1→15+，5 秒，power2.in",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.04,
+    "pan_pct": 46.2,
+    "tilt_pct": -44.3,
+    "zoom": 18.563,
+    "roll_deg": 1.1,
+    "t10": 0.18,
+    "t50": 0.62,
+    "t90": 0.88,
+    "peak_at": 0.69,
+    "profile": [1.43, 2.07, 2.4, 2.97, 3.19, 3.31, 5.19, 4.78, 4.5, 2.86]
+   },
+   "higgsfield": {
+    "id": "3afdf962-2709-44a9-a41c-6565e6998529",
+    "families": ["wan2_5_video"],
+    "preview": "https://cdn.higgsfield.ai/wan2_5_motion/c5736a3e-0a77-45d7-8619-0b2868cb5231.mp4"
+   }
+  },
+  {
+   "id": "fisheye",
+   "en": "Fisheye",
+   "zh": "魚眼",
+   "category": "lens",
+   "look": "超廣角鼓起變形",
+   "gsap": "SVG/WebGL barrel distortion shader，搭配 y 移動",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.6,
+    "pan_pct": 0.7,
+    "tilt_pct": -38.6,
+    "zoom": 1.081,
+    "roll_deg": 7.9,
+    "t10": 0.17,
+    "t50": 0.43,
+    "t90": 0.89,
+    "peak_at": 0.47,
+    "profile": [0.66, 1.49, 2.21, 2.39, 2.67, 2.04, 0.66, 0.58, 0.73, 1.35],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "6c689fc3-e421-4ed5-892c-2092d1c60be0",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/6c689fc3-e421-4ed5-892c-2092d1c60be0.mp4"
+   }
+  },
+  {
+   "id": "flying-cam-transition",
+   "en": "Flying Cam Transition",
+   "zh": "飛行轉場",
+   "category": "transition",
+   "look": "鏡頭飛過門洞連到下一個場景",
+   "gsap": "scale 1→40 穿過門洞，在洞口換場，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 8.04,
+    "pan_pct": -21.9,
+    "tilt_pct": 5.2,
+    "zoom": 45.916,
+    "roll_deg": -8.1,
+    "t10": 0.33,
+    "t50": 0.57,
+    "t90": 0.87,
+    "peak_at": 0.49,
+    "profile": [0.09, 0.69, 1.14, 1.17, 4.85, 4.85, 3.57, 2.61, 2.17, 1.77],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "e43378b9-b20b-4158-a626-745bbbcacdbd",
+    "families": ["kling"],
+    "preview": "https://cdn.higgsfield.ai/kling_motion/ecb6fc91-c4df-4133-95da-5e53108a7c6f.mp4"
+   }
+  },
+  {
+   "id": "focus-change",
+   "en": "Focus Change",
+   "zh": "移焦",
+   "category": "lens",
+   "look": "焦點從一個主體換到另一個",
+   "gsap": "前景 blur 0→8px、後景 8→0px，0.8 秒；鏡頭小移",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 19.2,
+    "tilt_pct": -0.2,
+    "zoom": 1.012,
+    "roll_deg": 4.0,
+    "t10": 0.35,
+    "t50": 0.77,
+    "t90": 0.95,
+    "peak_at": 0.76,
+    "profile": [0.01, 0.08, 0.15, 0.1, 0.18, 0.15, 0.36, 0.65, 0.64, 0.65],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "390e084a-4a80-410b-a808-77411828c61d",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/390e084a-4a80-410b-a808-77411828c61d.mp4"
+   }
+  },
+  {
+   "id": "fpv-drone",
+   "en": "FPV Drone",
+   "zh": "穿越機",
+   "category": "vehicle",
+   "look": "高速前衝、傾斜轉彎的無人機視角",
+   "gsap": "scale 持續推 + x 大幅橫移 + rotation ±5° banking，越飛越快，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.0,
+    "pan_pct": -49.1,
+    "tilt_pct": -7.2,
+    "zoom": 0.709,
+    "roll_deg": -5.1,
+    "t10": 0.33,
+    "t50": 0.62,
+    "t90": 0.95,
+    "peak_at": 0.97,
+    "profile": [0.04, 0.34, 1.3, 2.31, 2.85, 3.26, 2.95, 2.21, 2.38, 3.83],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "5eb82f94-2b98-4e4a-ab4b-ee6c872fb2c7",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/5eb82f94-2b98-4e4a-ab4b-ee6c872fb2c7.mp4"
+   }
+  },
+  {
+   "id": "general",
+   "en": "General",
+   "zh": "通用",
+   "category": "other",
+   "look": "Higgsfield 的預設通用運動",
+   "gsap": "依場景自由推移",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 2.1,
+    "tilt_pct": 6.3,
+    "zoom": 0.306,
+    "roll_deg": -0.4,
+    "t10": 0.28,
+    "t50": 0.55,
+    "t90": 0.89,
+    "peak_at": 0.49,
+    "profile": [0.39, 0.25, 0.38, 1.42, 1.61, 1.38, 1.35, 1.09, 0.99, 0.92]
+   },
+   "higgsfield": {
+    "id": "d2389a9a-91c2-4276-bc9c-c9e35e8fb85a",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/d2389a9a-91c2-4276-bc9c-c9e35e8fb85a.mp4"
+   }
+  },
+  {
+   "id": "glam",
+   "en": "Glam",
+   "zh": "時尚感",
+   "category": "other",
+   "look": "時尚片式的慢推＋光感",
+   "gsap": "scale 1→1.03 慢推 + 柔光",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -0.4,
+    "tilt_pct": -6.1,
+    "zoom": 0.941,
+    "roll_deg": -4.3,
+    "t10": 0.02,
+    "t50": 0.13,
+    "t90": 0.3,
+    "peak_at": 0.01,
+    "profile": [0.54, 0.47, 0.23, 0.07, 0.03, 0.02, 0.01, 0.0, 0.01, 0.01]
+   },
+   "higgsfield": {
+    "id": "ae4a319d-a06f-4b30-8b67-55a35a22f24a",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/5763f4ec-ea6b-449d-9509-4596962668a8.mp4"
+   }
+  },
+  {
+   "id": "handheld",
+   "en": "Handheld",
+   "zh": "手持",
+   "category": "body",
+   "look": "輕微不規則晃動，像人拿著拍",
+   "gsap": "x/y ±0.4%、rotation ±0.3° 低頻雜訊（CustomWiggle 2–3 Hz）",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.6,
+    "pan_pct": -1.0,
+    "tilt_pct": 1.7,
+    "zoom": 0.997,
+    "roll_deg": -0.3,
+    "t10": 0.08,
+    "t50": 0.51,
+    "t90": 0.91,
+    "peak_at": 0.6,
+    "profile": [0.94, 0.73, 0.77, 1.0, 0.84, 0.95, 1.13, 0.77, 0.97, 1.06]
+   },
+   "higgsfield": {
+    "id": "36e6e450-52d9-484f-bfbe-f069e06a1530",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/36e6e450-52d9-484f-bfbe-f069e06a1530.mp4"
+   }
+  },
+  {
+   "id": "head-tracking",
+   "en": "Head Tracking",
+   "zh": "跟頭",
+   "category": "body",
+   "look": "鏡頭跟著主角的頭，臉保持在同一位置",
+   "gsap": "反向抵銷主體位移：.world x/y = -主體位移",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.04,
+    "pan_pct": -3.4,
+    "tilt_pct": -2.8,
+    "zoom": 1.034,
+    "roll_deg": 0.4,
+    "t10": 0.16,
+    "t50": 0.56,
+    "t90": 0.91,
+    "peak_at": 0.71,
+    "profile": [0.7, 0.81, 1.47, 1.02, 1.1, 1.13, 1.56, 1.32, 1.28, 1.37]
+   },
+   "higgsfield": {
+    "id": "fe520e06-7971-4f28-9e10-e45911c57bb6",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/fe520e06-7971-4f28-9e10-e45911c57bb6.mp4"
+   }
+  },
+  {
+   "id": "hero-cam",
+   "en": "Hero Cam",
+   "zh": "英雄鏡頭",
+   "category": "orbit",
+   "look": "仰角繞到主角正面，光線一起改變",
+   "gsap": "大幅 x 弧繞 + scale ×2.7 + 光線漸亮，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": -145.5,
+    "tilt_pct": -29.2,
+    "zoom": 2.751,
+    "roll_deg": -17.4,
+    "t10": 0.12,
+    "t50": 0.43,
+    "t90": 0.84,
+    "peak_at": 0.38,
+    "profile": [5.81, 6.7, 10.18, 10.25, 7.99, 8.51, 6.96, 6.37, 5.53, 4.69],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "a8c54413-c991-416a-8ac8-32c6a42caa6c",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/11c6d46d-0a52-407a-8823-ba1e498c2638.mp4"
+   }
+  },
+  {
+   "id": "hyperlapse",
+   "en": "Hyperlapse",
+   "zh": "移動縮時",
+   "category": "time",
+   "look": "鏡頭移動中的縮時",
+   "gsap": "背景快速變化 + 鏡頭等速推/移",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.27,
+    "pan_pct": -0.8,
+    "tilt_pct": -1.6,
+    "zoom": 1.157,
+    "roll_deg": 0.8,
+    "t10": 0.08,
+    "t50": 0.34,
+    "t90": 0.86,
+    "peak_at": 0.33,
+    "profile": [0.27, 0.4, 0.26, 0.4, 0.17, 0.16, 0.15, 0.14, 0.22, 0.14],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "f0f07997-34fe-4bef-84c1-ee9d4da94a1a",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/2dec4bb0-5d8d-4a2d-bd9f-242ec613a9fb.mp4"
+   }
+  },
+  {
+   "id": "incline",
+   "en": "Incline",
+   "zh": "斜升",
+   "category": "vertical",
+   "look": "沿斜線慢慢移動",
+   "gsap": "x/y 斜線位移 5%，中段最快，sine.inOut",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 5.4,
+    "tilt_pct": 0.6,
+    "zoom": 1.197,
+    "roll_deg": 0.2,
+    "t10": 0.2,
+    "t50": 0.25,
+    "t90": 0.49,
+    "peak_at": 0.21,
+    "profile": [0.0, 0.19, 1.56, 0.29, 0.23, 0.11, 0.03, 0.05, 0.0, 0.0]
+   },
+   "higgsfield": {
+    "id": "b120f292-74e3-4878-817b-626e203f8a92",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/342d9ac9-ecd1-4c7b-a3a2-ac6e3423d302.mp4"
+   }
+  },
+  {
+   "id": "jib-down",
+   "en": "Jib down",
+   "zh": "搖臂下降",
+   "category": "vertical",
+   "look": "搖臂把鏡頭放低",
+   "gsap": "y 上移 50%，峰值在 50%，power1.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": 1.5,
+    "tilt_pct": 48.8,
+    "zoom": 1.122,
+    "roll_deg": -8.5,
+    "t10": 0.31,
+    "t50": 0.6,
+    "t90": 0.91,
+    "peak_at": 0.52,
+    "profile": [0.1, 0.08, 0.33, 0.49, 0.97, 0.93, 0.77, 0.74, 0.74, 0.75],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "4e2318ed-572e-4d5a-bcf9-7e70e4755a52",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/bd55056c-3362-4c37-8209-3560422d1672.mp4"
+   }
+  },
+  {
+   "id": "jib-down-2",
+   "en": "Jib Down",
+   "zh": "搖臂下降（大幅）",
+   "category": "vertical",
+   "look": "大幅下降，畫面經過兩個多畫面高",
+   "gsap": "y 上移 2 個畫面高，峰值在 40%，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 0.6,
+    "tilt_pct": 228.7,
+    "zoom": 0.984,
+    "roll_deg": -19.4,
+    "t10": 0.19,
+    "t50": 0.44,
+    "t90": 0.7,
+    "peak_at": 0.41,
+    "profile": [0.55, 1.59, 2.77, 3.6, 5.01, 3.45, 2.07, 1.29, 0.72, 0.22],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "2057206c-09ef-40b2-9cc9-049e41a0b8bb",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/2057206c-09ef-40b2-9cc9-049e41a0b8bb.mp4"
+   }
+  },
+  {
+   "id": "jib-up",
+   "en": "Jib up",
+   "zh": "搖臂上升",
+   "category": "vertical",
+   "look": "搖臂把鏡頭抬高並略帶斜移",
+   "gsap": "y 下移 45% + x 斜移，前 25% 最快，power2.out，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": 52.0,
+    "tilt_pct": -45.0,
+    "zoom": 1.254,
+    "roll_deg": -8.3,
+    "t10": 0.09,
+    "t50": 0.39,
+    "t90": 0.81,
+    "peak_at": 0.25,
+    "profile": [0.97, 1.05, 1.46, 0.91, 0.78, 0.73, 0.77, 0.63, 0.56, 0.53],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "30a7fe68-0967-419a-b7cb-0d0bed480b09",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/3f28e537-56b1-4f21-91e5-144f82d50dfb.mp4"
+   }
+  },
+  {
+   "id": "jib-up-2",
+   "en": "Jib Up",
+   "zh": "搖臂上升（慢）",
+   "category": "vertical",
+   "look": "慢慢抬高，最後微推",
+   "gsap": "scale 1→1.2 + 小幅 y，峰值在 70%，power2.in",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": 3.4,
+    "tilt_pct": -0.2,
+    "zoom": 1.203,
+    "roll_deg": -0.3,
+    "t10": 0.16,
+    "t50": 0.7,
+    "t90": 0.92,
+    "peak_at": 0.71,
+    "profile": [0.09, 0.15, 0.1, 0.09, 0.09, 0.14, 0.24, 0.35, 0.33, 0.22]
+   },
+   "higgsfield": {
+    "id": "d6b43086-d5d1-415b-a239-016698b425d7",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/d6b43086-d5d1-415b-a239-016698b425d7.mp4"
+   }
+  },
+  {
+   "id": "lazy-susan",
+   "en": "Lazy Susan",
+   "zh": "轉盤",
+   "category": "orbit",
+   "look": "主體像在轉盤上自轉、鏡頭不動",
+   "gsap": "主體 rotationY 連續轉，背景不動，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -29.1,
+    "tilt_pct": -2.4,
+    "zoom": 0.367,
+    "roll_deg": -30.0,
+    "t10": 0.18,
+    "t50": 0.57,
+    "t90": 0.88,
+    "peak_at": 0.8,
+    "profile": [0.66, 0.91, 2.08, 1.55, 1.47, 1.02, 1.36, 2.06, 2.47, 1.18],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "025866ff-677c-4af2-92ef-52d6ec3b035e",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/025866ff-677c-4af2-92ef-52d6ec3b035e.mp4"
+   }
+  },
+  {
+   "id": "low-shutter",
+   "en": "Low Shutter",
+   "zh": "慢快門",
+   "category": "lens",
+   "look": "低快門的拖影、光軌",
+   "gsap": "動態物件加 3–5 格殘影（疊前幾格降透明）",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 5.2,
+    "tilt_pct": -10.9,
+    "zoom": 0.73,
+    "roll_deg": -1.4,
+    "t10": 0.12,
+    "t50": 0.5,
+    "t90": 0.92,
+    "peak_at": 0.12,
+    "profile": [0.32, 0.89, 0.42, 0.37, 0.51, 0.44, 0.33, 0.52, 0.57, 0.59],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "f7949a2f-2bcd-459a-96c0-80eb222abcdc",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/f7949a2f-2bcd-459a-96c0-80eb222abcdc.mp4"
+   }
+  },
+  {
+   "id": "mouth-in",
+   "en": "Mouth In",
+   "zh": "推進嘴巴",
+   "category": "push-pull",
+   "look": "推到嘴巴大特寫",
+   "gsap": "transformOrigin 在嘴，scale 1→5.7，前 20–40% 最快，power2.out",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 6.33,
+    "pan_pct": 7.5,
+    "tilt_pct": 27.9,
+    "zoom": 5.753,
+    "roll_deg": 5.0,
+    "t10": 0.15,
+    "t50": 0.4,
+    "t90": 0.85,
+    "peak_at": 0.19,
+    "profile": [0.76, 2.13, 2.65, 2.63, 2.15, 1.51, 1.2, 1.14, 1.1, 1.18]
+   },
+   "higgsfield": {
+    "id": "7351a8ad-9754-4844-94f1-00baf293d588",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/7351a8ad-9754-4844-94f1-00baf293d588.mp4"
+   }
+  },
+  {
+   "id": "object-pov",
+   "en": "Object POV",
+   "zh": "物件視角",
+   "category": "push-pull",
+   "look": "從物件的角度看出去，貼近推進",
+   "gsap": "scale 1→3 + 微晃，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.0,
+    "pan_pct": -12.9,
+    "tilt_pct": -5.7,
+    "zoom": 3.188,
+    "roll_deg": -2.2,
+    "t10": 0.11,
+    "t50": 0.49,
+    "t90": 0.87,
+    "peak_at": 0.68,
+    "profile": [2.86, 4.6, 4.01, 3.36, 3.12, 2.37, 5.02, 4.45, 3.94, 2.88],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "ab14b29d-f23e-449e-a40e-ebdbb4f7437a",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/ab14b29d-f23e-449e-a40e-ebdbb4f7437a.mp4"
+   }
+  },
+  {
+   "id": "overhead",
+   "en": "Overhead",
+   "zh": "俯拍",
+   "category": "vertical",
+   "look": "正上方往下看，微微漂移",
+   "gsap": "rotationX 90° 的俯視構圖；y 小漂移 10%，power1.out",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": 3.2,
+    "tilt_pct": 12.8,
+    "zoom": 0.965,
+    "roll_deg": 2.9,
+    "t10": 0.11,
+    "t50": 0.41,
+    "t90": 0.92,
+    "peak_at": 0.15,
+    "profile": [0.23, 0.34, 0.36, 0.27, 0.28, 0.17, 0.19, 0.15, 0.15, 0.3]
+   },
+   "higgsfield": {
+    "id": "b6395b91-a356-4bc6-9cda-fc2793b3d706",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/b6395b91-a356-4bc6-9cda-fc2793b3d706.mp4"
+   }
+  },
+  {
+   "id": "pan-left",
+   "en": "Pan Left",
+   "zh": "左搖",
+   "category": "pan-tilt",
+   "look": "鏡頭原地向左轉",
+   "gsap": "x 往右移約 1 個畫面寬（畫面要先畫寬），5 秒，sine.inOut，峰值在 60%",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.04,
+    "pan_pct": -103.5,
+    "tilt_pct": 0.3,
+    "zoom": 1.019,
+    "roll_deg": -19.9,
+    "t10": 0.37,
+    "t50": 0.58,
+    "t90": 0.83,
+    "peak_at": 0.61,
+    "profile": [0.07, 0.07, 0.23, 1.37, 2.6, 2.69, 2.42, 1.81, 1.24, 0.66]
+   },
+   "higgsfield": {
+    "id": "6f087874-24f3-4d48-9eb9-f4349ac6a105",
+    "families": ["wan2_5_video"],
+    "preview": "https://cdn.higgsfield.ai/wan2_5_motion/6bff4a6e-bec1-4d32-84bf-6b4f9cb4df0d.mp4"
+   }
+  },
+  {
+   "id": "pan-right",
+   "en": "Pan Right",
+   "zh": "右搖",
+   "category": "pan-tilt",
+   "look": "鏡頭原地向右轉",
+   "gsap": "鏡像 pan-left",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.04,
+    "pan_pct": 130.1,
+    "tilt_pct": 5.5,
+    "zoom": 1.342,
+    "roll_deg": -10.2,
+    "t10": 0.21,
+    "t50": 0.69,
+    "t90": 0.93,
+    "peak_at": 0.88,
+    "profile": [0.46, 0.94, 0.72, 0.83, 1.4, 1.61, 2.05, 2.41, 3.08, 2.54]
+   },
+   "higgsfield": {
+    "id": "ce0b3d96-be4c-4b2d-962a-340dd386d910",
+    "families": ["wan2_5_video"],
+    "preview": "https://cdn.higgsfield.ai/wan2_5_motion/3de2c725-7b7c-44c2-9126-e745b6468b37.mp4"
+   }
+  },
+  {
+   "id": "rapid-zoom-in",
+   "en": "Rapid Zoom In",
+   "zh": "快速推近",
+   "category": "zoom",
+   "look": "比急推溫和的快推，約 1.6 倍",
+   "gsap": "scale 1→1.6，0.8 秒，power3.out，開頭 25% 內",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": -1.3,
+    "tilt_pct": -8.3,
+    "zoom": 1.633,
+    "roll_deg": 0.9,
+    "t10": 0.22,
+    "t50": 0.29,
+    "t90": 0.44,
+    "peak_at": 0.26,
+    "profile": [0.05, 0.13, 2.17, 1.59, 0.4, 0.24, 0.03, 0.01, 0.0, 0.0]
+   },
+   "higgsfield": {
+    "id": "3dee792a-3fb1-40e5-8f46-3a1db42d64b1",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/981bda8a-d681-4b08-83fa-64cccdc1e6ec.mp4"
+   }
+  },
+  {
+   "id": "rapid-zoom-out",
+   "en": "Rapid Zoom Out",
+   "zh": "快速拉遠",
+   "category": "zoom",
+   "look": "快速拉開到約一半大小",
+   "gsap": "scale 2.2→1，0.6 秒，power3.out，開頭 10% 內",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": 3.8,
+    "tilt_pct": -12.0,
+    "zoom": 0.461,
+    "roll_deg": -3.8,
+    "t10": 0.08,
+    "t50": 0.13,
+    "t90": 0.51,
+    "peak_at": 0.11,
+    "profile": [1.85, 3.34, 0.53, 0.54, 0.54, 0.27, 0.2, 0.16, 0.11, 0.1]
+   },
+   "higgsfield": {
+    "id": "222b3cfc-5e24-44ee-b7f5-94deb2d2b514",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/bf33fd46-52bf-4326-8eff-2d6f314e68ae.mp4"
+   }
+  },
+  {
+   "id": "road-rush",
+   "en": "Road Rush",
+   "zh": "公路疾馳",
+   "category": "vehicle",
+   "look": "多角度剪接的公路飛馳",
+   "gsap": "多段 cut，每段高速 x 捲動",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": -168.5,
+    "tilt_pct": 20.1,
+    "zoom": 1.577,
+    "roll_deg": 0.7,
+    "t10": 0.09,
+    "t50": 0.56,
+    "t90": 0.91,
+    "peak_at": 0.73,
+    "profile": [4.5, 6.39, 3.5, 2.92, 2.81, 4.13, 5.21, 7.37, 4.18, 5.44]
+   },
+   "higgsfield": {
+    "id": "c9c68a56-1f59-46d9-90f2-ee8535f0511d",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/4a04b7f7-6fff-460f-b2e9-ef415ad27257.mp4"
+   }
+  },
+  {
+   "id": "robo-arm",
+   "en": "Robo Arm",
+   "zh": "機械臂",
+   "category": "rotate",
+   "look": "機械臂快速甩出大弧＋大幅翻轉",
+   "gsap": "x 甩 + rotation 40°+ + scale 0.7，0.8 秒，expo.inOut，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -18.1,
+    "tilt_pct": -9.8,
+    "zoom": 0.699,
+    "roll_deg": 44.4,
+    "t10": 0.26,
+    "t50": 0.59,
+    "t90": 0.88,
+    "peak_at": 0.59,
+    "profile": [1.0, 0.87, 2.03, 3.49, 0.31, 2.88, 5.62, 2.8, 0.56, 1.8],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "1bd4363a-6e5a-4c57-90a5-30f0733a769b",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/1bd4363a-6e5a-4c57-90a5-30f0733a769b.mp4"
+   }
+  },
+  {
+   "id": "snorricam",
+   "en": "Snorricam",
+   "zh": "綁身鏡頭",
+   "category": "body",
+   "look": "鏡頭綁在主角身上：人不動、背景晃和轉",
+   "gsap": "主體層固定；背景層 rotation ±10°、x/y 搖晃，3d",
+   "needs3d": true,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.06,
+    "pan_pct": 7.7,
+    "tilt_pct": -17.6,
+    "zoom": 0.762,
+    "roll_deg": -18.1,
+    "t10": 0.1,
+    "t50": 0.4,
+    "t90": 0.9,
+    "peak_at": 0.23,
+    "profile": [1.84, 2.27, 2.93, 2.6, 1.53, 0.97, 1.7, 1.54, 1.86, 1.94],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "893cb65f-c528-40aa-83d8-c5aeb2bfe59f",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/893cb65f-c528-40aa-83d8-c5aeb2bfe59f.mp4"
+   }
+  },
+  {
+   "id": "static",
+   "en": "Static",
+   "zh": "固定鏡頭",
+   "category": "hold",
+   "look": "鏡頭不動，只有主體在動",
+   "gsap": "不動 .world",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": 0.5,
+    "tilt_pct": -0.4,
+    "zoom": 1.001,
+    "roll_deg": 0.6,
+    "t10": 0.24,
+    "t50": 0.65,
+    "t90": 0.91,
+    "peak_at": 0.79,
+    "profile": [0.0, 0.03, 0.1, 0.06, 0.07, 0.09, 0.12, 0.1, 0.11, 0.09]
+   },
+   "higgsfield": {
+    "id": "aab8440c-0d65-4554-b88a-7a9a5e084b6e",
+    "families": ["higgsfield", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/fffe5dfd-f63b-4659-b7dd-e45f9c7d4ea2.mp4"
+   }
+  },
+  {
+   "id": "super-dolly-in",
+   "en": "Super Dolly In",
+   "zh": "超級推進",
+   "category": "push-pull",
+   "look": "一路加速推到很近（全身→臉）",
+   "gsap": "scale 1→8–12，5 秒，power3.in（量到峰值在 97%）",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -0.1,
+    "tilt_pct": -46.1,
+    "zoom": 11.961,
+    "roll_deg": 1.2,
+    "t10": 0.47,
+    "t50": 0.81,
+    "t90": 0.97,
+    "peak_at": 0.97,
+    "profile": [0.16, 0.17, 0.24, 0.52, 1.17, 1.44, 2.16, 3.61, 4.3, 5.81]
+   },
+   "higgsfield": {
+    "id": "6a6fb1b9-28ea-44c8-9be4-e5d8c6ab1f3a",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/6a6fb1b9-28ea-44c8-9be4-e5d8c6ab1f3a.mp4"
+   }
+  },
+  {
+   "id": "super-dolly-out",
+   "en": "Super Dolly Out",
+   "zh": "超級拉遠",
+   "category": "push-pull",
+   "look": "從近景一路拉到大遠景",
+   "gsap": "scale 2.4→1，5 秒，power2.inOut；露出的周邊要事先畫好",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -5.6,
+    "tilt_pct": 4.7,
+    "zoom": 0.422,
+    "roll_deg": -2.2,
+    "t10": 0.29,
+    "t50": 0.68,
+    "t90": 0.91,
+    "peak_at": 0.67,
+    "profile": [0.07, 0.09, 0.6, 0.65, 0.55, 0.64, 1.08, 1.2, 1.22, 0.77]
+   },
+   "higgsfield": {
+    "id": "d66685ce-8c2b-4aeb-8d4a-195d474c7eca",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/d66685ce-8c2b-4aeb-8d4a-195d474c7eca.mp4"
+   }
+  },
+  {
+   "id": "through-object-in",
+   "en": "Through Object In",
+   "zh": "穿物進入",
+   "category": "transition",
+   "look": "鏡頭穿過前景物件進入場景",
+   "gsap": "前景層 scale 1→4 並淡出，主場景 scale 1.3→1，0.8 秒 power2.inOut",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -2.6,
+    "tilt_pct": 9.0,
+    "zoom": 3.638,
+    "roll_deg": -5.4,
+    "t10": 0.13,
+    "t50": 0.36,
+    "t90": 0.64,
+    "peak_at": 0.41,
+    "profile": [0.64, 1.49, 2.09, 1.61, 2.03, 1.49, 0.46, 0.36, 0.2, 0.34]
+   },
+   "higgsfield": {
+    "id": "2b353671-da2e-4c9e-841d-b7af200ceadb",
+    "families": ["higgsfield", "minimax", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/2b353671-da2e-4c9e-841d-b7af200ceadb.mp4"
+   }
+  },
+  {
+   "id": "through-object-out",
+   "en": "Through Object Out",
+   "zh": "穿物退出",
+   "category": "transition",
+   "look": "鏡頭往後穿出前景物件",
+   "gsap": "反向 through-object-in",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -3.2,
+    "tilt_pct": 7.4,
+    "zoom": 0.178,
+    "roll_deg": -10.9,
+    "t10": 0.3,
+    "t50": 0.51,
+    "t90": 0.85,
+    "peak_at": 0.34,
+    "profile": [0.03, 0.07, 1.13, 2.81, 2.32, 1.67, 1.64, 1.62, 1.03, 0.78]
+   },
+   "higgsfield": {
+    "id": "3e217f3c-5133-4e83-ab6c-afb35d1c5852",
+    "families": ["higgsfield", "minimax", "wan2_5_video"],
+    "preview": "https://static.higgsfield.ai/3e217f3c-5133-4e83-ab6c-afb35d1c5852.mp4"
+   }
+  },
+  {
+   "id": "tilt-down",
+   "en": "Tilt Down",
+   "zh": "下搖",
+   "category": "pan-tilt",
+   "look": "鏡頭原地往下俯",
+   "gsap": "鏡像 tilt-up",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 6.8,
+    "tilt_pct": 0.3,
+    "zoom": 1.077,
+    "roll_deg": -6.3,
+    "t10": 0.19,
+    "t50": 0.5,
+    "t90": 0.88,
+    "peak_at": 0.42,
+    "profile": [0.09, 0.18, 0.18, 0.4, 0.46, 0.36, 0.28, 0.23, 0.27, 0.22]
+   },
+   "higgsfield": {
+    "id": "1958a932-8ffb-4f1a-a5cd-480858f6ae84",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/1958a932-8ffb-4f1a-a5cd-480858f6ae84.mp4"
+   }
+  },
+  {
+   "id": "tilt-up",
+   "en": "Tilt up",
+   "zh": "上搖",
+   "category": "pan-tilt",
+   "look": "鏡頭原地往上仰",
+   "gsap": "y 往下移約 0.8 個畫面高，前 60% 完成，power2.out",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 0.1,
+    "tilt_pct": -83.3,
+    "zoom": 0.955,
+    "roll_deg": 2.0,
+    "t10": 0.19,
+    "t50": 0.38,
+    "t90": 0.62,
+    "peak_at": 0.2,
+    "profile": [0.0, 0.83, 1.26, 1.07, 1.16, 0.92, 0.54, 0.19, 0.0, 0.0]
+   },
+   "higgsfield": {
+    "id": "9f127dad-0db0-4e3d-a440-3cfbffca30b6",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/9f127dad-0db0-4e3d-a440-3cfbffca30b6.mp4"
+   }
+  },
+  {
+   "id": "timelapse-glam",
+   "en": "Timelapse Glam",
+   "zh": "縮時造型",
+   "category": "time",
+   "look": "主角不動，周邊人快速動",
+   "gsap": "主體正常、周邊層 timeScale 8",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.88,
+    "pan_pct": 0.5,
+    "tilt_pct": -0.3,
+    "zoom": 0.981,
+    "roll_deg": -0.9,
+    "t10": 0.26,
+    "t50": 0.66,
+    "t90": 0.97,
+    "peak_at": 0.97,
+    "profile": [0.01, 0.06, 0.08, 0.12, 0.12, 0.08, 0.08, 0.09, 0.13, 0.23],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "4b2db33e-b163-484b-b33a-7b0a04d81ddf",
+    "families": ["minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/1e2a226b-4d82-4dd1-868a-57d21710fd1c.mp4"
+   }
+  },
+  {
+   "id": "timelapse-human",
+   "en": "Timelapse Human",
+   "zh": "縮時人流",
+   "category": "time",
+   "look": "主角靜止，人群快速流過",
+   "gsap": "主體正常、人群層 timeScale 8 + 拖影",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -6.9,
+    "tilt_pct": 5.1,
+    "zoom": 0.966,
+    "roll_deg": -20.7,
+    "t10": 0.11,
+    "t50": 0.28,
+    "t90": 0.8,
+    "peak_at": 0.21,
+    "profile": [0.4, 1.28, 1.22, 0.65, 0.47, 0.2, 0.33, 0.36, 0.33, 0.22],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "c4ce82e4-1426-46b4-b184-db8f7fe41a5f",
+    "families": ["higgsfield", "minimax"],
+    "preview": "https://static.higgsfield.ai/c4ce82e4-1426-46b4-b184-db8f7fe41a5f.mp4"
+   }
+  },
+  {
+   "id": "timelapse-landscape",
+   "en": "Timelapse Landscape",
+   "zh": "縮時風景",
+   "category": "time",
+   "look": "天色快速變化的風景縮時",
+   "gsap": "色溫與亮度快速過渡，鏡頭不動",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.88,
+    "pan_pct": -3.0,
+    "tilt_pct": -3.9,
+    "zoom": 0.902,
+    "roll_deg": 6.0,
+    "t10": 0.16,
+    "t50": 0.64,
+    "t90": 0.91,
+    "peak_at": 0.63,
+    "profile": [0.19, 0.23, 0.12, 0.18, 0.29, 0.46, 0.6, 0.5, 0.51, 0.4],
+    "limit": "2D 量測只看得到整體平移／縮放／旋轉，視差、對焦、時間效果看不到"
+   },
+   "higgsfield": {
+    "id": "51ef3ada-73fd-4663-a406-48f3ff6d2def",
+    "families": ["higgsfield", "minimax"],
+    "preview": "https://cdn.higgsfield.ai/minimax_hailuo_motion/a31a54ff-1028-4cb7-bddb-ac31d3c20290.mp4"
+   }
+  },
+  {
+   "id": "whip-pan",
+   "en": "Whip Pan",
+   "zh": "甩鏡",
+   "category": "transition",
+   "look": "極快的橫甩，糊掉之後落在新畫面（常當轉場）",
+   "gsap": "x 甩 3 個畫面寬，0.3–0.4 秒，expo.inOut，中段 directional blur；20% 處做完",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": 340.6,
+    "tilt_pct": 0.5,
+    "zoom": 0.937,
+    "roll_deg": 16.6,
+    "t10": 0.1,
+    "t50": 0.23,
+    "t90": 0.4,
+    "peak_at": 0.21,
+    "profile": [2.33, 7.57, 7.72, 4.11, 1.72, 0.52, 0.09, 0.05, 0.0, 0.1]
+   },
+   "higgsfield": {
+    "id": "7a144766-cdd2-4b73-8a27-67b35f2d4ba2",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/7a144766-cdd2-4b73-8a27-67b35f2d4ba2.mp4"
+   }
+  },
+  {
+   "id": "wiggle",
+   "en": "Wiggle",
+   "zh": "抖動",
+   "category": "body",
+   "look": "比手持更快、更明顯的抖動",
+   "gsap": "x/y ±1% 6–8 Hz wiggle，3 秒內收掉",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 3.23,
+    "pan_pct": -1.9,
+    "tilt_pct": 0.2,
+    "zoom": 0.979,
+    "roll_deg": -0.4,
+    "t10": 0.1,
+    "t50": 0.45,
+    "t90": 0.86,
+    "peak_at": 0.11,
+    "profile": [0.27, 0.4, 0.32, 0.36, 0.32, 0.36, 0.28, 0.26, 0.26, 0.25]
+   },
+   "higgsfield": {
+    "id": "cfbe9732-1b5a-4f59-9dbc-801f85f5c702",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/cfbe9732-1b5a-4f59-9dbc-801f85f5c702.mp4"
+   }
+  },
+  {
+   "id": "yoyo-zoom",
+   "en": "YoYo Zoom",
+   "zh": "溜溜球變焦",
+   "category": "zoom",
+   "look": "推近又拉回，來回彈",
+   "gsap": "scale 1→1.3→1 兩次，各 0.4 秒，power2.inOut",
+   "needs3d": false,
+   "measured": {
+    "confidence": "clear",
+    "seconds": 5.37,
+    "pan_pct": -0.4,
+    "tilt_pct": -5.8,
+    "zoom": 1.148,
+    "roll_deg": 0.2,
+    "t10": 0.09,
+    "t50": 0.44,
+    "t90": 0.84,
+    "peak_at": 0.8,
+    "profile": [1.84, 3.44, 0.77, 0.92, 2.6, 0.82, 0.04, 1.42, 3.36, 0.08]
+   },
+   "higgsfield": {
+    "id": "702c6210-9798-4888-b7c9-e794c8fcaaef",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/702c6210-9798-4888-b7c9-e794c8fcaaef.mp4"
+   }
+  },
+  {
+   "id": "zoom-in",
+   "en": "Zoom In",
+   "zh": "變焦推近",
+   "category": "zoom",
+   "look": "鏡頭不動，焦段拉長，畫面平順放大",
+   "gsap": "scale 1→1.1，5 秒，sine.inOut；不加視差",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": -1.1,
+    "tilt_pct": -3.3,
+    "zoom": 1.103,
+    "roll_deg": -3.4,
+    "t10": 0.27,
+    "t50": 0.56,
+    "t90": 0.9,
+    "peak_at": 0.47,
+    "profile": [0.06, 0.06, 0.09, 0.14, 0.21, 0.15, 0.13, 0.14, 0.16, 0.16]
+   },
+   "higgsfield": {
+    "id": "a3a3db5d-d3c5-4d95-b429-235ae3d1ee82",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/a3a3db5d-d3c5-4d95-b429-235ae3d1ee82.mp4"
+   }
+  },
+  {
+   "id": "zoom-out",
+   "en": "Zoom Out",
+   "zh": "變焦拉遠",
+   "category": "zoom",
+   "look": "鏡頭不動，焦段縮短，畫面平順縮小",
+   "gsap": "scale 1.1→1，5 秒，sine.inOut",
+   "needs3d": false,
+   "measured": {
+    "confidence": "weak",
+    "seconds": 5.37,
+    "pan_pct": -0.8,
+    "tilt_pct": 0.4,
+    "zoom": 0.929,
+    "roll_deg": -0.8,
+    "t10": 0.08,
+    "t50": 0.34,
+    "t90": 0.81,
+    "peak_at": 0.13,
+    "profile": [0.11, 0.12, 0.1, 0.09, 0.06, 0.04, 0.07, 0.05, 0.05, 0.03]
+   },
+   "higgsfield": {
+    "id": "f9e6792f-b385-4eca-87f6-f439e917a7aa",
+    "families": ["higgsfield"],
+    "preview": "https://static.higgsfield.ai/b731109c-5856-436f-b269-b44b75f20945.mp4"
+   }
+  }
+ ]
+}

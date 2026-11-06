@@ -1,0 +1,12 @@
+#root { background: #f4f3ef; color: var(--brand); font-family: 'Noto Sans TC', sans-serif; }
+.col { position: absolute; top: 0; bottom: 0; width: 122px; background: color-mix(in srgb, var(--brand) 3%, transparent); }
+.abs { position: absolute; }
+.mask { position: absolute; overflow: hidden; }
+.meta { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+.rule { position: absolute; left: 96px; width: 1728px; height: 3px; background: var(--brand); transform-origin: left; }
+.big { font-weight: 900; letter-spacing: -6px; line-height: 0.92; white-space: nowrap; }
+.kicker { font-weight: 700; font-size: 46px; line-height: 1.25; }
+.line { font-weight: 500; font-size: 34px; line-height: 1.55; }
+.fig { font-size: 20px; font-weight: 700; letter-spacing: 1px; margin-top: 12px; }
+.accent { color: var(--accent); }
+.dot { position: absolute; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); }

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Style preview · {{STYLE_ID}}</title>
+    <link rel="stylesheet" href="brand/theme.css" />
+    <style>
+      @font-face { font-family: 'Noto Sans TC'; src: url('fonts/NotoSansTC-VF.ttf'); font-weight: 100 900; font-display: block; }
+      @font-face { font-family: 'Noto Serif TC'; src: url('fonts/NotoSerifTC-VF.ttf'); font-weight: 200 900; font-display: block; }
+      @font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Regular.ttf'); font-display: block; }
+      @font-face { font-family: 'Instrument Serif'; font-style: italic; src: url('fonts/InstrumentSerif-Italic.ttf'); font-display: block; }
+      html, body { margin: 0; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #root * { box-sizing: border-box; }
+    </style>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!-- Fixed 10 s preview storyboard (same words for every style): logo 0–2.5 · product 2.5–5.5 ·
+         data point 5.5–8 · CTA 8–10. Each style builds its own composition into #root. -->
+    <div id="root" data-composition-id="preview" data-start="0" data-width="1920" data-height="1080" data-duration="10"></div>
+    <script>window.CONTENT = {{CONTENT}}; window.BRAND = {{BRAND}};</script>
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/helpers.js"></script>
+    <script src="style/style.js"></script>
+    <script>
+      const S = { logo: [0, 2.5], product: [2.5, 5.5], stat: [5.5, 8], cta: [8, 10] };
+      const tl = gsap.timeline({ paused: true });
+      window.STYLE.build(tl, S, window.CONTENT, document.getElementById("root"));
+      tl.set({}, {}, 10);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["preview"] = tl;
+    </script>
+  </body>
+</html>
